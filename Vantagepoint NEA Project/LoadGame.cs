@@ -16,5 +16,13 @@ namespace Vantagepoint_NEA_Project
         {
             InitializeComponent();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            MainMenu newMainMenu = new MainMenu();
+            this.Hide();
+            newMainMenu.ShowDialog();
+            this.Close();
+        }
     }
 }

@@ -32,9 +32,9 @@ namespace Vantagepoint_NEA_Project
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            NewGame newGamePage = new NewGame();
+            CreateCompany newCreateCompany = new CreateCompany();
             this.Hide();
-            newGamePage.ShowDialog();
+            newCreateCompany.ShowDialog();
             this.Close();
         }
 
