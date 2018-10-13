@@ -1,6 +1,6 @@
 namespace Vantagepoint_NEA_Project
 {
-    partial class Form1
+    partial class MainMenu
     {
         /// <summary>
         /// Required designer variable.

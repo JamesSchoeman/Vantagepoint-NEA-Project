@@ -1,6 +1,6 @@
 ﻿namespace Vantagepoint_NEA_Project
 {
-    partial class Form2
+    partial class NewGame
     {
         /// <summary>
         /// Required designer variable.
@@ -41,13 +41,13 @@
             this.button1.Text = "Placeholder - To be replaced by new game page";
             this.button1.UseVisualStyleBackColor = true;
             // 
-            // Form2
+            // NewGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.button1);
-            this.Name = "Form2";
+            this.Name = "NewGame";
             this.Text = "New Game Start Page";
             this.ResumeLayout(false);
 

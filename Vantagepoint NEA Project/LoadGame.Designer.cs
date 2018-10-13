@@ -1,6 +1,6 @@
 ﻿namespace Vantagepoint_NEA_Project
 {
-    partial class Form3
+    partial class LoadGame
     {
         /// <summary>
         /// Required designer variable.

@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Vantagepoint_NEA_Project
 {
-    public partial class Form2 : Form
+    public partial class NewGame : Form
     {
-        public Form2()
+        public NewGame()
         {
             InitializeComponent();
         }

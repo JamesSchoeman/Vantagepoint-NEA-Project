@@ -13,9 +13,9 @@ using System.Windows.Forms;
 
 namespace Vantagepoint_NEA_Project
 {
-    public partial class Form1 : Form
+    public partial class MainMenu : Form
     {
-        public Form1()
+        public MainMenu()
         {
             InitializeComponent();
         }
@@ -32,7 +32,7 @@ namespace Vantagepoint_NEA_Project
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            Form2 newGamePage = new Form2();
+            NewGame newGamePage = new NewGame();
             this.Hide();
             newGamePage.ShowDialog();
             this.Close();
@@ -45,7 +45,7 @@ namespace Vantagepoint_NEA_Project
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Form3 loadGamePage = new Form3();
+            LoadGame loadGamePage = new LoadGame();
             this.Hide();
             loadGamePage.ShowDialog();
             this.Close();
