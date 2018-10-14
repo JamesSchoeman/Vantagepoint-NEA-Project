@@ -25,7 +25,10 @@ namespace Vantagepoint_NEA_Project
 
         private void Board_Game_Load(object sender, EventArgs e)
         {
-            
+            this.CNDisplay.Text = companyName;
+            this.SHDisplay.Text = shareholders;
+            this.NOBDisplay.Text = natureOfBusiness;
+            this.CTDisplay.Text = companyType;
         }
 
     }
