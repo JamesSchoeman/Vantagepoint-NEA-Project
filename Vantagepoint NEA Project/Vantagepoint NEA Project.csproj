@@ -45,11 +45,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Board Game.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Board Game.Designer.cs">
+      <DependentUpon>Board Game.cs</DependentUpon>
+    </Compile>
     <Compile Include="CreateCompany.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="CreateCompany.Designer.cs">
       <DependentUpon>CreateCompany.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FillAllFieldsError.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FillAllFieldsError.Designer.cs">
+      <DependentUpon>FillAllFieldsError.cs</DependentUpon>
     </Compile>
     <Compile Include="MainMenu.cs">
       <SubType>Form</SubType>
@@ -65,8 +77,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Board Game.resx">
+      <DependentUpon>Board Game.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CreateCompany.resx">
       <DependentUpon>CreateCompany.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FillAllFieldsError.resx">
+      <DependentUpon>FillAllFieldsError.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
