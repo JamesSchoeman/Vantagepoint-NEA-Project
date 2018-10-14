@@ -39,6 +39,7 @@
             this.CTDisplay = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.DescriptionDisplay = new System.Windows.Forms.Label();
+            this.RollResultDisplay = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,6 +51,7 @@
             this.RollDiceButton.TabIndex = 0;
             this.RollDiceButton.Text = "Roll Dice";
             this.RollDiceButton.UseVisualStyleBackColor = true;
+            this.RollDiceButton.Click += new System.EventHandler(this.RollDiceButton_Click);
             // 
             // CompanyTypeLabel
             // 
@@ -157,11 +159,22 @@
             this.DescriptionDisplay.TabIndex = 22;
             this.DescriptionDisplay.Text = "Square descriptions will go here";
             // 
+            // RollResultDisplay
+            // 
+            this.RollResultDisplay.AutoSize = true;
+            this.RollResultDisplay.Font = new System.Drawing.Font("Kelson Sans", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RollResultDisplay.Location = new System.Drawing.Point(38, 61);
+            this.RollResultDisplay.Name = "RollResultDisplay";
+            this.RollResultDisplay.Size = new System.Drawing.Size(35, 42);
+            this.RollResultDisplay.TabIndex = 23;
+            this.RollResultDisplay.Text = "-";
+            // 
             // Board_Game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.RollResultDisplay);
             this.Controls.Add(this.DescriptionDisplay);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.CTDisplay);
@@ -196,5 +209,6 @@
         private System.Windows.Forms.Label CTDisplay;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label DescriptionDisplay;
+        private System.Windows.Forms.Label RollResultDisplay;
     }
 }

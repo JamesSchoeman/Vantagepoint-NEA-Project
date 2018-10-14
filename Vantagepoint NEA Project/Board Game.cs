@@ -22,6 +22,7 @@ namespace Vantagepoint_NEA_Project
         public string shareholders = CreateCompany.shareholders;
         public string natureOfBusiness = CreateCompany.natureOfBusiness;
         public int shareCapital = CreateCompany.shareCapital;
+        public int diceRollResult;
 
         private void Board_Game_Load(object sender, EventArgs e)
         {
@@ -31,5 +32,11 @@ namespace Vantagepoint_NEA_Project
             this.CTDisplay.Text = companyType;
         }
 
+        private void RollDiceButton_Click(object sender, EventArgs e)
+        {
+            Random rnd = new Random();
+            diceRollResult = rnd.Next(1, 7);
+            this.RollResultDisplay.Text = string.Concat(diceRollResult);
+        }
     }
 }
