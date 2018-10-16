@@ -82,8 +82,7 @@ namespace Vantagepoint_NEA_Project
             }
             else
             {
-                FillAllFieldsError newError = new FillAllFieldsError();
-                newError.ShowDialog();
+                MessageBox.Show("Please fill all fields. ", "Error");
             }
 
         }
