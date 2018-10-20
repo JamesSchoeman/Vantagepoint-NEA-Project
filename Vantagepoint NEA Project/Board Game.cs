@@ -56,6 +56,7 @@ namespace Vantagepoint_NEA_Project
             this.SquareNameDisplay.Text = squareNamevar;
             squareDescvar = string.Concat(data.Rows[diceRollResult - 1][2]);
             this.DescriptionDisplay.Text = squareDescvar;
+            //dsfdgfsdfgdfgthscvb 
         }
     }
 }
