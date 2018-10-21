@@ -24,6 +24,7 @@ namespace Vantagepoint_NEA_Project
         public string natureOfBusiness = CreateCompany.natureOfBusiness;
         public int shareCapital = CreateCompany.shareCapital;
         public int diceRollResult;
+        public int boardPosition = 1;
 
         private void Board_Game_Load(object sender, EventArgs e)
         {
@@ -39,7 +40,10 @@ namespace Vantagepoint_NEA_Project
             diceRollResult = rnd.Next(1, 7);
             this.RollResultDisplay.Text = string.Concat(diceRollResult);
 
-            
+            boardPosition = boardPosition + diceRollResult;
+            if (boardPosition > 36) {
+                boardPosition = boardPosition - 36;
+            }
 
             DataTable data = new DataTable();
             SqlConnection dataconn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename=|DataDirectory|\\SquaresDatabase.mdf;Integrated Security = True");
@@ -50,11 +54,12 @@ namespace Vantagepoint_NEA_Project
             dataconn.Open();
             adapter.Fill(data);
             dataconn.Close();
+
             string squareNamevar = "";
             string squareDescvar = "";
-            squareNamevar = string.Concat(data.Rows[diceRollResult - 1][1]);
+            squareNamevar = string.Concat(data.Rows[boardPosition - 1][1]);
             this.SquareNameDisplay.Text = squareNamevar;
-            squareDescvar = string.Concat(data.Rows[diceRollResult - 1][2]);
+            squareDescvar = string.Concat(data.Rows[boardPosition - 1][2]);
             this.DescriptionDisplay.Text = squareDescvar;
         }
     }
