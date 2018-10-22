@@ -39,6 +39,19 @@ namespace Vantagepoint_NEA_Project
             this.SHDisplay.Text = shareholders;
             this.NOBDisplay.Text = natureOfBusiness;
             this.CTDisplay.Text = companyType;
+
+            commandTest.CommandType = CommandType.Text;
+            commandTest.Connection = dataconn;
+            dataconn.Open();
+            adapter.Fill(data);
+            dataconn.Close();
+
+            string squareNamevar = "";
+            string squareDescvar = "";
+            squareNamevar = string.Concat(data.Rows[boardPosition - 1][1]);
+            this.SquareNameDisplay.Text = squareNamevar;
+            squareDescvar = string.Concat(data.Rows[boardPosition - 1][2]);
+            this.DescriptionDisplay.Text = squareDescvar;
         }
 
         private void RollDiceButton_Click(object sender, EventArgs e)
@@ -67,7 +80,16 @@ namespace Vantagepoint_NEA_Project
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            DialogResult answer;
+            answer = MessageBox.Show("Are you sure you want to go back to the menu? ", "Are you sure? ", MessageBoxButtons.YesNo);
+
+            if (answer == DialogResult.Yes)
+            {
+                MainMenu newMainMenu = new MainMenu();
+                this.Hide();
+                newMainMenu.ShowDialog();
+                this.Close();
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
