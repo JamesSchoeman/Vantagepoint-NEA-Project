@@ -37,11 +37,14 @@
             this.SHDisplay = new System.Windows.Forms.Label();
             this.NOBDisplay = new System.Windows.Forms.Label();
             this.CTDisplay = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.SquareDisplay = new System.Windows.Forms.PictureBox();
             this.DescriptionDisplay = new System.Windows.Forms.Label();
             this.RollResultDisplay = new System.Windows.Forms.Label();
             this.SquareNameDisplay = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.SquareDisplay)).BeginInit();
             this.SuspendLayout();
             // 
             // RollDiceButton
@@ -142,29 +145,29 @@
             this.CTDisplay.TabIndex = 20;
             this.CTDisplay.Text = "-----";
             // 
-            // pictureBox1
+            // SquareDisplay
             // 
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pictureBox1.Location = new System.Drawing.Point(117, 61);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(300, 300);
-            this.pictureBox1.TabIndex = 21;
-            this.pictureBox1.TabStop = false;
+            this.SquareDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SquareDisplay.Location = new System.Drawing.Point(117, 61);
+            this.SquareDisplay.Name = "SquareDisplay";
+            this.SquareDisplay.Size = new System.Drawing.Size(300, 300);
+            this.SquareDisplay.TabIndex = 21;
+            this.SquareDisplay.TabStop = false;
             // 
             // DescriptionDisplay
             // 
             this.DescriptionDisplay.AutoSize = true;
             this.DescriptionDisplay.Location = new System.Drawing.Point(114, 375);
             this.DescriptionDisplay.Name = "DescriptionDisplay";
-            this.DescriptionDisplay.Size = new System.Drawing.Size(156, 13);
+            this.DescriptionDisplay.Size = new System.Drawing.Size(22, 13);
             this.DescriptionDisplay.TabIndex = 22;
-            this.DescriptionDisplay.Text = "Square descriptions will go here";
+            this.DescriptionDisplay.Text = "-----";
             // 
             // RollResultDisplay
             // 
             this.RollResultDisplay.AutoSize = true;
             this.RollResultDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RollResultDisplay.Location = new System.Drawing.Point(38, 61);
+            this.RollResultDisplay.Location = new System.Drawing.Point(41, 61);
             this.RollResultDisplay.Name = "RollResultDisplay";
             this.RollResultDisplay.Size = new System.Drawing.Size(29, 39);
             this.RollResultDisplay.TabIndex = 23;
@@ -175,19 +178,52 @@
             this.SquareNameDisplay.AutoSize = true;
             this.SquareNameDisplay.Location = new System.Drawing.Point(114, 25);
             this.SquareNameDisplay.Name = "SquareNameDisplay";
-            this.SquareNameDisplay.Size = new System.Drawing.Size(72, 13);
+            this.SquareNameDisplay.Size = new System.Drawing.Size(22, 13);
             this.SquareNameDisplay.TabIndex = 24;
-            this.SquareNameDisplay.Text = "Square Name";
+            this.SquareNameDisplay.Text = "-----";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(701, 392);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(87, 46);
+            this.button1.TabIndex = 25;
+            this.button1.Text = "Exit";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(608, 392);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(87, 46);
+            this.button2.TabIndex = 26;
+            this.button2.Text = "Save Game";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(515, 392);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(87, 46);
+            this.button3.TabIndex = 27;
+            this.button3.Text = "Finish Game";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // Board_Game
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.SquareNameDisplay);
             this.Controls.Add(this.RollResultDisplay);
             this.Controls.Add(this.DescriptionDisplay);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.SquareDisplay);
             this.Controls.Add(this.CTDisplay);
             this.Controls.Add(this.NOBDisplay);
             this.Controls.Add(this.SHDisplay);
@@ -201,7 +237,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Board Game";
             this.Load += new System.EventHandler(this.Board_Game_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.SquareDisplay)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -218,9 +254,12 @@
         private System.Windows.Forms.Label SHDisplay;
         private System.Windows.Forms.Label NOBDisplay;
         private System.Windows.Forms.Label CTDisplay;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox SquareDisplay;
         private System.Windows.Forms.Label DescriptionDisplay;
         private System.Windows.Forms.Label RollResultDisplay;
         private System.Windows.Forms.Label SquareNameDisplay;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }

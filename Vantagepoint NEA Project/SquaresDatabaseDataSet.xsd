@@ -31,7 +31,7 @@ SELECT Id, SquareName, SquareDescription FROM Squares WHERE (Id = @Id)</CommandT
                 </InsertCommand>
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT Id, SquareName, SquareDescription FROM dbo.Squares</CommandText>
+                    <CommandText>SELECT Id, SquareName, SquareDescription FROM Squares</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -64,7 +64,7 @@ SELECT Id, SquareName, SquareDescription FROM Squares WHERE (Id = @Id)</CommandT
   <xs:element name="SquaresDatabaseDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="SquaresDatabaseDataSet" msprop:Generator_UserDSName="SquaresDatabaseDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Squares" msprop:Generator_TableClassName="SquaresDataTable" msprop:Generator_TableVarName="tableSquares" msprop:Generator_TablePropName="Squares" msprop:Generator_RowDeletingName="SquaresRowDeleting" msprop:Generator_RowChangingName="SquaresRowChanging" msprop:Generator_RowEvHandlerName="SquaresRowChangeEventHandler" msprop:Generator_RowDeletedName="SquaresRowDeleted" msprop:Generator_UserTableName="Squares" msprop:Generator_RowChangedName="SquaresRowChanged" msprop:Generator_RowEvArgName="SquaresRowChangeEvent" msprop:Generator_RowClassName="SquaresRow">
+        <xs:element name="Squares" msprop:Generator_TableClassName="SquaresDataTable" msprop:Generator_TableVarName="tableSquares" msprop:Generator_RowChangedName="SquaresRowChanged" msprop:Generator_TablePropName="Squares" msprop:Generator_RowDeletingName="SquaresRowDeleting" msprop:Generator_RowChangingName="SquaresRowChanging" msprop:Generator_RowEvHandlerName="SquaresRowChangeEventHandler" msprop:Generator_RowDeletedName="SquaresRowDeleted" msprop:Generator_RowClassName="SquaresRow" msprop:Generator_UserTableName="Squares" msprop:Generator_RowEvArgName="SquaresRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Id" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />

@@ -26,6 +26,13 @@ namespace Vantagepoint_NEA_Project
         public int diceRollResult;
         public int boardPosition = 1;
 
+        DataTable data = new DataTable();
+        SqlConnection dataconn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename=|DataDirectory|\\SquaresDatabase.mdf;Integrated Security = True");
+        static SqlCommand commandTest = new SqlCommand("select * from Squares");
+        SqlDataAdapter adapter = new SqlDataAdapter(commandTest);
+
+        Random rnd = new Random();
+
         private void Board_Game_Load(object sender, EventArgs e)
         {
             this.CNDisplay.Text = companyName;
@@ -36,7 +43,6 @@ namespace Vantagepoint_NEA_Project
 
         private void RollDiceButton_Click(object sender, EventArgs e)
         {
-            Random rnd = new Random();
             diceRollResult = rnd.Next(1, 7);
             this.RollResultDisplay.Text = string.Concat(diceRollResult);
 
@@ -45,12 +51,8 @@ namespace Vantagepoint_NEA_Project
                 boardPosition = boardPosition - 36;
             }
 
-            DataTable data = new DataTable();
-            SqlConnection dataconn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename=|DataDirectory|\\SquaresDatabase.mdf;Integrated Security = True");
-            SqlCommand commandTest = new SqlCommand("select * from Squares");
             commandTest.CommandType = CommandType.Text;
             commandTest.Connection = dataconn;
-            SqlDataAdapter adapter = new SqlDataAdapter(commandTest);
             dataconn.Open();
             adapter.Fill(data);
             dataconn.Close();
@@ -61,6 +63,31 @@ namespace Vantagepoint_NEA_Project
             this.SquareNameDisplay.Text = squareNamevar;
             squareDescvar = string.Concat(data.Rows[boardPosition - 1][2]);
             this.DescriptionDisplay.Text = squareDescvar;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            SaveGame saveGamePage = new SaveGame();
+            saveGamePage.ShowDialog();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            DialogResult answer;
+            answer = MessageBox.Show("Are you sure you want to finish this game? ", "Are you sure? ", MessageBoxButtons.YesNo);
+
+            if (answer == DialogResult.Yes)
+            {
+                FinishPage newFinishPage = new FinishPage();
+                this.Hide();
+                newFinishPage.ShowDialog();
+                this.Close();
+            }
         }
     }
 }
