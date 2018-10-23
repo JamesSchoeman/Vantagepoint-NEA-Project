@@ -45,9 +45,9 @@ namespace Vantagepoint_NEA_Project
 
         private void button2_Click(object sender, EventArgs e)
         {
-            LoadGame loadGamePage = new LoadGame();
+            LoadedBoardGame newLoaded = new LoadedBoardGame();
             this.Hide();
-            loadGamePage.ShowDialog();
+            newLoaded.ShowDialog();
             this.Close();
         }
     }

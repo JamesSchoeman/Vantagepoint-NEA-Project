@@ -1,6 +1,6 @@
 ﻿namespace Vantagepoint_NEA_Project
 {
-    partial class Board_Game
+    partial class LoadedBoardGame
     {
         /// <summary>
         /// Required designer variable.
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.RollDiceButton = new System.Windows.Forms.Button();
             this.CompanyTypeLabel = new System.Windows.Forms.Label();
             this.NOBLabel = new System.Windows.Forms.Label();
@@ -44,6 +45,10 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.TimerMinutesDisplay = new System.Windows.Forms.Label();
+            this.TimerLabel = new System.Windows.Forms.Label();
+            this.TimerSecondsDisplay = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.SquareDisplay)).BeginInit();
             this.SuspendLayout();
             // 
@@ -212,11 +217,53 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // Board_Game
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // TimerMinutesDisplay
+            // 
+            this.TimerMinutesDisplay.AutoSize = true;
+            this.TimerMinutesDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TimerMinutesDisplay.Location = new System.Drawing.Point(584, 160);
+            this.TimerMinutesDisplay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.TimerMinutesDisplay.Name = "TimerMinutesDisplay";
+            this.TimerMinutesDisplay.Size = new System.Drawing.Size(34, 20);
+            this.TimerMinutesDisplay.TabIndex = 29;
+            this.TimerMinutesDisplay.Text = "-----";
+            // 
+            // TimerLabel
+            // 
+            this.TimerLabel.AutoSize = true;
+            this.TimerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TimerLabel.Location = new System.Drawing.Point(435, 160);
+            this.TimerLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.TimerLabel.Name = "TimerLabel";
+            this.TimerLabel.Size = new System.Drawing.Size(123, 20);
+            this.TimerLabel.TabIndex = 28;
+            this.TimerLabel.Text = "Time Remaining";
+            // 
+            // TimerSecondsDisplay
+            // 
+            this.TimerSecondsDisplay.AutoSize = true;
+            this.TimerSecondsDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TimerSecondsDisplay.Location = new System.Drawing.Point(661, 160);
+            this.TimerSecondsDisplay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.TimerSecondsDisplay.Name = "TimerSecondsDisplay";
+            this.TimerSecondsDisplay.Size = new System.Drawing.Size(34, 20);
+            this.TimerSecondsDisplay.TabIndex = 30;
+            this.TimerSecondsDisplay.Text = "-----";
+            // 
+            // LoadedBoardGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.TimerSecondsDisplay);
+            this.Controls.Add(this.TimerMinutesDisplay);
+            this.Controls.Add(this.TimerLabel);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -233,7 +280,7 @@
             this.Controls.Add(this.ShareholdersLabel);
             this.Controls.Add(this.CompanyNameLabel);
             this.Controls.Add(this.RollDiceButton);
-            this.Name = "Board_Game";
+            this.Name = "LoadedBoardGame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Board Game";
             this.Load += new System.EventHandler(this.Board_Game_Load);
@@ -261,5 +308,9 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label TimerMinutesDisplay;
+        private System.Windows.Forms.Label TimerLabel;
+        private System.Windows.Forms.Label TimerSecondsDisplay;
     }
 }

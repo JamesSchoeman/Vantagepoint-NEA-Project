@@ -48,6 +48,8 @@
             this.SalesStaffLabel = new System.Windows.Forms.Label();
             this.CompanyDescriptionLabel = new System.Windows.Forms.Label();
             this.GoButton = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // button1
@@ -188,7 +190,6 @@
             this.CompanyTypeLabel.Size = new System.Drawing.Size(34, 20);
             this.CompanyTypeLabel.TabIndex = 13;
             this.CompanyTypeLabel.Text = "-----";
-            this.CompanyTypeLabel.Click += new System.EventHandler(this.CompanyTypeDescriptionLabel_Click);
             // 
             // CompanyTypeHeaderLabel
             // 
@@ -265,11 +266,40 @@
             this.GoButton.UseVisualStyleBackColor = true;
             this.GoButton.Click += new System.EventHandler(this.GoButton_Click);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(220, 275);
+            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(150, 20);
+            this.label6.TabIndex = 22;
+            this.label6.Text = "Time Limit (Minutes)";
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.749999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Items.AddRange(new object[] {
+            "None",
+            "30",
+            "60",
+            "90"});
+            this.comboBox2.Location = new System.Drawing.Point(416, 276);
+            this.comboBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(160, 24);
+            this.comboBox2.TabIndex = 21;
+            // 
             // CreateCompany
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 658);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.GoButton);
             this.Controls.Add(this.CompanyDescriptionLabel);
             this.Controls.Add(this.SalesStaffLabel);
@@ -322,5 +352,7 @@
         private System.Windows.Forms.Label SalesStaffLabel;
         private System.Windows.Forms.Label CompanyDescriptionLabel;
         private System.Windows.Forms.Button GoButton;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox comboBox2;
     }
 }

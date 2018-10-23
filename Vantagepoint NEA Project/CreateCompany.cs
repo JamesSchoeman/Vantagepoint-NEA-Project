@@ -18,6 +18,7 @@ namespace Vantagepoint_NEA_Project
         public static string natureOfBusiness;
         public static int shareCapital;
         public static string companyType;
+        public static int timeLimit;
 
         public CreateCompany()
         {
@@ -60,14 +61,9 @@ namespace Vantagepoint_NEA_Project
             }
         }
 
-        private void CompanyTypeDescriptionLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void GoButton_Click(object sender, EventArgs e)
         {
-            if ((this.CompanyNameInput.Text != "") && (this.ShareholdersInput.Text != "") && (this.NatureOfBusinessInput.Text != "") && (this.NatureOfBusinessInput.Text != "") && (this.ShareCapitalInput.Text != "") && (this.comboBox1.Text != ""))
+            if ((this.CompanyNameInput.Text != "") && (this.ShareholdersInput.Text != "") && (this.NatureOfBusinessInput.Text != "") && (this.NatureOfBusinessInput.Text != "") && (this.ShareCapitalInput.Text != "") && (this.comboBox1.Text != "") && (this.comboBox2.Text != ""))
             {
                 companyName = CompanyNameInput.Text;
                 shareholders = ShareholdersInput.Text;
@@ -75,7 +71,16 @@ namespace Vantagepoint_NEA_Project
                 shareCapital = int.Parse(ShareCapitalInput.Text);
                 companyType = comboBox1.Text;
 
-                Board_Game newBoardGame = new Board_Game();
+                if (comboBox2.Text != "None")
+                {
+                    timeLimit = int.Parse(comboBox2.Text);
+                }
+                else
+                {
+                    timeLimit = 0;
+                }
+                
+                BoardGame newBoardGame = new BoardGame();
                 this.Hide();
                 newBoardGame.ShowDialog();
                 this.Close();

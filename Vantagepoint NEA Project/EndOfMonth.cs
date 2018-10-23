@@ -10,18 +10,15 @@ using System.Windows.Forms;
 
 namespace Vantagepoint_NEA_Project
 {
-    public partial class LoadGame : Form
+    public partial class EndOfMonth : Form
     {
-        public LoadGame()
+        public EndOfMonth()
         {
             InitializeComponent();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void CloseButton_Click(object sender, EventArgs e)
         {
-            MainMenu newMainMenu = new MainMenu();
-            this.Hide();
-            newMainMenu.ShowDialog();
             this.Close();
         }
     }
