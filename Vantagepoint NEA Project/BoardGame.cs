@@ -28,6 +28,9 @@ namespace Vantagepoint_NEA_Project
         public static int timeLimit = (CreateCompany.timeLimit * 60);
         public static int diceRollResult;
         public static int boardPosition = 1;
+        public bool regFeesPaid = false;
+        public bool bankLoanTaken = false;
+        public Button TakeLoanButton;
 
         DataTable data = new DataTable();
         SqlConnection dataconn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename=|DataDirectory|\\SquaresDatabase.mdf;Integrated Security = True");
@@ -63,6 +66,7 @@ namespace Vantagepoint_NEA_Project
                 TimerSecondsDisplay.Text = "";
             }
 
+            Square1();
         }
 
         private void RollDiceButton_Click(object sender, EventArgs e)
@@ -89,6 +93,15 @@ namespace Vantagepoint_NEA_Project
             this.SquareNameDisplay.Text = squareNamevar;
             squareDescvar = string.Concat(data.Rows[boardPosition - 1][2]);
             this.DescriptionDisplay.Text = squareDescvar;
+
+            if (boardPosition == 2)
+            {
+                Square2();
+            }
+            else if (boardPosition == 6)
+            {
+                Square6();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -114,6 +127,8 @@ namespace Vantagepoint_NEA_Project
             public int saveShareCapital;
             public int saveTimeLimit;
             public int saveBoardPosition;
+            public bool saveRegFeesPaid;
+            public bool saveBankLoanTaken;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -126,12 +141,97 @@ namespace Vantagepoint_NEA_Project
             newSave.saveShareCapital = shareCapital;
             newSave.saveTimeLimit = timeLimit;
             newSave.saveBoardPosition = boardPosition;
+            newSave.saveRegFeesPaid = regFeesPaid;
+            newSave.saveBankLoanTaken = bankLoanTaken;
 
             XmlSerializer xs = new XmlSerializer(typeof(DataToBeSaved));
             using (System.IO.FileStream fs = new FileStream("savegame.xml", FileMode.Create))
             {
                 xs.Serialize(fs, newSave);
             }
+        }
+
+        private void Square1()
+        {
+            if (regFeesPaid == false)
+            {
+                if (companyType == "Sole Trader")
+                {
+                    shareCapital = shareCapital - 5000;
+                }
+                else if (companyType == "Partnership")
+                {
+                    shareCapital = shareCapital - 10000;
+                }
+                else if (companyType == "Limited")
+                {
+                    shareCapital = shareCapital - 20000;
+                }
+                CapitalDisplay.Text = string.Concat(shareCapital);
+                regFeesPaid = true;
+            }
+        }
+
+        private void Square2()
+        {
+            if (bankLoanTaken == false)
+            {
+                Button TakeLoan = new Button();
+                TakeLoan.Location = new System.Drawing.Point(422, 340);
+                TakeLoan.Size = new System.Drawing.Size(87, 46);
+                TakeLoan.Text = "Take loan";
+                TakeLoanButton = TakeLoan;
+                Button DoNotTakeLoan = new Button();
+                DoNotTakeLoan.Location = new System.Drawing.Point(422, 392);
+                DoNotTakeLoan.Size = new System.Drawing.Size(87, 46);
+                DoNotTakeLoan.Text = "Continue";
+                this.Controls.Add(TakeLoan);
+                this.Controls.Add(DoNotTakeLoan);
+                TakeLoan.Click += TakeLoan_Click;
+                DoNotTakeLoan.Click += DoNotTakeLoan_Click;
+                RollDiceButton.Enabled = false;
+            }
+        }
+
+        void TakeLoan_Click(object sender, EventArgs e)
+        {
+            shareCapital = shareCapital + 250000;
+            CapitalDisplay.Text = string.Concat(shareCapital);
+            bankLoanTaken = true;
+            Button btn = sender as Button;
+            btn.Enabled = false;
+            btn.Visible = false;
+        }
+
+        void DoNotTakeLoan_Click(object sender, EventArgs e)
+        {
+            RollDiceButton.Enabled = true;
+            Button btn = sender as Button;
+            btn.Enabled = false;
+            btn.Visible = false;
+            TakeLoanButton.Visible = false;
+            TakeLoanButton.Enabled = false;
+        }
+
+        private void Square6()
+        {
+            Button PayForEquipment = new Button();
+            PayForEquipment.Location = new System.Drawing.Point(422, 392);
+            PayForEquipment.Size = new System.Drawing.Size(87, 46);
+            PayForEquipment.Text = "Pay £15000";
+            this.Controls.Add(PayForEquipment);
+            PayForEquipment.Click += PayForEquipment_Click;
+            RollDiceButton.Enabled = false;
+        }
+
+        void PayForEquipment_Click(object sender, EventArgs e)
+        {
+            shareCapital = shareCapital - 15000;
+            CapitalDisplay.Text = string.Concat(shareCapital);
+            Button btn = sender as Button;
+            btn.Enabled = false;
+            btn.Visible = false;
+            RollDiceButton.Enabled = true;
         }
 
         private void button3_Click(object sender, EventArgs e)

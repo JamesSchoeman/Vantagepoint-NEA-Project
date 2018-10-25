@@ -49,6 +49,8 @@
             this.TimerMinutesDisplay = new System.Windows.Forms.Label();
             this.TimerLabel = new System.Windows.Forms.Label();
             this.TimerSecondsDisplay = new System.Windows.Forms.Label();
+            this.CapitalLabel = new System.Windows.Forms.Label();
+            this.CapitalDisplay = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.SquareDisplay)).BeginInit();
             this.SuspendLayout();
             // 
@@ -163,6 +165,7 @@
             // 
             this.DescriptionDisplay.AutoSize = true;
             this.DescriptionDisplay.Location = new System.Drawing.Point(114, 375);
+            this.DescriptionDisplay.MaximumSize = new System.Drawing.Size(300, 0);
             this.DescriptionDisplay.Name = "DescriptionDisplay";
             this.DescriptionDisplay.Size = new System.Drawing.Size(22, 13);
             this.DescriptionDisplay.TabIndex = 22;
@@ -227,7 +230,7 @@
             // 
             this.TimerMinutesDisplay.AutoSize = true;
             this.TimerMinutesDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TimerMinutesDisplay.Location = new System.Drawing.Point(584, 160);
+            this.TimerMinutesDisplay.Location = new System.Drawing.Point(584, 195);
             this.TimerMinutesDisplay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.TimerMinutesDisplay.Name = "TimerMinutesDisplay";
             this.TimerMinutesDisplay.Size = new System.Drawing.Size(34, 20);
@@ -238,7 +241,7 @@
             // 
             this.TimerLabel.AutoSize = true;
             this.TimerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TimerLabel.Location = new System.Drawing.Point(435, 160);
+            this.TimerLabel.Location = new System.Drawing.Point(435, 195);
             this.TimerLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.TimerLabel.Name = "TimerLabel";
             this.TimerLabel.Size = new System.Drawing.Size(123, 20);
@@ -249,18 +252,42 @@
             // 
             this.TimerSecondsDisplay.AutoSize = true;
             this.TimerSecondsDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TimerSecondsDisplay.Location = new System.Drawing.Point(661, 160);
+            this.TimerSecondsDisplay.Location = new System.Drawing.Point(661, 195);
             this.TimerSecondsDisplay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.TimerSecondsDisplay.Name = "TimerSecondsDisplay";
             this.TimerSecondsDisplay.Size = new System.Drawing.Size(34, 20);
             this.TimerSecondsDisplay.TabIndex = 30;
             this.TimerSecondsDisplay.Text = "-----";
             // 
+            // CapitalLabel
+            // 
+            this.CapitalLabel.AutoSize = true;
+            this.CapitalLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CapitalLabel.Location = new System.Drawing.Point(435, 160);
+            this.CapitalLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.CapitalLabel.Name = "CapitalLabel";
+            this.CapitalLabel.Size = new System.Drawing.Size(58, 20);
+            this.CapitalLabel.TabIndex = 31;
+            this.CapitalLabel.Text = "Capital";
+            // 
+            // CapitalDisplay
+            // 
+            this.CapitalDisplay.AutoSize = true;
+            this.CapitalDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CapitalDisplay.Location = new System.Drawing.Point(584, 160);
+            this.CapitalDisplay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.CapitalDisplay.Name = "CapitalDisplay";
+            this.CapitalDisplay.Size = new System.Drawing.Size(34, 20);
+            this.CapitalDisplay.TabIndex = 32;
+            this.CapitalDisplay.Text = "-----";
+            // 
             // BoardGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.CapitalDisplay);
+            this.Controls.Add(this.CapitalLabel);
             this.Controls.Add(this.TimerSecondsDisplay);
             this.Controls.Add(this.TimerMinutesDisplay);
             this.Controls.Add(this.TimerLabel);
@@ -312,5 +339,7 @@
         private System.Windows.Forms.Label TimerMinutesDisplay;
         private System.Windows.Forms.Label TimerLabel;
         private System.Windows.Forms.Label TimerSecondsDisplay;
+        private System.Windows.Forms.Label CapitalLabel;
+        private System.Windows.Forms.Label CapitalDisplay;
     }
 }
