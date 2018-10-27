@@ -31,6 +31,7 @@ namespace Vantagepoint_NEA_Project
         public bool regFeesPaid = false;
         public bool bankLoanTaken = false;
         public Button TakeLoanButton;
+        public bool hasWebsite = false;
 
         DataTable data = new DataTable();
         SqlConnection dataconn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename=|DataDirectory|\\SquaresDatabase.mdf;Integrated Security = True");
@@ -102,6 +103,22 @@ namespace Vantagepoint_NEA_Project
             {
                 Square6();
             }
+            else if (boardPosition == 10)
+            {
+                Square10();
+            }
+            else if (boardPosition == 12)
+            {
+                Square12();
+            }
+            else if (boardPosition == 21)
+            {
+                Square21();
+            }
+            else if (boardPosition == 28)
+            {
+                Square28();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -129,6 +146,7 @@ namespace Vantagepoint_NEA_Project
             public int saveBoardPosition;
             public bool saveRegFeesPaid;
             public bool saveBankLoanTaken;
+            public bool saveHasWebsite;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -143,6 +161,7 @@ namespace Vantagepoint_NEA_Project
             newSave.saveBoardPosition = boardPosition;
             newSave.saveRegFeesPaid = regFeesPaid;
             newSave.saveBankLoanTaken = bankLoanTaken;
+            newSave.saveHasWebsite = hasWebsite;
 
             XmlSerializer xs = new XmlSerializer(typeof(DataToBeSaved));
             using (System.IO.FileStream fs = new FileStream("savegame.xml", FileMode.Create))
@@ -227,6 +246,116 @@ namespace Vantagepoint_NEA_Project
         void PayForEquipment_Click(object sender, EventArgs e)
         {
             shareCapital = shareCapital - 15000;
+            CapitalDisplay.Text = string.Concat(shareCapital);
+            Button btn = sender as Button;
+            btn.Enabled = false;
+            btn.Visible = false;
+            RollDiceButton.Enabled = true;
+        }
+
+        private void Square10()
+        {
+            if (hasWebsite == false)
+            {
+                Button PayForWebsite = new Button();
+                PayForWebsite.Location = new System.Drawing.Point(422, 392);
+                PayForWebsite.Size = new System.Drawing.Size(87, 46);
+                PayForWebsite.Text = "Pay £20000";
+                this.Controls.Add(PayForWebsite);
+                PayForWebsite.Click += PayForWebsite_Click;
+                RollDiceButton.Enabled = false;
+            }
+            else if (hasWebsite == true)
+            {
+                Button PayForWebsite = new Button();
+                PayForWebsite.Location = new System.Drawing.Point(422, 392);
+                PayForWebsite.Size = new System.Drawing.Size(87, 46);
+                PayForWebsite.Text = "Renew for £10000";
+                this.Controls.Add(PayForWebsite);
+                PayForWebsite.Click += PayForWebsite_Click;
+                RollDiceButton.Enabled = false;
+            }
+        }
+
+        void PayForWebsite_Click(object sender, EventArgs e)
+        {
+            if (hasWebsite == false)
+            {
+                shareCapital = shareCapital - 20000;
+                CapitalDisplay.Text = string.Concat(shareCapital);
+                Button btn = sender as Button;
+                btn.Enabled = false;
+                btn.Visible = false;
+                RollDiceButton.Enabled = true;
+                hasWebsite = true;
+            }
+            else if (hasWebsite == true)
+            {
+                shareCapital = shareCapital - 10000;
+                CapitalDisplay.Text = string.Concat(shareCapital);
+                Button btn = sender as Button;
+                btn.Enabled = false;
+                btn.Visible = false;
+                RollDiceButton.Enabled = true;
+            }
+        }
+
+        private void Square12()
+        {
+            Button PayForRates = new Button();
+            PayForRates.Location = new System.Drawing.Point(422, 392);
+            PayForRates.Size = new System.Drawing.Size(87, 46);
+            PayForRates.Text = "Pay £15000";
+            this.Controls.Add(PayForRates);
+            PayForRates.Click += PayForRates_Click;
+            RollDiceButton.Enabled = false;
+        }
+
+        void PayForRates_Click(object sender, EventArgs e)
+        {
+            shareCapital = shareCapital - 15000;
+            CapitalDisplay.Text = string.Concat(shareCapital);
+            Button btn = sender as Button;
+            btn.Enabled = false;
+            btn.Visible = false;
+            RollDiceButton.Enabled = true;
+        }
+
+        private void Square21()
+        {
+            Button PayForPremises = new Button();
+            PayForPremises.Location = new System.Drawing.Point(422, 392);
+            PayForPremises.Size = new System.Drawing.Size(87, 46);
+            PayForPremises.Text = "Pay £30000";
+            this.Controls.Add(PayForPremises);
+            PayForPremises.Click += PayForPremises_Click;
+            RollDiceButton.Enabled = false;
+        }
+
+        void PayForPremises_Click(object sender, EventArgs e)
+        {
+            shareCapital = shareCapital - 30000;
+            CapitalDisplay.Text = string.Concat(shareCapital);
+            Button btn = sender as Button;
+            btn.Enabled = false;
+            btn.Visible = false;
+            RollDiceButton.Enabled = true;
+        }
+
+        private void Square28()
+        {
+            Button PayForTelephone = new Button();
+            PayForTelephone.Location = new System.Drawing.Point(422, 392);
+            PayForTelephone.Size = new System.Drawing.Size(87, 46);
+            PayForTelephone.Text = "Pay £20000";
+            this.Controls.Add(PayForTelephone);
+            PayForTelephone.Click += PayForTelephone_Click;
+            RollDiceButton.Enabled = false;
+        }
+
+        void PayForTelephone_Click(object sender, EventArgs e)
+        {
+            shareCapital = shareCapital - 20000;
             CapitalDisplay.Text = string.Concat(shareCapital);
             Button btn = sender as Button;
             btn.Enabled = false;
