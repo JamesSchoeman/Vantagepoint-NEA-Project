@@ -32,6 +32,8 @@ namespace Vantagepoint_NEA_Project
         public bool bankLoanTaken = false;
         public Button TakeLoanButton;
         public bool hasWebsite = false;
+        public bool hasHealthCare = false;
+        public bool hasPension = false;
 
         DataTable data = new DataTable();
         SqlConnection dataconn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename=|DataDirectory|\\SquaresDatabase.mdf;Integrated Security = True");
@@ -111,6 +113,10 @@ namespace Vantagepoint_NEA_Project
             {
                 Square12();
             }
+            else if (boardPosition == 19)
+            {
+                Square19();
+            }
             else if (boardPosition == 21)
             {
                 Square21();
@@ -118,6 +124,10 @@ namespace Vantagepoint_NEA_Project
             else if (boardPosition == 28)
             {
                 Square28();
+            }
+            else if (boardPosition == 30)
+            {
+                Square30();
             }
         }
 
@@ -147,6 +157,8 @@ namespace Vantagepoint_NEA_Project
             public bool saveRegFeesPaid;
             public bool saveBankLoanTaken;
             public bool saveHasWebsite;
+            public bool saveHasHealthCare;
+            public bool saveHasPension;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -162,6 +174,8 @@ namespace Vantagepoint_NEA_Project
             newSave.saveRegFeesPaid = regFeesPaid;
             newSave.saveBankLoanTaken = bankLoanTaken;
             newSave.saveHasWebsite = hasWebsite;
+            newSave.saveHasHealthCare = hasHealthCare;
+            newSave.saveHasPension = hasPension;
 
             XmlSerializer xs = new XmlSerializer(typeof(DataToBeSaved));
             using (System.IO.FileStream fs = new FileStream("savegame.xml", FileMode.Create))
@@ -361,6 +375,103 @@ namespace Vantagepoint_NEA_Project
             btn.Enabled = false;
             btn.Visible = false;
             RollDiceButton.Enabled = true;
+        }
+
+        private void Square19()
+        {
+            if (hasHealthCare == false)
+            {
+                Button PayForHealthCare = new Button();
+                PayForHealthCare.Location = new System.Drawing.Point(422, 392);
+                PayForHealthCare.Size = new System.Drawing.Size(87, 46);
+                PayForHealthCare.Text = "Pay £20000";
+                this.Controls.Add(PayForHealthCare);
+                PayForHealthCare.Click += PayForHealthCare_Click;
+                RollDiceButton.Enabled = false;
+            }
+            else if (hasHealthCare == true)
+            {
+                Button PayForHealthCare = new Button();
+                PayForHealthCare.Location = new System.Drawing.Point(422, 392);
+                PayForHealthCare.Size = new System.Drawing.Size(87, 46);
+                PayForHealthCare.Text = "Renew for £10000";
+                this.Controls.Add(PayForHealthCare);
+                PayForHealthCare.Click += PayForHealthCare_Click;
+                RollDiceButton.Enabled = false;
+            }
+        }
+
+        void PayForHealthCare_Click(object sender, EventArgs e)
+        {
+            if (hasHealthCare == false)
+            {
+                shareCapital = shareCapital - 20000;
+                CapitalDisplay.Text = string.Concat(shareCapital);
+                Button btn = sender as Button;
+                btn.Enabled = false;
+                btn.Visible = false;
+                RollDiceButton.Enabled = true;
+                hasHealthCare = true;
+            }
+            else if (hasHealthCare == true)
+            {
+                shareCapital = shareCapital - 10000;
+                CapitalDisplay.Text = string.Concat(shareCapital);
+                Button btn = sender as Button;
+                btn.Enabled = false;
+                btn.Visible = false;
+                RollDiceButton.Enabled = true;
+            }
+        }
+
+        private void Square30()
+        {
+            if (companyType != "Sole Trader")
+            {
+                if (hasPension == false)
+                {
+                    Button PayForPension = new Button();
+                    PayForPension.Location = new System.Drawing.Point(422, 392);
+                    PayForPension.Size = new System.Drawing.Size(87, 46);
+                    PayForPension.Text = "Pay £30000";
+                    this.Controls.Add(PayForPension);
+                    PayForPension.Click += PayForPension_Click;
+                    RollDiceButton.Enabled = false;
+                }
+                else if (hasPension == true)
+                {
+                    Button PayForPension = new Button();
+                    PayForPension.Location = new System.Drawing.Point(422, 392);
+                    PayForPension.Size = new System.Drawing.Size(87, 46);
+                    PayForPension.Text = "Renew for £15000";
+                    this.Controls.Add(PayForPension);
+                    PayForPension.Click += PayForPension_Click;
+                    RollDiceButton.Enabled = false;
+                }
+            }
+        }
+
+        void PayForPension_Click(object sender, EventArgs e)
+        {
+            if (hasPension == false)
+            {
+                shareCapital = shareCapital - 20000;
+                CapitalDisplay.Text = string.Concat(shareCapital);
+                Button btn = sender as Button;
+                btn.Enabled = false;
+                btn.Visible = false;
+                RollDiceButton.Enabled = true;
+                hasPension = true;
+            }
+            else if (hasPension == true)
+            {
+                shareCapital = shareCapital - 10000;
+                CapitalDisplay.Text = string.Concat(shareCapital);
+                Button btn = sender as Button;
+                btn.Enabled = false;
+                btn.Visible = false;
+                RollDiceButton.Enabled = true;
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
