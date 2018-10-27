@@ -34,6 +34,8 @@ namespace Vantagepoint_NEA_Project
         public bool hasWebsite = false;
         public bool hasHealthCare = false;
         public bool hasPension = false;
+        public bool hasPR = false;
+        public bool hasMarketing = false;
 
         DataTable data = new DataTable();
         SqlConnection dataconn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename=|DataDirectory|\\SquaresDatabase.mdf;Integrated Security = True");
@@ -48,6 +50,7 @@ namespace Vantagepoint_NEA_Project
             this.SHDisplay.Text = shareholders;
             this.NOBDisplay.Text = natureOfBusiness;
             this.CTDisplay.Text = companyType;
+            this.CapitalDisplay.Text = string.Concat(shareCapital);
 
             commandTest.CommandType = CommandType.Text;
             commandTest.Connection = dataconn;
@@ -121,6 +124,10 @@ namespace Vantagepoint_NEA_Project
             {
                 Square21();
             }
+            else if (boardPosition == 26)
+            {
+                Square26();
+            }
             else if (boardPosition == 28)
             {
                 Square28();
@@ -128,6 +135,10 @@ namespace Vantagepoint_NEA_Project
             else if (boardPosition == 30)
             {
                 Square30();
+            }
+            else if (boardPosition == 35)
+            {
+                Square35();
             }
         }
 
@@ -159,6 +170,8 @@ namespace Vantagepoint_NEA_Project
             public bool saveHasWebsite;
             public bool saveHasHealthCare;
             public bool saveHasPension;
+            public bool saveHasPR;
+            public bool saveHasMarketing;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -176,6 +189,8 @@ namespace Vantagepoint_NEA_Project
             newSave.saveHasWebsite = hasWebsite;
             newSave.saveHasHealthCare = hasHealthCare;
             newSave.saveHasPension = hasPension;
+            newSave.saveHasPR = hasPR;
+            newSave.saveHasMarketing = hasMarketing;
 
             XmlSerializer xs = new XmlSerializer(typeof(DataToBeSaved));
             using (System.IO.FileStream fs = new FileStream("savegame.xml", FileMode.Create))
@@ -455,7 +470,7 @@ namespace Vantagepoint_NEA_Project
         {
             if (hasPension == false)
             {
-                shareCapital = shareCapital - 20000;
+                shareCapital = shareCapital - 30000;
                 CapitalDisplay.Text = string.Concat(shareCapital);
                 Button btn = sender as Button;
                 btn.Enabled = false;
@@ -465,7 +480,101 @@ namespace Vantagepoint_NEA_Project
             }
             else if (hasPension == true)
             {
-                shareCapital = shareCapital - 10000;
+                shareCapital = shareCapital - 15000;
+                CapitalDisplay.Text = string.Concat(shareCapital);
+                Button btn = sender as Button;
+                btn.Enabled = false;
+                btn.Visible = false;
+                RollDiceButton.Enabled = true;
+            }
+        }
+
+        private void Square26()
+        {
+            if (hasPR == false)
+            {
+                Button PayForPR = new Button();
+                PayForPR.Location = new System.Drawing.Point(422, 392);
+                PayForPR.Size = new System.Drawing.Size(87, 46);
+                PayForPR.Text = "Pay £30000";
+                this.Controls.Add(PayForPR);
+                PayForPR.Click += PayForPR_Click;
+                RollDiceButton.Enabled = false;
+            }
+            else if (hasPR == true)
+            {
+                Button PayForPR = new Button();
+                PayForPR.Location = new System.Drawing.Point(422, 392);
+                PayForPR.Size = new System.Drawing.Size(87, 46);
+                PayForPR.Text = "Renew for £15000";
+                this.Controls.Add(PayForPR);
+                PayForPR.Click += PayForPR_Click;
+                RollDiceButton.Enabled = false;
+            }
+        }
+
+        void PayForPR_Click(object sender, EventArgs e)
+        {
+            if (hasPR == false)
+            {
+                shareCapital = shareCapital - 30000;
+                CapitalDisplay.Text = string.Concat(shareCapital);
+                Button btn = sender as Button;
+                btn.Enabled = false;
+                btn.Visible = false;
+                RollDiceButton.Enabled = true;
+                hasPR = true;
+            }
+            else if (hasPR == true)
+            {
+                shareCapital = shareCapital - 15000;
+                CapitalDisplay.Text = string.Concat(shareCapital);
+                Button btn = sender as Button;
+                btn.Enabled = false;
+                btn.Visible = false;
+                RollDiceButton.Enabled = true;
+            }
+        }
+
+        private void Square35()
+        {
+            if (hasMarketing == false)
+            {
+                Button PayForMarketing = new Button();
+                PayForMarketing.Location = new System.Drawing.Point(422, 392);
+                PayForMarketing.Size = new System.Drawing.Size(87, 46);
+                PayForMarketing.Text = "Pay £30000";
+                this.Controls.Add(PayForMarketing);
+                PayForMarketing.Click += PayForMarketing_Click;
+                RollDiceButton.Enabled = false;
+            }
+            else if (hasMarketing == true)
+            {
+                Button PayForMarketing = new Button();
+                PayForMarketing.Location = new System.Drawing.Point(422, 392);
+                PayForMarketing.Size = new System.Drawing.Size(87, 46);
+                PayForMarketing.Text = "Renew for £15000";
+                this.Controls.Add(PayForMarketing);
+                PayForMarketing.Click += PayForMarketing_Click;
+                RollDiceButton.Enabled = false;
+            }
+        }
+
+        void PayForMarketing_Click(object sender, EventArgs e)
+        {
+            if (hasMarketing == false)
+            {
+                shareCapital = shareCapital - 30000;
+                CapitalDisplay.Text = string.Concat(shareCapital);
+                Button btn = sender as Button;
+                btn.Enabled = false;
+                btn.Visible = false;
+                RollDiceButton.Enabled = true;
+                hasMarketing = true;
+            }
+            else if (hasMarketing == true)
+            {
+                shareCapital = shareCapital - 15000;
                 CapitalDisplay.Text = string.Concat(shareCapital);
                 Button btn = sender as Button;
                 btn.Enabled = false;
