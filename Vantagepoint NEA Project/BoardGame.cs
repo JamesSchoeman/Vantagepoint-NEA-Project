@@ -28,6 +28,7 @@ namespace Vantagepoint_NEA_Project
         public static int timeLimit = (CreateCompany.timeLimit * 60);
         public static int diceRollResult;
         public static int boardPosition = 1;
+        public static int newBoardPosition;
         public bool regFeesPaid = false;
         public bool bankLoanTaken = false;
         public Button TakeLoanButton;
@@ -80,9 +81,9 @@ namespace Vantagepoint_NEA_Project
             diceRollResult = rnd.Next(1, 7);
             this.RollResultDisplay.Text = string.Concat(diceRollResult);
 
-            boardPosition = boardPosition + diceRollResult;
-            if (boardPosition > 36) {
-                boardPosition = boardPosition - 36;
+            newBoardPosition = boardPosition + diceRollResult;
+            if (newBoardPosition > 36) {
+                newBoardPosition = newBoardPosition - 36;
                 EndOfMonth monthlyReport = new EndOfMonth();
                 monthlyReport.Show();
             }
@@ -95,51 +96,58 @@ namespace Vantagepoint_NEA_Project
 
             string squareNamevar = "";
             string squareDescvar = "";
-            squareNamevar = string.Concat(data.Rows[boardPosition - 1][1]);
+            squareNamevar = string.Concat(data.Rows[newBoardPosition - 1][1]);
             this.SquareNameDisplay.Text = squareNamevar;
-            squareDescvar = string.Concat(data.Rows[boardPosition - 1][2]);
+            squareDescvar = string.Concat(data.Rows[newBoardPosition - 1][2]);
             this.DescriptionDisplay.Text = squareDescvar;
 
-            if (boardPosition == 2)
+            if (newBoardPosition == 2)
             {
                 Square2();
             }
-            else if (boardPosition == 6)
+            else if (newBoardPosition == 6)
             {
                 Square6();
             }
-            else if (boardPosition == 10)
+            else if ((newBoardPosition == 9) || ((boardPosition <  9) && (newBoardPosition > 9)))
+            {
+                SalesOpportunity();
+            }
+            else if (newBoardPosition == 10)
             {
                 Square10();
             }
-            else if (boardPosition == 12)
+            else if (newBoardPosition == 12)
             {
                 Square12();
             }
-            else if (boardPosition == 19)
+            else if (newBoardPosition == 19)
             {
                 Square19();
             }
-            else if (boardPosition == 21)
+            else if (newBoardPosition == 21)
             {
                 Square21();
             }
-            else if (boardPosition == 26)
+            else if (newBoardPosition == 26)
             {
                 Square26();
             }
-            else if (boardPosition == 28)
+            else if (newBoardPosition == 28)
             {
                 Square28();
             }
-            else if (boardPosition == 30)
+            else if (newBoardPosition == 30)
             {
                 Square30();
             }
-            else if (boardPosition == 35)
+            else if (newBoardPosition == 35)
             {
                 Square35();
             }
+
+            boardPosition = newBoardPosition;
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -580,6 +588,133 @@ namespace Vantagepoint_NEA_Project
                 btn.Enabled = false;
                 btn.Visible = false;
                 RollDiceButton.Enabled = true;
+            }
+        }
+
+        private void SalesOpportunity()
+        {
+            int chance = new int();
+            chance = rnd.Next(1, 4);
+            if ((chance == 1) || (chance == 2))
+            {
+                chance = rnd.Next(1, 27);
+                if (chance > 12)
+                {
+                    chance = rnd.Next(1, 12);
+                    if (chance < 2)
+                    {
+                        if (hasPension == true)
+                        {
+                            //300,000 sales pipeline
+                        }
+                    }
+                    else if (chance < 3)
+                    {
+                        if (hasWebsite == true)
+                        {
+                            //300,000 sales pipeline
+                        }
+                    }
+                    else if (chance < 4)
+                    {
+                        if ((hasWebsite == true) && (hasPension == true))
+                        {
+                            //300,000 sales pipeline
+                        }
+                    }
+                    else if (chance < 6)
+                    {
+                        //If have sales staff, collect 100,000 sales pipeline
+                    }
+                    else if (chance < 7)
+                    {
+                        //If have stock, collect 300,000 sales pipeline
+                    }
+                    else if (chance < 8)
+                    {
+                        //Each salesperson (excluding self) generates 50,000 sales pipeline
+                    }
+                    else if (chance < 9)
+                    {
+                        if (hasPR == true)
+                        {
+                            //Each sales staff (excluding self) generates 100,000 sales pipeline
+                        }
+                    }
+                    else if (chance < 10)
+                    {
+                        if (hasHealthCare == true)
+                        {
+                            //300,000 sales pipeline
+                        }
+                    }
+                    else if (chance < 11)
+                    {
+                        if ((hasPension == true) && (hasHealthCare == true))
+                        {
+                            //500,000 sales pipeline
+                        }
+                    }
+                    else if (chance < 12)
+                    {
+                        if (hasPR == true)
+                        {
+                            //300,000 sales pipeline
+                        }
+                    }
+                }
+                else
+                {
+                    chance = rnd.Next(1, 16);
+                    if (chance < 4)
+                    {
+                        //50,000 sales pipeline
+                    }
+                    else if (chance < 7)
+                    {
+                        //100,000 sales pipeline
+                    }
+                    else if (chance < 9)
+                    {
+                        //Pay 5000, collect 50,000 sales pipeline
+                    }
+                    else if (chance < 11)
+                    {
+                        //Change best pipeline into order, collect 50,000 sales pipeline
+                    }
+                    else if (chance < 12)
+                    {
+                        //Collect 200,000 sales pipeline, lose PR agreement
+                    }
+                    else if (chance < 13)
+                    {
+                        //Collect 200,000 sales pipeline, lose website agreement
+                    }
+                    else if (chance < 14)
+                    {
+                        //Collect 200,000 sales pipeline, return Marketing agreement
+                    }
+                    else if (chance < 15)
+                    {
+                        //Pay 10,000 per sales staff (excluding self), collect Sales Training card, collect 50,000 sales pipeline
+                    }
+                    else if (chance < 16)
+                    {
+                        //Pay 20,000, collect Sales Training card, collect 300,000 sales pipeline
+                    }
+                }
+            }
+            else if (chance == 3)
+            {
+                chance = rnd.Next(1, 14);
+                if (chance < 10)
+                {
+
+                }
+                else
+                {
+
+                }
             }
         }
 

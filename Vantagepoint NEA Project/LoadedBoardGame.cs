@@ -30,6 +30,7 @@ namespace Vantagepoint_NEA_Project
         public static int timeLimit;
         public static int diceRollResult;
         public static int boardPosition;
+        public static int newBoardPosition;
         public bool regFeesPaid = false;
         public bool bankLoanTaken = false;
         public Button TakeLoanButton;
@@ -111,9 +112,10 @@ namespace Vantagepoint_NEA_Project
             diceRollResult = rnd.Next(1, 7);
             this.RollResultDisplay.Text = string.Concat(diceRollResult);
 
-            boardPosition = boardPosition + diceRollResult;
-            if (boardPosition > 36) {
-                boardPosition = boardPosition - 36;
+            newBoardPosition = boardPosition + diceRollResult;
+            if (newBoardPosition > 36)
+            {
+                newBoardPosition = newBoardPosition - 36;
                 EndOfMonth monthlyReport = new EndOfMonth();
                 monthlyReport.Show();
             }
@@ -126,51 +128,58 @@ namespace Vantagepoint_NEA_Project
 
             string squareNamevar = "";
             string squareDescvar = "";
-            squareNamevar = string.Concat(data.Rows[boardPosition - 1][1]);
+            squareNamevar = string.Concat(data.Rows[newBoardPosition - 1][1]);
             this.SquareNameDisplay.Text = squareNamevar;
-            squareDescvar = string.Concat(data.Rows[boardPosition - 1][2]);
+            squareDescvar = string.Concat(data.Rows[newBoardPosition - 1][2]);
             this.DescriptionDisplay.Text = squareDescvar;
 
-            if (boardPosition == 2)
+            if (newBoardPosition == 2)
             {
                 Square2();
             }
-            else if (boardPosition == 6)
+            else if (newBoardPosition == 6)
             {
                 Square6();
             }
-            else if (boardPosition == 10)
+            else if ((newBoardPosition == 9) || ((boardPosition < 9) && (newBoardPosition > 9)))
+            {
+                SalesOpportunity();
+            }
+            else if (newBoardPosition == 10)
             {
                 Square10();
             }
-            else if (boardPosition == 12)
+            else if (newBoardPosition == 12)
             {
                 Square12();
             }
-            else if (boardPosition == 19)
+            else if (newBoardPosition == 19)
             {
                 Square19();
             }
-            else if (boardPosition == 21)
+            else if (newBoardPosition == 21)
             {
                 Square21();
             }
-            else if (boardPosition == 26)
+            else if (newBoardPosition == 26)
             {
                 Square26();
             }
-            else if (boardPosition == 28)
+            else if (newBoardPosition == 28)
             {
                 Square28();
             }
-            else if (boardPosition == 30)
+            else if (newBoardPosition == 30)
             {
                 Square30();
             }
-            else if (boardPosition == 35)
+            else if (newBoardPosition == 35)
             {
                 Square35();
             }
+
+            boardPosition = newBoardPosition;
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -612,6 +621,11 @@ namespace Vantagepoint_NEA_Project
                 btn.Visible = false;
                 RollDiceButton.Enabled = true;
             }
+        }
+
+        private void SalesOpportunity()
+        {
+
         }
 
         private void button3_Click(object sender, EventArgs e)
