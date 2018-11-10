@@ -34,6 +34,7 @@ namespace Vantagepoint_NEA_Project
         public bool regFeesPaid = false;
         public bool bankLoanTaken = false;
         public Button TakeLoanButton;
+        public Button DoNotTakeLoanButton;
         public bool hasWebsite = false;
         public bool hasHealthCare = false;
         public bool hasPension = false;
@@ -141,7 +142,7 @@ namespace Vantagepoint_NEA_Project
             {
                 Square6();
             }
-            else if ((newBoardPosition == 9) || ((boardPosition < 9) && (newBoardPosition > 9)))
+            else if (newBoardPosition == 9)
             {
                 SalesOpportunity();
             }
@@ -170,12 +171,17 @@ namespace Vantagepoint_NEA_Project
                 Square28();
             }
             else if (newBoardPosition == 30)
-            {
+            {   
                 Square30();
             }
             else if (newBoardPosition == 35)
             {
                 Square35();
+            }
+
+            if ((boardPosition < 9) && (newBoardPosition > 9))
+            {
+                SalesOpportunity();
             }
 
             boardPosition = newBoardPosition;
@@ -185,14 +191,11 @@ namespace Vantagepoint_NEA_Project
         private void button1_Click(object sender, EventArgs e)
         {
             DialogResult answer;
-            answer = MessageBox.Show("Are you sure you want to go back to the menu? ", "Are you sure? ", MessageBoxButtons.YesNo);
+            answer = MessageBox.Show("Are you sure you want to quit? ", "Are you sure? ", MessageBoxButtons.YesNo);
 
             if (answer == DialogResult.Yes)
             {
-                MainMenu newMainMenu = new MainMenu();
-                this.Hide();
-                newMainMenu.ShowDialog();
-                this.Close();
+                Application.Exit();
             }
         }
 
@@ -273,6 +276,7 @@ namespace Vantagepoint_NEA_Project
                 DoNotTakeLoan.Location = new System.Drawing.Point(422, 392);
                 DoNotTakeLoan.Size = new System.Drawing.Size(87, 46);
                 DoNotTakeLoan.Text = "Continue";
+                DoNotTakeLoanButton = DoNotTakeLoan;
                 this.Controls.Add(TakeLoan);
                 this.Controls.Add(DoNotTakeLoan);
                 TakeLoan.Click += TakeLoan_Click;
@@ -289,6 +293,9 @@ namespace Vantagepoint_NEA_Project
             Button btn = sender as Button;
             btn.Enabled = false;
             btn.Visible = false;
+            RollDiceButton.Enabled = true;
+            DoNotTakeLoanButton.Enabled = false;
+            DoNotTakeLoanButton.Visible = false;
         }
 
         void DoNotTakeLoan_Click(object sender, EventArgs e)
@@ -324,25 +331,19 @@ namespace Vantagepoint_NEA_Project
 
         private void Square10()
         {
+            Button PayForWebsite = new Button();
+            PayForWebsite.Location = new System.Drawing.Point(422, 392);
+            PayForWebsite.Size = new System.Drawing.Size(87, 46);
+            this.Controls.Add(PayForWebsite);
+            PayForWebsite.Click += PayForWebsite_Click;
+            RollDiceButton.Enabled = false;
             if (hasWebsite == false)
             {
-                Button PayForWebsite = new Button();
-                PayForWebsite.Location = new System.Drawing.Point(422, 392);
-                PayForWebsite.Size = new System.Drawing.Size(87, 46);
                 PayForWebsite.Text = "Pay £20000";
-                this.Controls.Add(PayForWebsite);
-                PayForWebsite.Click += PayForWebsite_Click;
-                RollDiceButton.Enabled = false;
             }
             else if (hasWebsite == true)
             {
-                Button PayForWebsite = new Button();
-                PayForWebsite.Location = new System.Drawing.Point(422, 392);
-                PayForWebsite.Size = new System.Drawing.Size(87, 46);
                 PayForWebsite.Text = "Renew for £10000";
-                this.Controls.Add(PayForWebsite);
-                PayForWebsite.Click += PayForWebsite_Click;
-                RollDiceButton.Enabled = false;
             }
         }
 
