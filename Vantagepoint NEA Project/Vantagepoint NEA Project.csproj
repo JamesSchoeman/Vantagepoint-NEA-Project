@@ -106,11 +106,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SquaresDatabaseDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="SquaresDatabaseDataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SquaresDatabaseDataSet1.xsd</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="LoadedBoardGame.resx">
       <DependentUpon>LoadedBoardGame.cs</DependentUpon>
     </EmbeddedResource>
@@ -154,17 +149,6 @@
     </None>
     <None Include="SquaresDatabaseDataSet.xss">
       <DependentUpon>SquaresDatabaseDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="SquaresDatabaseDataSet1.xsc">
-      <DependentUpon>SquaresDatabaseDataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="SquaresDatabaseDataSet1.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>SquaresDatabaseDataSet1.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="SquaresDatabaseDataSet1.xss">
-      <DependentUpon>SquaresDatabaseDataSet1.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

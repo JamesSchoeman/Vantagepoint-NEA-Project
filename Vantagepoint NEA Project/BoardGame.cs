@@ -38,6 +38,9 @@ namespace Vantagepoint_NEA_Project
         public bool hasPension = false;
         public bool hasPR = false;
         public bool hasMarketing = false;
+        public List<int> salesOpportunities = new List<int>();
+        public int stock = 0;
+        public int staff = 0;
 
         DataTable data = new DataTable();
         SqlConnection dataconn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename=|DataDirectory|\\SquaresDatabase.mdf;Integrated Security = True");
@@ -53,6 +56,20 @@ namespace Vantagepoint_NEA_Project
             this.NOBDisplay.Text = natureOfBusiness;
             this.CTDisplay.Text = companyType;
             this.CapitalDisplay.Text = string.Concat(shareCapital);
+            this.StockDisplay.Text = string.Concat(stock);
+            this.StaffDisplay.Text = string.Concat(staff);
+            if (companyType == "Sole Trader")
+            {
+                StaffLimitDisplay.Text = "/0";
+            }
+            else if (companyType == "Partnership")
+            {
+                StaffLimitDisplay.Text = "/1";
+            }
+            else if (companyType == "Limited")
+            {
+                StaffLimitDisplay.Text = "/3";
+            }
 
             commandTest.CommandType = CommandType.Text;
             commandTest.Connection = dataconn;
@@ -110,6 +127,10 @@ namespace Vantagepoint_NEA_Project
             {
                 Square6();
             }
+            else if (newBoardPosition == 8)
+            {
+                StaffRecruitment();
+            }
             else if (newBoardPosition == 9)
             {
                 SalesOpportunity();
@@ -122,6 +143,18 @@ namespace Vantagepoint_NEA_Project
             {
                 Square12();
             }
+            else if (newBoardPosition == 14)
+            {
+                StaffRecruitment();
+            }
+            else if (newBoardPosition == 16)
+            {
+                Square16();
+            }
+            else if (newBoardPosition == 18)
+            {
+                SalesOpportunity();
+            }
             else if (newBoardPosition == 19)
             {
                 Square19();
@@ -130,9 +163,17 @@ namespace Vantagepoint_NEA_Project
             {
                 Square21();
             }
+            else if (newBoardPosition == 25)
+            {
+                StaffRecruitment();
+            }
             else if (newBoardPosition == 26)
             {
                 Square26();
+            }
+            else if (newBoardPosition == 27)
+            {
+                SalesOpportunity();
             }
             else if (newBoardPosition == 28)
             {
@@ -148,6 +189,16 @@ namespace Vantagepoint_NEA_Project
             }
 
             if ((boardPosition < 9) && (newBoardPosition > 9))
+            {
+                SalesOpportunity();
+            }
+
+            if ((boardPosition < 18) && (newBoardPosition > 18))
+            {
+                SalesOpportunity();
+            }
+
+            if ((boardPosition < 27) && (newBoardPosition > 27))
             {
                 SalesOpportunity();
             }
@@ -183,6 +234,9 @@ namespace Vantagepoint_NEA_Project
             public bool saveHasPension;
             public bool saveHasPR;
             public bool saveHasMarketing;
+            public List<int> saveSalesOpportunities;
+            public int saveStock;
+            public int saveStaff;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -202,6 +256,9 @@ namespace Vantagepoint_NEA_Project
             newSave.saveHasPension = hasPension;
             newSave.saveHasPR = hasPR;
             newSave.saveHasMarketing = hasMarketing;
+            newSave.saveSalesOpportunities = salesOpportunities;
+            newSave.saveStock = stock;
+            newSave.saveStaff = staff;
 
             XmlSerializer xs = new XmlSerializer(typeof(DataToBeSaved));
             using (System.IO.FileStream fs = new FileStream("savegame.xml", FileMode.Create))
@@ -592,6 +649,62 @@ namespace Vantagepoint_NEA_Project
             }
         }
 
+        void Square16()
+        {
+            Button BuyStockButton = new Button();
+            BuyStockButton.Location = new System.Drawing.Point(422, 392);
+            BuyStockButton.Size = new System.Drawing.Size(87, 46);
+            BuyStockButton.Text = "Pay £50000";
+            this.Controls.Add(BuyStockButton);
+            BuyStockButton.Click += BuyStockButton_Click;
+            RollDiceButton.Enabled = false;
+        }
+
+        void BuyStockButton_Click(object sender, EventArgs e)
+        {
+            shareCapital = shareCapital - 50000;
+            CapitalDisplay.Text = string.Concat(shareCapital);
+            Button btn = sender as Button;
+            btn.Enabled = false;
+            btn.Visible = false;
+            RollDiceButton.Enabled = true;
+            stock = stock + 1;
+            StockDisplay.Text = string.Concat(stock);
+        }
+
+        void StaffRecruitment()
+        {
+            Button RecruitStaffButton = new Button();
+            RecruitStaffButton.Location = new System.Drawing.Point(422, 392);
+            RecruitStaffButton.Size = new System.Drawing.Size(87, 46);
+            RecruitStaffButton.Text = "Pay £25000";
+            this.Controls.Add(RecruitStaffButton);
+            RecruitStaffButton.Click += RecruitStaffButton_Click;
+            if (companyType == "Sole Trader")
+            {
+                RecruitStaffButton.Enabled = false;
+            }
+            else if ((companyType == "Partnership") && (staff > 0))
+            {
+                RecruitStaffButton.Enabled = false;
+            }
+            else if ((companyType == "Limited") && (staff > 2))
+            {
+                RecruitStaffButton.Enabled = false;
+            }
+        }
+
+        void RecruitStaffButton_Click(object sender, EventArgs e)
+        {
+            shareCapital = shareCapital - 25000;
+            CapitalDisplay.Text = string.Concat(shareCapital);
+            Button btn = sender as Button;
+            btn.Enabled = false;
+            btn.Visible = false;
+            staff = staff + 1;
+            StaffDisplay.Text = string.Concat(staff);
+        }
+
         private void SalesOpportunity()
         {
             int chance = new int();
@@ -606,61 +719,101 @@ namespace Vantagepoint_NEA_Project
                     {
                         if (hasPension == true)
                         {
-                            //300,000 sales pipeline
+                            salesOpportunities.Add(300000);
+                            salesOpportunities.Sort();
+                            MessageBox.Show("Thanks to your pension plan, you manage to secure a sales opportunity worth £300,000. ");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Sadly, due to not having a pension plan, you are unable to secure a sales opportunity. ");
                         }
                     }
                     else if (chance < 3)
                     {
                         if (hasWebsite == true)
                         {
-                            //300,000 sales pipeline
+                            salesOpportunities.Add(300000);
+                            salesOpportunities.Sort();
+                            MessageBox.Show("Thanks to your website, you manage to secure a sales opportunity worth £300,000. ");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Sadly, due to not having a pension plan, you are unable to secure a sales opportunity. ");
                         }
                     }
                     else if (chance < 4)
                     {
                         if ((hasWebsite == true) && (hasPension == true))
                         {
-                            //300,000 sales pipeline
+                            salesOpportunities.Add(300000);
+                            salesOpportunities.Sort();
+                            MessageBox.Show("Thanks to your pension plan and website, you manage to secure a sales opportunity worth £300,000. ");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Sadly, due to not having both a pension plan and website, you are unable to secure a sales opportunity. ");
                         }
                     }
                     else if (chance < 6)
                     {
                         //If have sales staff, collect 100,000 sales pipeline
+                        MessageBox.Show("Test");
                     }
                     else if (chance < 7)
                     {
                         //If have stock, collect 300,000 sales pipeline
+                        MessageBox.Show("Test");
                     }
                     else if (chance < 8)
                     {
                         //Each salesperson (excluding self) generates 50,000 sales pipeline
+                        MessageBox.Show("Test");
                     }
                     else if (chance < 9)
                     {
                         if (hasPR == true)
                         {
                             //Each sales staff (excluding self) generates 100,000 sales pipeline
+                            MessageBox.Show("Test");
                         }
                     }
                     else if (chance < 10)
                     {
                         if (hasHealthCare == true)
                         {
-                            //300,000 sales pipeline
+                            salesOpportunities.Add(300000);
+                            salesOpportunities.Sort();
+                            MessageBox.Show("Thanks to your healthcare plan, you manage to secure a sales opportunity worth £300,000. ");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Sadly, due to not having a healthcare plan, you are unable to secure a sales opportunity. ");
                         }
                     }
                     else if (chance < 11)
                     {
                         if ((hasPension == true) && (hasHealthCare == true))
                         {
-                            //500,000 sales pipeline
+                            salesOpportunities.Add(500000);
+                            salesOpportunities.Sort();
+                            MessageBox.Show("Thanks to your pension plan and healthcare plan, you manage to secure a sales opportunity worth £500,000. ");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Sadly, due to not having both a healthcare plan and a pension plan, you are unable to secure a sales opportunity. ");
                         }
                     }
                     else if (chance < 12)
                     {
                         if (hasPR == true)
                         {
-                            //300,000 sales pipeline
+                            salesOpportunities.Add(300000);
+                            salesOpportunities.Sort();
+                            MessageBox.Show("Thanks to your PR agreement, you manage to secure a sales opportunity worth £300,000. ");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Sadly, due to not having a PR agreement, you are unable to secure a sales opportunity. ");
                         }
                     }
                 }
@@ -669,39 +822,59 @@ namespace Vantagepoint_NEA_Project
                     chance = rnd.Next(1, 16);
                     if (chance < 4)
                     {
-                        //50,000 sales pipeline
+                        salesOpportunities.Add(50000);
+                        salesOpportunities.Sort();
+                        MessageBox.Show("You manage to secure a sales opportunity worth £50,000. ");
                     }
                     else if (chance < 7)
                     {
-                        //100,000 sales pipeline
+                        salesOpportunities.Add(100000);
+                        salesOpportunities.Sort();
+                        MessageBox.Show("You manage to secure a sales opportunity worth £100,000. ");
                     }
                     else if (chance < 9)
                     {
-                        //Pay 5000, collect 50,000 sales pipeline
+                        shareCapital = shareCapital - 5000;
+                        CapitalDisplay.Text = string.Concat(shareCapital);
+                        salesOpportunities.Add(50000);
+                        salesOpportunities.Sort();
+                        MessageBox.Show("You manage to secure a sales opportunity worth £50,000 at the cost of £5000. ");
                     }
                     else if (chance < 11)
                     {
                         //Change best pipeline into order, collect 50,000 sales pipeline
+                        MessageBox.Show("Test");
                     }
                     else if (chance < 12)
                     {
-                        //Collect 200,000 sales pipeline, lose PR agreement
+                        hasPR = false;
+                        salesOpportunities.Add(200000);
+                        salesOpportunities.Sort();
+                        MessageBox.Show("You manage to secure a sales opportunity worth £200,000 at the cost of any PR agreement you might have. ");
                     }
                     else if (chance < 13)
                     {
-                        //Collect 200,000 sales pipeline, lose website agreement
+                        hasWebsite = false;
+                        salesOpportunities.Add(200000);
+                        salesOpportunities.Sort();
+                        MessageBox.Show("You manage to secure a sales opportunity worth £200,000 at the cost of any website agreement you might have. ");
                     }
                     else if (chance < 14)
                     {
-                        //Collect 200,000 sales pipeline, return Marketing agreement
+                        hasMarketing = false;
+                        salesOpportunities.Add(200000);
+                        salesOpportunities.Sort();
+                        MessageBox.Show("You manage to secure a sales opportunity worth £200,000 at the cost of any marketing agreement you might have. ");
                     }
                     else if (chance < 15)
                     {
                         //Pay 10,000 per sales staff (excluding self), collect Sales Training card, collect 50,000 sales pipeline
+                        MessageBox.Show("Test");
                     }
                     else if (chance < 16)
                     {
                         //Pay 20,000, collect Sales Training card, collect 300,000 sales pipeline
+                        MessageBox.Show("Test");
                     }
                 }
             }
@@ -710,11 +883,11 @@ namespace Vantagepoint_NEA_Project
                 chance = rnd.Next(1, 14);
                 if (chance < 10)
                 {
-
+                    MessageBox.Show("Test");
                 }
                 else
                 {
-
+                    MessageBox.Show("Test");
                 }
             }
         }
@@ -754,6 +927,16 @@ namespace Vantagepoint_NEA_Project
                 newFinishPage.ShowDialog();
                 this.Close();
             }
+        }
+
+        private void ViewSalesOpportunities_Click(object sender, EventArgs e)
+        {
+            string toDisplay = null;
+            foreach (var i in salesOpportunities)
+            {
+                toDisplay = (toDisplay + string.Concat(i) + ", ");
+            }
+            MessageBox.Show(toDisplay);
         }
     }
 }

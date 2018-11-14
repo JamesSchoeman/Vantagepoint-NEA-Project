@@ -51,6 +51,12 @@
             this.TimerSecondsDisplay = new System.Windows.Forms.Label();
             this.CapitalLabel = new System.Windows.Forms.Label();
             this.CapitalDisplay = new System.Windows.Forms.Label();
+            this.ViewSalesOpportunities = new System.Windows.Forms.Button();
+            this.StockDisplay = new System.Windows.Forms.Label();
+            this.StockLabel = new System.Windows.Forms.Label();
+            this.StaffLimitDisplay = new System.Windows.Forms.Label();
+            this.StaffDisplay = new System.Windows.Forms.Label();
+            this.StaffLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.SquareDisplay)).BeginInit();
             this.SuspendLayout();
             // 
@@ -281,11 +287,82 @@
             this.CapitalDisplay.TabIndex = 32;
             this.CapitalDisplay.Text = "-----";
             // 
+            // ViewSalesOpportunities
+            // 
+            this.ViewSalesOpportunities.Location = new System.Drawing.Point(12, 113);
+            this.ViewSalesOpportunities.Name = "ViewSalesOpportunities";
+            this.ViewSalesOpportunities.Size = new System.Drawing.Size(87, 46);
+            this.ViewSalesOpportunities.TabIndex = 33;
+            this.ViewSalesOpportunities.Text = "View Sales Opportunities";
+            this.ViewSalesOpportunities.UseVisualStyleBackColor = true;
+            this.ViewSalesOpportunities.Click += new System.EventHandler(this.ViewSalesOpportunities_Click);
+            // 
+            // StockDisplay
+            // 
+            this.StockDisplay.AutoSize = true;
+            this.StockDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StockDisplay.Location = new System.Drawing.Point(584, 230);
+            this.StockDisplay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.StockDisplay.Name = "StockDisplay";
+            this.StockDisplay.Size = new System.Drawing.Size(34, 20);
+            this.StockDisplay.TabIndex = 35;
+            this.StockDisplay.Text = "-----";
+            // 
+            // StockLabel
+            // 
+            this.StockLabel.AutoSize = true;
+            this.StockLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StockLabel.Location = new System.Drawing.Point(435, 230);
+            this.StockLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.StockLabel.Name = "StockLabel";
+            this.StockLabel.Size = new System.Drawing.Size(50, 20);
+            this.StockLabel.TabIndex = 34;
+            this.StockLabel.Text = "Stock";
+            // 
+            // StaffLimitDisplay
+            // 
+            this.StaffLimitDisplay.AutoSize = true;
+            this.StaffLimitDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StaffLimitDisplay.Location = new System.Drawing.Point(661, 265);
+            this.StaffLimitDisplay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.StaffLimitDisplay.Name = "StaffLimitDisplay";
+            this.StaffLimitDisplay.Size = new System.Drawing.Size(34, 20);
+            this.StaffLimitDisplay.TabIndex = 43;
+            this.StaffLimitDisplay.Text = "-----";
+            // 
+            // StaffDisplay
+            // 
+            this.StaffDisplay.AutoSize = true;
+            this.StaffDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StaffDisplay.Location = new System.Drawing.Point(584, 265);
+            this.StaffDisplay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.StaffDisplay.Name = "StaffDisplay";
+            this.StaffDisplay.Size = new System.Drawing.Size(34, 20);
+            this.StaffDisplay.TabIndex = 42;
+            this.StaffDisplay.Text = "-----";
+            // 
+            // StaffLabel
+            // 
+            this.StaffLabel.AutoSize = true;
+            this.StaffLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.StaffLabel.Location = new System.Drawing.Point(435, 265);
+            this.StaffLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.StaffLabel.Name = "StaffLabel";
+            this.StaffLabel.Size = new System.Drawing.Size(44, 20);
+            this.StaffLabel.TabIndex = 41;
+            this.StaffLabel.Text = "Staff";
+            // 
             // BoardGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.StaffLimitDisplay);
+            this.Controls.Add(this.StaffDisplay);
+            this.Controls.Add(this.StaffLabel);
+            this.Controls.Add(this.StockDisplay);
+            this.Controls.Add(this.StockLabel);
+            this.Controls.Add(this.ViewSalesOpportunities);
             this.Controls.Add(this.CapitalDisplay);
             this.Controls.Add(this.CapitalLabel);
             this.Controls.Add(this.TimerSecondsDisplay);
@@ -341,5 +418,11 @@
         private System.Windows.Forms.Label TimerSecondsDisplay;
         private System.Windows.Forms.Label CapitalLabel;
         private System.Windows.Forms.Label CapitalDisplay;
+        private System.Windows.Forms.Button ViewSalesOpportunities;
+        private System.Windows.Forms.Label StockDisplay;
+        private System.Windows.Forms.Label StockLabel;
+        private System.Windows.Forms.Label StaffLimitDisplay;
+        private System.Windows.Forms.Label StaffDisplay;
+        private System.Windows.Forms.Label StaffLabel;
     }
 }
