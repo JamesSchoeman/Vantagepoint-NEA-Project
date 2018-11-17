@@ -18,41 +18,7 @@ namespace Vantagepoint_NEA_Project
         public LoadedBoardGame()
         {
             InitializeComponent();
-        }
 
-        public static string filePath;
-        
-        public static string companyType;
-        public static string companyName;
-        public static string shareholders;
-        public static string natureOfBusiness;
-        public static int shareCapital;
-        public static int timeLimit;
-        public static int diceRollResult;
-        public static int boardPosition;
-        public static int newBoardPosition;
-        public bool regFeesPaid = false;
-        public bool bankLoanTaken = false;
-        public Button TakeLoanButton;
-        public Button DoNotTakeLoanButton;
-        public bool hasWebsite = false;
-        public bool hasHealthCare = false;
-        public bool hasPension = false;
-        public bool hasPR = false;
-        public bool hasMarketing = false;
-        public List<int> salesOpportunities = new List<int>();
-        public int stock = 0;
-        public int staff = 0;
-
-        DataTable data = new DataTable();
-        SqlConnection dataconn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename=|DataDirectory|\\SquaresDatabase.mdf;Integrated Security = True");
-        static SqlCommand commandTest = new SqlCommand("select * from Squares");
-        SqlDataAdapter adapter = new SqlDataAdapter(commandTest);
-
-        Random rnd = new Random();
-
-        private void Board_Game_Load(object sender, EventArgs e)
-        {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.ShowDialog();
             filePath = openFileDialog1.SafeFileName;
@@ -83,7 +49,7 @@ namespace Vantagepoint_NEA_Project
                 salesOpportunities = loadedSave.saveSalesOpportunities;
                 stock = loadedSave.saveStock;
                 staff = loadedSave.saveStaff;
-    }
+            }
 
             this.CNDisplay.Text = companyName;
             this.SHDisplay.Text = shareholders;
@@ -126,6 +92,44 @@ namespace Vantagepoint_NEA_Project
             }
 
             Square1();
+        }
+
+        public static string filePath;
+        
+        public static string companyType;
+        public static string companyName;
+        public static string shareholders;
+        public static string natureOfBusiness;
+        public static int shareCapital;
+        public static int timeLimit;
+        public static int diceRollResult;
+        public static int boardPosition;
+        public static int newBoardPosition;
+        public static bool regFeesPaid = false;
+        public static bool bankLoanTaken = false;
+        public Button TakeLoanButton;
+        public Button DoNotTakeLoanButton;
+        public Button RecruitStaffButton;
+        public Button DoNotRecruitStaffButton;
+        public static bool hasWebsite = false;
+        public static bool hasHealthCare = false;
+        public static bool hasPension = false;
+        public static bool hasPR = false;
+        public static bool hasMarketing = false;
+        public static List<int> salesOpportunities = new List<int>();
+        public static int stock = 0;
+        public static int staff = 0;
+
+        DataTable data = new DataTable();
+        SqlConnection dataconn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename=|DataDirectory|\\SquaresDatabase.mdf;Integrated Security = True");
+        static SqlCommand commandTest = new SqlCommand("select * from Squares");
+        SqlDataAdapter adapter = new SqlDataAdapter(commandTest);
+
+        Random rnd = new Random();
+
+        private void Board_Game_Load(object sender, EventArgs e)
+        {
+            
         }
 
         private void RollDiceButton_Click(object sender, EventArgs e)
@@ -709,35 +713,56 @@ namespace Vantagepoint_NEA_Project
 
         void StaffRecruitment()
         {
-            Button RecruitStaffButton = new Button();
-            RecruitStaffButton.Location = new System.Drawing.Point(422, 392);
-            RecruitStaffButton.Size = new System.Drawing.Size(87, 46);
-            RecruitStaffButton.Text = "Pay £25000";
-            this.Controls.Add(RecruitStaffButton);
-            RecruitStaffButton.Click += RecruitStaffButton_Click;
-            if (companyType == "Sole Trader")
+            if (companyType != "Sole Trader")
             {
-                RecruitStaffButton.Enabled = false;
-            }
-            else if ((companyType == "Partnership") && (staff > 0))
-            {
-                RecruitStaffButton.Enabled = false;
-            }
-            else if ((companyType == "Limited") && (staff > 2))
-            {
-                RecruitStaffButton.Enabled = false;
+                Button RecruitStaff = new Button();
+                RecruitStaff.Location = new System.Drawing.Point(422, 392);
+                RecruitStaff.Size = new System.Drawing.Size(87, 46);
+                RecruitStaff.Text = "Pay £25000";
+                this.Controls.Add(RecruitStaff);
+                RecruitStaff.Click += RecruitStaff_Click;
+                if ((companyType == "Partnership") && (staff > 0))
+                {
+                    RecruitStaff.Enabled = false;
+                }
+                else if ((companyType == "Limited") && (staff > 2))
+                {
+                    RecruitStaff.Enabled = false;
+                }
+                RecruitStaffButton = RecruitStaff;
+                Button DoNotRecruitStaff = new Button();
+                DoNotRecruitStaff.Location = new System.Drawing.Point(422, 340);
+                DoNotRecruitStaff.Size = new System.Drawing.Size(87, 46);
+                DoNotRecruitStaff.Text = "Do not recruit staff";
+                this.Controls.Add(DoNotRecruitStaff);
+                DoNotRecruitStaff.Click += DoNotRecruitStaff_Click;
+                DoNotRecruitStaffButton = DoNotRecruitStaff;
+                RollDiceButton.Enabled = false;
             }
         }
 
-        void RecruitStaffButton_Click(object sender, EventArgs e)
+        void RecruitStaff_Click(object sender, EventArgs e)
         {
             shareCapital = shareCapital - 25000;
             CapitalDisplay.Text = string.Concat(shareCapital);
             Button btn = sender as Button;
             btn.Enabled = false;
             btn.Visible = false;
+            DoNotRecruitStaffButton.Enabled = false;
+            DoNotRecruitStaffButton.Visible = false;
             staff = staff + 1;
             StaffDisplay.Text = string.Concat(staff);
+            RollDiceButton.Enabled = true;
+        }
+
+        void DoNotRecruitStaff_Click(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            btn.Enabled = false;
+            btn.Visible = false;
+            RecruitStaffButton.Enabled = false;
+            RecruitStaffButton.Visible = false;
+            RollDiceButton.Enabled = true;
         }
 
         private void SalesOpportunity()

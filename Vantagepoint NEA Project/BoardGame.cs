@@ -18,39 +18,7 @@ namespace Vantagepoint_NEA_Project
         public BoardGame()
         {
             InitializeComponent();
-        }
 
-        public static string companyType = CreateCompany.companyType;
-        public static string companyName = CreateCompany.companyName;
-        public static string shareholders = CreateCompany.shareholders;
-        public static string natureOfBusiness = CreateCompany.natureOfBusiness;
-        public static int shareCapital = CreateCompany.shareCapital;
-        public static int timeLimit = (CreateCompany.timeLimit * 60);
-        public static int diceRollResult;
-        public static int boardPosition = 1;
-        public static int newBoardPosition;
-        public bool regFeesPaid = false;
-        public bool bankLoanTaken = false;
-        public Button TakeLoanButton;
-        public Button DoNotTakeLoanButton;
-        public bool hasWebsite = false;
-        public bool hasHealthCare = false;
-        public bool hasPension = false;
-        public bool hasPR = false;
-        public bool hasMarketing = false;
-        public List<int> salesOpportunities = new List<int>();
-        public int stock = 0;
-        public int staff = 0;
-
-        DataTable data = new DataTable();
-        SqlConnection dataconn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename=|DataDirectory|\\SquaresDatabase.mdf;Integrated Security = True");
-        static SqlCommand commandTest = new SqlCommand("select * from Squares");
-        SqlDataAdapter adapter = new SqlDataAdapter(commandTest);
-
-        Random rnd = new Random();
-
-        private void Board_Game_Load(object sender, EventArgs e)
-        {
             this.CNDisplay.Text = companyName;
             this.SHDisplay.Text = shareholders;
             this.NOBDisplay.Text = natureOfBusiness;
@@ -92,6 +60,42 @@ namespace Vantagepoint_NEA_Project
             }
 
             Square1();
+        }
+
+        public static string companyType = CreateCompany.companyType;
+        public static string companyName = CreateCompany.companyName;
+        public static string shareholders = CreateCompany.shareholders;
+        public static string natureOfBusiness = CreateCompany.natureOfBusiness;
+        public static int shareCapital = CreateCompany.shareCapital;
+        public static int timeLimit = (CreateCompany.timeLimit * 60);
+        public static int diceRollResult;
+        public static int boardPosition = 1;
+        public static int newBoardPosition;
+        public static bool regFeesPaid = false;
+        public static bool bankLoanTaken = false;
+        public Button TakeLoanButton;
+        public Button DoNotTakeLoanButton;
+        public Button RecruitStaffButton;
+        public Button DoNotRecruitStaffButton;
+        public static bool hasWebsite = false;
+        public static bool hasHealthCare = false;
+        public static bool hasPension = false;
+        public static bool hasPR = false;
+        public static bool hasMarketing = false;
+        public static List<int> salesOpportunities = new List<int>();
+        public static int stock = 0;
+        public static int staff = 0;
+
+        DataTable data = new DataTable();
+        SqlConnection dataconn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename=|DataDirectory|\\SquaresDatabase.mdf;Integrated Security = True");
+        static SqlCommand commandTest = new SqlCommand("select * from Squares");
+        SqlDataAdapter adapter = new SqlDataAdapter(commandTest);
+
+        Random rnd = new Random();
+
+        private void Board_Game_Load(object sender, EventArgs e)
+        {
+            
         }
 
         private void RollDiceButton_Click(object sender, EventArgs e)
@@ -674,35 +678,56 @@ namespace Vantagepoint_NEA_Project
 
         void StaffRecruitment()
         {
-            Button RecruitStaffButton = new Button();
-            RecruitStaffButton.Location = new System.Drawing.Point(422, 392);
-            RecruitStaffButton.Size = new System.Drawing.Size(87, 46);
-            RecruitStaffButton.Text = "Pay £25000";
-            this.Controls.Add(RecruitStaffButton);
-            RecruitStaffButton.Click += RecruitStaffButton_Click;
-            if (companyType == "Sole Trader")
+            if (companyType != "Sole Trader")
             {
-                RecruitStaffButton.Enabled = false;
-            }
-            else if ((companyType == "Partnership") && (staff > 0))
-            {
-                RecruitStaffButton.Enabled = false;
-            }
-            else if ((companyType == "Limited") && (staff > 2))
-            {
-                RecruitStaffButton.Enabled = false;
+                Button RecruitStaff = new Button();
+                RecruitStaff.Location = new System.Drawing.Point(422, 392);
+                RecruitStaff.Size = new System.Drawing.Size(87, 46);
+                RecruitStaff.Text = "Pay £25000";
+                this.Controls.Add(RecruitStaff);
+                RecruitStaff.Click += RecruitStaff_Click;
+                if ((companyType == "Partnership") && (staff > 0))
+                {
+                    RecruitStaff.Enabled = false;
+                }
+                else if ((companyType == "Limited") && (staff > 2))
+                {
+                    RecruitStaff.Enabled = false;
+                }
+                RecruitStaffButton = RecruitStaff;
+                Button DoNotRecruitStaff = new Button();
+                DoNotRecruitStaff.Location = new System.Drawing.Point(422, 340);
+                DoNotRecruitStaff.Size = new System.Drawing.Size(87, 46);
+                DoNotRecruitStaff.Text = "Do not recruit staff";
+                this.Controls.Add(DoNotRecruitStaff);
+                DoNotRecruitStaff.Click += DoNotRecruitStaff_Click;
+                DoNotRecruitStaffButton = DoNotRecruitStaff;
+                RollDiceButton.Enabled = false;
             }
         }
 
-        void RecruitStaffButton_Click(object sender, EventArgs e)
+        void RecruitStaff_Click(object sender, EventArgs e)
         {
             shareCapital = shareCapital - 25000;
             CapitalDisplay.Text = string.Concat(shareCapital);
             Button btn = sender as Button;
             btn.Enabled = false;
             btn.Visible = false;
+            DoNotRecruitStaffButton.Enabled = false;
+            DoNotRecruitStaffButton.Visible = false;
             staff = staff + 1;
             StaffDisplay.Text = string.Concat(staff);
+            RollDiceButton.Enabled = true;
+        }
+
+        void DoNotRecruitStaff_Click(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            btn.Enabled = false;
+            btn.Visible = false;
+            RecruitStaffButton.Enabled = false;
+            RecruitStaffButton.Visible = false;
+            RollDiceButton.Enabled = true;
         }
 
         private void SalesOpportunity()
@@ -756,25 +781,63 @@ namespace Vantagepoint_NEA_Project
                     }
                     else if (chance < 6)
                     {
-                        //If have sales staff, collect 100,000 sales pipeline
-                        MessageBox.Show("Test");
+                        if (staff > 0)
+                        {
+                            salesOpportunities.Add(100000);
+                            salesOpportunities.Sort();
+                            MessageBox.Show("Thanks to your sales staff, you are able to secure a sales opportunity worth £100,000. ");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Sadly, due to your lack of sales staff, you are unable to secure a sales opportunity. ");
+                        }
                     }
                     else if (chance < 7)
                     {
-                        //If have stock, collect 300,000 sales pipeline
-                        MessageBox.Show("Test");
+                        if (stock > 0)
+                        {
+                            salesOpportunities.Add(300000);
+                            salesOpportunities.Sort();
+                            MessageBox.Show("Due to your stock, you are able to secure a sales opportunity worth £300,000. ");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Sadly, due to your lack of stock, you are unable to secure a sales opportunity. ");
+                        }
                     }
                     else if (chance < 8)
                     {
-                        //Each salesperson (excluding self) generates 50,000 sales pipeline
-                        MessageBox.Show("Test");
+                        if (staff > 0)
+                        {
+                            foreach (int i in Enumerable.Range(1, staff))
+                            {
+                                salesOpportunities.Add(50000);
+                            }
+                            salesOpportunities.Sort();
+                            MessageBox.Show("Thanks to your sales staff, you have generated " + string.Concat(staff) + " sales opportunities, each worth £50,000. ");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Sadly, due to your lack of staff, you do not manage to generate any sales opportunities. ");
+                        }
                     }
                     else if (chance < 9)
                     {
                         if (hasPR == true)
                         {
-                            //Each sales staff (excluding self) generates 100,000 sales pipeline
-                            MessageBox.Show("Test");
+                            if (staff > 0)
+                            {
+                                foreach (int i in Enumerable.Range(1, staff))
+                                {
+                                    salesOpportunities.Add(100000);
+                                }
+                                salesOpportunities.Sort();
+                                MessageBox.Show("Thanks to your sales staff and PR agreements, you have generated " + string.Concat(staff) + " sales opportunities, each worth £100,000. ");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Sadly, due to not having both staff and PR agreements, you do not manage to generate any sales opportunities. ");
+                            }
                         }
                     }
                     else if (chance < 10)
