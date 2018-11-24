@@ -417,12 +417,12 @@
         private System.Windows.Forms.Label TimerLabel;
         private System.Windows.Forms.Label TimerSecondsDisplay;
         private System.Windows.Forms.Label CapitalLabel;
-        private System.Windows.Forms.Label CapitalDisplay;
         private System.Windows.Forms.Button ViewSalesOpportunities;
         private System.Windows.Forms.Label StockDisplay;
         private System.Windows.Forms.Label StockLabel;
         private System.Windows.Forms.Label StaffDisplay;
         private System.Windows.Forms.Label StaffLabel;
         private System.Windows.Forms.Label StaffLimitDisplay;
+        private System.Windows.Forms.Label CapitalDisplay;
     }
 }

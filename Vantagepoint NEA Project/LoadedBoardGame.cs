@@ -70,6 +70,8 @@ namespace Vantagepoint_NEA_Project
             {
                 StaffLimitDisplay.Text = "/3";
             }
+            SquareDisplay.ImageLocation = ("Board Images\\" + boardPosition + ".JPG");
+            SquareDisplay.SizeMode = PictureBoxSizeMode.Zoom;
 
             commandTest.CommandType = CommandType.Text;
             commandTest.Connection = dataconn;
@@ -119,6 +121,7 @@ namespace Vantagepoint_NEA_Project
         public static List<int> salesOpportunities = new List<int>();
         public static int stock = 0;
         public static int staff = 0;
+        public static bool reportCapitalChanged = false;
 
         DataTable data = new DataTable();
         SqlConnection dataconn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename=|DataDirectory|\\SquaresDatabase.mdf;Integrated Security = True");
@@ -143,6 +146,10 @@ namespace Vantagepoint_NEA_Project
                 newBoardPosition = newBoardPosition - 36;
                 EndOfMonth monthlyReport = new EndOfMonth();
                 monthlyReport.Show();
+                while (reportCapitalChanged == false)
+                {
+                    CapitalDisplay.Text = string.Concat(shareCapital);
+                }
             }
 
             commandTest.CommandType = CommandType.Text;
@@ -157,6 +164,8 @@ namespace Vantagepoint_NEA_Project
             this.SquareNameDisplay.Text = squareNamevar;
             squareDescvar = string.Concat(data.Rows[newBoardPosition - 1][2]);
             this.DescriptionDisplay.Text = squareDescvar;
+            SquareDisplay.ImageLocation = ("Board Images\\" + newBoardPosition + ".JPG");
+            SquareDisplay.SizeMode = PictureBoxSizeMode.Zoom;
 
             if (newBoardPosition == 2)
             {
@@ -994,7 +1003,7 @@ namespace Vantagepoint_NEA_Project
             string toDisplay = null;
             foreach (var i in salesOpportunities)
             {
-                toDisplay = (toDisplay + string.Concat(i) + ", ");
+                toDisplay = (toDisplay + "£" + string.Concat(i) + ", ");
             }
             MessageBox.Show(toDisplay);
         }
