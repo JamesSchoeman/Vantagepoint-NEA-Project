@@ -14,100 +14,189 @@ namespace Vantagepoint_NEA_Project
     {
 
         public string parentType = null;
-        public bool paidVat = false;
-        public bool convertedOrders = false;
-        public bool convertedOpportunities = false;
-        public bool paidStaff = false;
-
+        private int localShareCapital;
+        private int localStaff;
+        private string localCompanyType;
+        private static List<int> localSalesOpportunities = new List<int>();
+        private static List<int> opportunitiesToRemove = new List<int>();
+        private static List<int> localSalesOrders = new List<int>();
+        Random rnd = new Random();
 
         public EndOfMonth()
         {
             InitializeComponent();
 
-            paidVat = false;
-            convertedOrders = false;
-            convertedOpportunities = false;
-            paidStaff = false;
+            CloseButton.Enabled = false;
+            SalesOpportunitiesButton.Enabled = false;
+            PayVATButton.Enabled = false;
+            SalariesButton.Enabled = false;
+            
 
             foreach (var i in Application.OpenForms)
             {
                 if (string.Concat(i) == "Vantagepoint_NEA_Project.BoardGame, Text: Board Game")
                 {
                     parentType = "NonLoaded";
-                    Console.WriteLine("NonLoaded");
                     break;
                 }
                 if (string.Concat(i) == "Vantagepoint_NEA_Project.LoadedBoardGame, Text: Board Game")
                 {
                     parentType = "Loaded";
-                    Console.WriteLine("Loaded");
-                    Console.WriteLine(i);
                     break;
                 }
             }
 
             if (parentType == "NonLoaded")
             {
-                CapitalDisplay.Text = string.Concat(BoardGame.shareCapital);
-                StaffDisplay.Text = string.Concat(BoardGame.staff);
-                PayVATButton.Text = "Pay VAT of £" + string.Concat(BoardGame.shareCapital / 10);
-                if (BoardGame.companyType == "Sole Trader")
-                {
-                    StaffLimitDisplay.Text = "/0";
-                }
-                else if (BoardGame.companyType == "Partnership")
-                {
-                    StaffLimitDisplay.Text = "/1";
-                }
-                else if (BoardGame.companyType == "Limited")
-                {
-                    StaffLimitDisplay.Text = "/3";
-                }
+                localShareCapital = BoardGame.shareCapital;
+                localStaff = BoardGame.staff;
+                localCompanyType = BoardGame.companyType;
+                localSalesOpportunities = BoardGame.salesOpportunities;
+                localSalesOrders = BoardGame.salesOrders;
             }
             else if (parentType == "Loaded")
             {
-                CapitalDisplay.Text = string.Concat(LoadedBoardGame.shareCapital);
-                StaffDisplay.Text = string.Concat(LoadedBoardGame.staff);
-                PayVATButton.Text = "Pay VAT of £" + string.Concat(LoadedBoardGame.shareCapital / 10);
-                if (LoadedBoardGame.companyType == "Sole Trader")
-                {
-                    StaffLimitDisplay.Text = "/0";
-                }
-                else if (LoadedBoardGame.companyType == "Partnership")
-                {
-                    StaffLimitDisplay.Text = "/1";
-                }
-                else if (LoadedBoardGame.companyType == "Limited")
-                {
-                    StaffLimitDisplay.Text = "/3";
-                }
+                localShareCapital = LoadedBoardGame.shareCapital;
+                localStaff = LoadedBoardGame.staff;
+                localCompanyType = LoadedBoardGame.companyType;
+                localSalesOpportunities = LoadedBoardGame.salesOpportunities;
+                localSalesOrders = LoadedBoardGame.salesOrders;
+            }
+
+            CapitalDisplay.Text = string.Concat(localShareCapital);
+            StaffDisplay.Text = string.Concat(localStaff);
+            PayVATButton.Text = "Pay VAT of £" + string.Concat(localShareCapital / 10);
+            SalariesButton.Text = "Pay salaries of £" + string.Concat(localStaff * 25000);
+
+            if (localCompanyType == "Sole Trader")
+            {
+                StaffLimitDisplay.Text = "/0";
+            }
+            else if (localCompanyType == "Partnership")
+            {
+                StaffLimitDisplay.Text = "/1";
+            }
+            else if (localCompanyType == "Limited")
+            {
+                StaffLimitDisplay.Text = "/3";
             }
         }
 
         private void CloseButton_Click(object sender, EventArgs e)
         {
+            if (parentType == "NonLoaded")
+            {
+                BoardGame.shareCapital = localShareCapital;
+                BoardGame.salesOpportunities = localSalesOpportunities;
+                BoardGame.salesOrders = localSalesOrders;
+            }
+            else if (parentType == "Loaded")
+            {
+                LoadedBoardGame.shareCapital = localShareCapital;
+                LoadedBoardGame.salesOpportunities = localSalesOpportunities;
+                LoadedBoardGame.salesOrders = localSalesOrders;
+            }
             this.Close();
         }
 
-        private void EndOfMonth_Load(object sender, EventArgs e)
+        public void UpdateCapital(int amount)
         {
-            
+            localShareCapital = localShareCapital + amount;
+            CapitalDisplay.Text = string.Concat(localShareCapital);
         }
 
         private void PayVATButton_Click(object sender, EventArgs e)
         {
-            if (parentType == "NonLoaded")
-            {
-                BoardGame.shareCapital = BoardGame.shareCapital - (BoardGame.shareCapital / 10);
-                CapitalDisplay.Text = string.Concat(BoardGame.shareCapital);
-            }
-            else if (parentType == "Loaded")
-            {
-                LoadedBoardGame.shareCapital = LoadedBoardGame.shareCapital - (LoadedBoardGame.shareCapital / 10);
-                CapitalDisplay.Text = string.Concat(LoadedBoardGame.shareCapital);
-            }
-            paidVat = true;
+            UpdateCapital(localShareCapital / -10);
+
             PayVATButton.Enabled = false;
+            CloseButton.Enabled = true;
+        }
+
+        private void SalesOrdersButton_Click(object sender, EventArgs e)
+        {
+            foreach (int i in localSalesOrders)
+            {
+                UpdateCapital(i);
+                MessageBox.Show("£" + string.Concat(i) + " sales order payout received. ", "Payout recieved");
+            }
+            localSalesOrders.Clear();
+            SalesOrdersButton.Enabled = false;
+            SalesOpportunitiesButton.Enabled = true;
+        }
+
+        private void ViewSalesOpportunities_Click(object sender, EventArgs e)
+        {
+            string toDisplay = null;
+            foreach (int i in localSalesOpportunities)
+            {
+                toDisplay = (toDisplay + "£" + string.Concat(i) + ", ");
+            }
+            MessageBox.Show(toDisplay);
+        }
+
+        private void ViewSalesOrders_Click(object sender, EventArgs e)
+        {
+            string toDisplay = null;
+            foreach (int i in localSalesOrders)
+            {
+                toDisplay = (toDisplay + "£" + string.Concat(i) + ", ");
+            }
+            MessageBox.Show(toDisplay);
+        }
+
+        private void SalesOpportunitiesButton_Click(object sender, EventArgs e)
+        {
+            foreach (int i in localSalesOpportunities)
+            {
+                int chance = new int();
+                chance = rnd.Next(1, 37);
+                if (chance < 6)
+                {
+                    opportunitiesToRemove.Add(i);
+                    MessageBox.Show("£" + string.Concat(i) + " sales opportunity lost. ", "Sales opportunity lost");
+                }
+                else if (chance < 12)
+                {
+                    MessageBox.Show("£" + string.Concat(i) + " sales opportunity has failed to close, but has not been lost. ", "Sales opportunity failed to close");
+                }
+                else if (chance < 36)
+                {
+                    localSalesOrders.Add(i);
+                    opportunitiesToRemove.Add(i);
+                    MessageBox.Show("£" + string.Concat(i) + " sales opportunity successfully converted to sales order. ", "Sales opportunity closed");
+                }
+                else if (chance == 36)
+                {
+                    localSalesOpportunities.Clear();
+                    MessageBox.Show("All sales opportunities lost due to unforeseen complications.", "All sales opportunities lost");
+                    break;
+                }
+            }
+            foreach (int i in opportunitiesToRemove)
+            {
+                localSalesOpportunities.Remove(i);
+            }
+            localSalesOpportunities.Sort();
+            opportunitiesToRemove.Clear();
+            localSalesOrders.Sort();
+
+            if ((localCompanyType == "Sole Trader") || (localStaff == 0))
+            {
+                PayVATButton.Enabled = true;
+            }
+            else
+            {
+                SalariesButton.Enabled = true;
+            }
+            SalesOpportunitiesButton.Enabled = false;
+        }
+
+        private void SalariesButton_Click(object sender, EventArgs e)
+        {
+            UpdateCapital(localStaff * -25000);
+            PayVATButton.Enabled = true;
+            SalariesButton.Enabled = false;
         }
     }
 }

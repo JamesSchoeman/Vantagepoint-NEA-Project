@@ -42,9 +42,9 @@
             this.DescriptionDisplay = new System.Windows.Forms.Label();
             this.RollResultDisplay = new System.Windows.Forms.Label();
             this.SquareNameDisplay = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.ExitGameButton = new System.Windows.Forms.Button();
+            this.SaveGameButton = new System.Windows.Forms.Button();
+            this.FinishGameButton = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.TimerMinutesDisplay = new System.Windows.Forms.Label();
             this.TimerLabel = new System.Windows.Forms.Label();
@@ -57,12 +57,13 @@
             this.StaffDisplay = new System.Windows.Forms.Label();
             this.StaffLabel = new System.Windows.Forms.Label();
             this.StaffLimitDisplay = new System.Windows.Forms.Label();
+            this.ViewSalesOrders = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.SquareDisplay)).BeginInit();
             this.SuspendLayout();
             // 
             // RollDiceButton
             // 
-            this.RollDiceButton.Location = new System.Drawing.Point(12, 12);
+            this.RollDiceButton.Location = new System.Drawing.Point(701, 392);
             this.RollDiceButton.Name = "RollDiceButton";
             this.RollDiceButton.Size = new System.Drawing.Size(87, 46);
             this.RollDiceButton.TabIndex = 0;
@@ -181,7 +182,7 @@
             // 
             this.RollResultDisplay.AutoSize = true;
             this.RollResultDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RollResultDisplay.Location = new System.Drawing.Point(41, 61);
+            this.RollResultDisplay.Location = new System.Drawing.Point(759, 349);
             this.RollResultDisplay.Name = "RollResultDisplay";
             this.RollResultDisplay.Size = new System.Drawing.Size(29, 39);
             this.RollResultDisplay.TabIndex = 23;
@@ -196,35 +197,35 @@
             this.SquareNameDisplay.TabIndex = 24;
             this.SquareNameDisplay.Text = "-----";
             // 
-            // button1
+            // ExitGameButton
             // 
-            this.button1.Location = new System.Drawing.Point(701, 392);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(87, 46);
-            this.button1.TabIndex = 25;
-            this.button1.Text = "Exit";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.ExitGameButton.Location = new System.Drawing.Point(12, 116);
+            this.ExitGameButton.Name = "ExitGameButton";
+            this.ExitGameButton.Size = new System.Drawing.Size(87, 46);
+            this.ExitGameButton.TabIndex = 25;
+            this.ExitGameButton.Text = "Exit";
+            this.ExitGameButton.UseVisualStyleBackColor = true;
+            this.ExitGameButton.Click += new System.EventHandler(this.ExitGameButton_Click);
             // 
-            // button2
+            // SaveGameButton
             // 
-            this.button2.Location = new System.Drawing.Point(608, 392);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(87, 46);
-            this.button2.TabIndex = 26;
-            this.button2.Text = "Save Game";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.SaveGameButton.Location = new System.Drawing.Point(12, 64);
+            this.SaveGameButton.Name = "SaveGameButton";
+            this.SaveGameButton.Size = new System.Drawing.Size(87, 46);
+            this.SaveGameButton.TabIndex = 26;
+            this.SaveGameButton.Text = "Save Game";
+            this.SaveGameButton.UseVisualStyleBackColor = true;
+            this.SaveGameButton.Click += new System.EventHandler(this.SaveGameButton_Click);
             // 
-            // button3
+            // FinishGameButton
             // 
-            this.button3.Location = new System.Drawing.Point(515, 392);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(87, 46);
-            this.button3.TabIndex = 27;
-            this.button3.Text = "Finish Game";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.FinishGameButton.Location = new System.Drawing.Point(12, 12);
+            this.FinishGameButton.Name = "FinishGameButton";
+            this.FinishGameButton.Size = new System.Drawing.Size(87, 46);
+            this.FinishGameButton.TabIndex = 27;
+            this.FinishGameButton.Text = "Finish Game";
+            this.FinishGameButton.UseVisualStyleBackColor = true;
+            this.FinishGameButton.Click += new System.EventHandler(this.FinishGameButton_Click);
             // 
             // timer1
             // 
@@ -289,7 +290,7 @@
             // 
             // ViewSalesOpportunities
             // 
-            this.ViewSalesOpportunities.Location = new System.Drawing.Point(12, 113);
+            this.ViewSalesOpportunities.Location = new System.Drawing.Point(608, 392);
             this.ViewSalesOpportunities.Name = "ViewSalesOpportunities";
             this.ViewSalesOpportunities.Size = new System.Drawing.Size(87, 46);
             this.ViewSalesOpportunities.TabIndex = 34;
@@ -345,18 +346,29 @@
             // 
             this.StaffLimitDisplay.AutoSize = true;
             this.StaffLimitDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.StaffLimitDisplay.Location = new System.Drawing.Point(626, 265);
+            this.StaffLimitDisplay.Location = new System.Drawing.Point(661, 265);
             this.StaffLimitDisplay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.StaffLimitDisplay.Name = "StaffLimitDisplay";
             this.StaffLimitDisplay.Size = new System.Drawing.Size(34, 20);
             this.StaffLimitDisplay.TabIndex = 40;
             this.StaffLimitDisplay.Text = "-----";
             // 
+            // ViewSalesOrders
+            // 
+            this.ViewSalesOrders.Location = new System.Drawing.Point(515, 392);
+            this.ViewSalesOrders.Name = "ViewSalesOrders";
+            this.ViewSalesOrders.Size = new System.Drawing.Size(87, 46);
+            this.ViewSalesOrders.TabIndex = 52;
+            this.ViewSalesOrders.Text = "View Sales Orders";
+            this.ViewSalesOrders.UseVisualStyleBackColor = true;
+            this.ViewSalesOrders.Click += new System.EventHandler(this.ViewSalesOrders_Click);
+            // 
             // LoadedBoardGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ViewSalesOrders);
             this.Controls.Add(this.StaffLimitDisplay);
             this.Controls.Add(this.StaffDisplay);
             this.Controls.Add(this.StaffLabel);
@@ -368,9 +380,9 @@
             this.Controls.Add(this.TimerSecondsDisplay);
             this.Controls.Add(this.TimerMinutesDisplay);
             this.Controls.Add(this.TimerLabel);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.FinishGameButton);
+            this.Controls.Add(this.SaveGameButton);
+            this.Controls.Add(this.ExitGameButton);
             this.Controls.Add(this.SquareNameDisplay);
             this.Controls.Add(this.RollResultDisplay);
             this.Controls.Add(this.DescriptionDisplay);
@@ -409,9 +421,9 @@
         private System.Windows.Forms.Label DescriptionDisplay;
         private System.Windows.Forms.Label RollResultDisplay;
         private System.Windows.Forms.Label SquareNameDisplay;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button ExitGameButton;
+        private System.Windows.Forms.Button SaveGameButton;
+        private System.Windows.Forms.Button FinishGameButton;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label TimerMinutesDisplay;
         private System.Windows.Forms.Label TimerLabel;
@@ -424,5 +436,6 @@
         private System.Windows.Forms.Label StaffLabel;
         private System.Windows.Forms.Label StaffLimitDisplay;
         private System.Windows.Forms.Label CapitalDisplay;
+        private System.Windows.Forms.Button ViewSalesOrders;
     }
 }

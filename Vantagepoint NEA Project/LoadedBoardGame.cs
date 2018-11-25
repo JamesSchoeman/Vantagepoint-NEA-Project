@@ -19,45 +19,55 @@ namespace Vantagepoint_NEA_Project
         {
             InitializeComponent();
 
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.ShowDialog();
-            filePath = openFileDialog1.SafeFileName;
-
-            DataToBeSaved loadedSave;
-            XmlSerializer xs = new XmlSerializer(typeof(DataToBeSaved));
-            using (FileStream fs = new FileStream(filePath, FileMode.Open))
+            try
             {
-                loadedSave = xs.Deserialize(fs) as DataToBeSaved;
+                OpenFileDialog openFileDialog1 = new OpenFileDialog();
+                openFileDialog1.ShowDialog();
+                filePath = openFileDialog1.SafeFileName;
+                DataToBeSaved loadedSave;
+                XmlSerializer xs = new XmlSerializer(typeof(DataToBeSaved));
+                using (FileStream fs = new FileStream(filePath, FileMode.Open))
+                {
+                    loadedSave = xs.Deserialize(fs) as DataToBeSaved;
+                }
+
+                if (loadedSave != null)
+                {
+                    companyType = loadedSave.saveCompanyType;
+                    companyName = loadedSave.saveCompanyName;
+                    shareholders = loadedSave.saveShareholders;
+                    natureOfBusiness = loadedSave.saveNatureOfBusiness;
+                    shareCapital = loadedSave.saveShareCapital;
+                    timeLimit = loadedSave.saveTimeLimit;
+                    boardPosition = loadedSave.saveBoardPosition;
+                    regFeesPaid = loadedSave.saveRegFeesPaid;
+                    bankLoanTaken = loadedSave.saveBankLoanTaken;
+                    hasWebsite = loadedSave.saveHasWebsite;
+                    hasHealthCare = loadedSave.saveHasHealthCare;
+                    hasBEE = loadedSave.saveHasBEE;
+                    hasPR = loadedSave.saveHasPR;
+                    hasMarketing = loadedSave.saveHasMarketing;
+                    salesOpportunities = loadedSave.saveSalesOpportunities;
+                    stock = loadedSave.saveStock;
+                    staff = loadedSave.saveStaff;
+                    hasInsurance = loadedSave.saveHasInsurance;
+                    salesOrders = loadedSave.saveSalesOrders;
+                }
+                validFileSelected = true;
             }
-
-            if (loadedSave != null)
+            catch (Exception)
             {
-                companyType = loadedSave.saveCompanyType;
-                companyName = loadedSave.saveCompanyName;
-                shareholders = loadedSave.saveShareholders;
-                natureOfBusiness = loadedSave.saveNatureOfBusiness;
-                shareCapital = loadedSave.saveShareCapital;
-                timeLimit = loadedSave.saveTimeLimit;
-                boardPosition = loadedSave.saveBoardPosition;
-                regFeesPaid = loadedSave.saveRegFeesPaid;
-                bankLoanTaken = loadedSave.saveBankLoanTaken;
-                hasWebsite = loadedSave.saveHasWebsite;
-                hasHealthCare = loadedSave.saveHasHealthCare;
-                hasPension = loadedSave.saveHasPension;
-                hasPR = loadedSave.saveHasPR;
-                hasMarketing = loadedSave.saveHasMarketing;
-                salesOpportunities = loadedSave.saveSalesOpportunities;
-                stock = loadedSave.saveStock;
-                staff = loadedSave.saveStaff;
+                MessageBox.Show("Invalid save file. ", "Load failed");
+                Environment.Exit(0);
             }
 
             this.CNDisplay.Text = companyName;
             this.SHDisplay.Text = shareholders;
             this.NOBDisplay.Text = natureOfBusiness;
             this.CTDisplay.Text = companyType;
-            this.CapitalDisplay.Text = string.Concat(shareCapital);
             this.StockDisplay.Text = string.Concat(stock);
             this.StaffDisplay.Text = string.Concat(staff);
+            this.CapitalDisplay.Text = string.Concat(shareCapital);
             if (companyType == "Sole Trader")
             {
                 StaffLimitDisplay.Text = "/0";
@@ -97,7 +107,7 @@ namespace Vantagepoint_NEA_Project
         }
 
         public static string filePath;
-        
+
         public static string companyType;
         public static string companyName;
         public static string shareholders;
@@ -115,13 +125,15 @@ namespace Vantagepoint_NEA_Project
         public Button DoNotRecruitStaffButton;
         public static bool hasWebsite = false;
         public static bool hasHealthCare = false;
-        public static bool hasPension = false;
+        public static bool hasBEE = false;
         public static bool hasPR = false;
         public static bool hasMarketing = false;
+        public static bool hasInsurance = false;
         public static List<int> salesOpportunities = new List<int>();
+        public static List<int> salesOrders = new List<int>();
         public static int stock = 0;
         public static int staff = 0;
-        public static bool reportCapitalChanged = false;
+        public static bool validFileSelected = false;
 
         DataTable data = new DataTable();
         SqlConnection dataconn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename=|DataDirectory|\\SquaresDatabase.mdf;Integrated Security = True");
@@ -132,7 +144,7 @@ namespace Vantagepoint_NEA_Project
 
         private void Board_Game_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void RollDiceButton_Click(object sender, EventArgs e)
@@ -145,10 +157,11 @@ namespace Vantagepoint_NEA_Project
             {
                 newBoardPosition = newBoardPosition - 36;
                 EndOfMonth monthlyReport = new EndOfMonth();
-                monthlyReport.Show();
-                while (reportCapitalChanged == false)
+                monthlyReport.ShowDialog(this);
+                CapitalDisplay.Text = string.Concat(shareCapital);
+                foreach (int i in Enumerable.Range(0, staff + 1))
                 {
-                    CapitalDisplay.Text = string.Concat(shareCapital);
+                    SalesOpportunity();
                 }
             }
 
@@ -199,6 +212,10 @@ namespace Vantagepoint_NEA_Project
             {
                 Square16();
             }
+            else if (newBoardPosition == 17)
+            {
+                GetInsurance();
+            }
             else if (newBoardPosition == 18)
             {
                 SalesOpportunity();
@@ -231,6 +248,10 @@ namespace Vantagepoint_NEA_Project
             {
                 Square30();
             }
+            else if (newBoardPosition == 32)
+            {
+                StaffRecruitment();
+            }
             else if (newBoardPosition == 35)
             {
                 Square35();
@@ -255,7 +276,7 @@ namespace Vantagepoint_NEA_Project
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void ExitGameButton_Click(object sender, EventArgs e)
         {
             DialogResult answer;
             answer = MessageBox.Show("Are you sure you want to quit? ", "Are you sure? ", MessageBoxButtons.YesNo);
@@ -279,15 +300,17 @@ namespace Vantagepoint_NEA_Project
             public bool saveBankLoanTaken;
             public bool saveHasWebsite;
             public bool saveHasHealthCare;
-            public bool saveHasPension;
+            public bool saveHasBEE;
             public bool saveHasPR;
             public bool saveHasMarketing;
             public List<int> saveSalesOpportunities;
+            public List<int> saveSalesOrders;
             public int saveStock;
             public int saveStaff;
+            public bool saveHasInsurance;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void SaveGameButton_Click(object sender, EventArgs e)
         {
             DataToBeSaved newSave = new DataToBeSaved();
             newSave.saveCompanyType = companyType;
@@ -301,15 +324,17 @@ namespace Vantagepoint_NEA_Project
             newSave.saveBankLoanTaken = bankLoanTaken;
             newSave.saveHasWebsite = hasWebsite;
             newSave.saveHasHealthCare = hasHealthCare;
-            newSave.saveHasPension = hasPension;
+            newSave.saveHasBEE = hasBEE;
             newSave.saveHasPR = hasPR;
             newSave.saveHasMarketing = hasMarketing;
             newSave.saveSalesOpportunities = salesOpportunities;
+            newSave.saveSalesOrders = salesOrders;
             newSave.saveStock = stock;
             newSave.saveStaff = staff;
+            newSave.saveHasInsurance = hasInsurance;
 
             XmlSerializer xs = new XmlSerializer(typeof(DataToBeSaved));
-            using (System.IO.FileStream fs = new FileStream("savegame.xml", FileMode.Create))
+            using (System.IO.FileStream fs = new FileStream(companyName + ".xml", FileMode.Create))
             {
                 xs.Serialize(fs, newSave);
             }
@@ -321,17 +346,16 @@ namespace Vantagepoint_NEA_Project
             {
                 if (companyType == "Sole Trader")
                 {
-                    shareCapital = shareCapital - 5000;
+                    UpdateCapital(-5000);
                 }
                 else if (companyType == "Partnership")
                 {
-                    shareCapital = shareCapital - 10000;
+                    UpdateCapital(-10000);
                 }
                 else if (companyType == "Limited")
                 {
-                    shareCapital = shareCapital - 20000;
+                    UpdateCapital(-20000);
                 }
-                CapitalDisplay.Text = string.Concat(shareCapital);
                 regFeesPaid = true;
             }
         }
@@ -355,18 +379,23 @@ namespace Vantagepoint_NEA_Project
                 TakeLoan.Click += TakeLoan_Click;
                 DoNotTakeLoan.Click += DoNotTakeLoan_Click;
                 RollDiceButton.Enabled = false;
+                SaveGameButton.Enabled = false;
+                FinishGameButton.Enabled = false;
+                ExitGameButton.Enabled = false;
             }
         }
 
         void TakeLoan_Click(object sender, EventArgs e)
         {
-            shareCapital = shareCapital + 250000;
-            CapitalDisplay.Text = string.Concat(shareCapital);
+            UpdateCapital(250000);
             bankLoanTaken = true;
             Button btn = sender as Button;
             btn.Enabled = false;
             btn.Visible = false;
             RollDiceButton.Enabled = true;
+            SaveGameButton.Enabled = true;
+            FinishGameButton.Enabled = true;
+            ExitGameButton.Enabled = true;
             DoNotTakeLoanButton.Enabled = false;
             DoNotTakeLoanButton.Visible = false;
         }
@@ -374,6 +403,9 @@ namespace Vantagepoint_NEA_Project
         void DoNotTakeLoan_Click(object sender, EventArgs e)
         {
             RollDiceButton.Enabled = true;
+            SaveGameButton.Enabled = true;
+            FinishGameButton.Enabled = true;
+            ExitGameButton.Enabled = true;
             Button btn = sender as Button;
             btn.Enabled = false;
             btn.Visible = false;
@@ -390,16 +422,22 @@ namespace Vantagepoint_NEA_Project
             this.Controls.Add(PayForEquipment);
             PayForEquipment.Click += PayForEquipment_Click;
             RollDiceButton.Enabled = false;
+            SaveGameButton.Enabled = false;
+            FinishGameButton.Enabled = false;
+            ExitGameButton.Enabled = false;
+
         }
 
         void PayForEquipment_Click(object sender, EventArgs e)
         {
-            shareCapital = shareCapital - 15000;
-            CapitalDisplay.Text = string.Concat(shareCapital);
+            UpdateCapital(-15000);
             Button btn = sender as Button;
             btn.Enabled = false;
             btn.Visible = false;
             RollDiceButton.Enabled = true;
+            SaveGameButton.Enabled = true;
+            FinishGameButton.Enabled = true;
+            ExitGameButton.Enabled = true;
         }
 
         private void Square10()
@@ -410,6 +448,9 @@ namespace Vantagepoint_NEA_Project
             this.Controls.Add(PayForWebsite);
             PayForWebsite.Click += PayForWebsite_Click;
             RollDiceButton.Enabled = false;
+            SaveGameButton.Enabled = false;
+            FinishGameButton.Enabled = false;
+            ExitGameButton.Enabled = false;
             if (hasWebsite == false)
             {
                 PayForWebsite.Text = "Pay £20000";
@@ -424,22 +465,26 @@ namespace Vantagepoint_NEA_Project
         {
             if (hasWebsite == false)
             {
-                shareCapital = shareCapital - 20000;
-                CapitalDisplay.Text = string.Concat(shareCapital);
+                UpdateCapital(-20000);
                 Button btn = sender as Button;
                 btn.Enabled = false;
                 btn.Visible = false;
                 RollDiceButton.Enabled = true;
+                SaveGameButton.Enabled = true;
+                FinishGameButton.Enabled = true;
+                ExitGameButton.Enabled = true;
                 hasWebsite = true;
             }
             else if (hasWebsite == true)
             {
-                shareCapital = shareCapital - 10000;
-                CapitalDisplay.Text = string.Concat(shareCapital);
+                UpdateCapital(-10000);
                 Button btn = sender as Button;
                 btn.Enabled = false;
                 btn.Visible = false;
                 RollDiceButton.Enabled = true;
+                SaveGameButton.Enabled = true;
+                FinishGameButton.Enabled = true;
+                ExitGameButton.Enabled = true;
             }
         }
 
@@ -452,16 +497,21 @@ namespace Vantagepoint_NEA_Project
             this.Controls.Add(PayForRates);
             PayForRates.Click += PayForRates_Click;
             RollDiceButton.Enabled = false;
+            SaveGameButton.Enabled = false;
+            FinishGameButton.Enabled = false;
+            ExitGameButton.Enabled = false;
         }
 
         void PayForRates_Click(object sender, EventArgs e)
         {
-            shareCapital = shareCapital - 15000;
-            CapitalDisplay.Text = string.Concat(shareCapital);
+            UpdateCapital(-15000);
             Button btn = sender as Button;
             btn.Enabled = false;
             btn.Visible = false;
             RollDiceButton.Enabled = true;
+            SaveGameButton.Enabled = true;
+            FinishGameButton.Enabled = true;
+            ExitGameButton.Enabled = true;
         }
 
         private void Square21()
@@ -473,16 +523,21 @@ namespace Vantagepoint_NEA_Project
             this.Controls.Add(PayForPremises);
             PayForPremises.Click += PayForPremises_Click;
             RollDiceButton.Enabled = false;
+            SaveGameButton.Enabled = false;
+            FinishGameButton.Enabled = false;
+            ExitGameButton.Enabled = false;
         }
 
         void PayForPremises_Click(object sender, EventArgs e)
         {
-            shareCapital = shareCapital - 30000;
-            CapitalDisplay.Text = string.Concat(shareCapital);
+            UpdateCapital(-30000);
             Button btn = sender as Button;
             btn.Enabled = false;
             btn.Visible = false;
             RollDiceButton.Enabled = true;
+            SaveGameButton.Enabled = true;
+            FinishGameButton.Enabled = true;
+            ExitGameButton.Enabled = true;
         }
 
         private void Square28()
@@ -494,16 +549,21 @@ namespace Vantagepoint_NEA_Project
             this.Controls.Add(PayForTelephone);
             PayForTelephone.Click += PayForTelephone_Click;
             RollDiceButton.Enabled = false;
+            SaveGameButton.Enabled = false;
+            FinishGameButton.Enabled = false;
+            ExitGameButton.Enabled = false;
         }
 
         void PayForTelephone_Click(object sender, EventArgs e)
         {
-            shareCapital = shareCapital - 20000;
-            CapitalDisplay.Text = string.Concat(shareCapital);
+            UpdateCapital(-20000);
             Button btn = sender as Button;
             btn.Enabled = false;
             btn.Visible = false;
             RollDiceButton.Enabled = true;
+            SaveGameButton.Enabled = true;
+            FinishGameButton.Enabled = true;
+            ExitGameButton.Enabled = true;
         }
 
         private void Square19()
@@ -517,6 +577,9 @@ namespace Vantagepoint_NEA_Project
                 this.Controls.Add(PayForHealthCare);
                 PayForHealthCare.Click += PayForHealthCare_Click;
                 RollDiceButton.Enabled = false;
+                SaveGameButton.Enabled = false;
+                FinishGameButton.Enabled = false;
+                ExitGameButton.Enabled = false;
             }
             else if (hasHealthCare == true)
             {
@@ -527,6 +590,9 @@ namespace Vantagepoint_NEA_Project
                 this.Controls.Add(PayForHealthCare);
                 PayForHealthCare.Click += PayForHealthCare_Click;
                 RollDiceButton.Enabled = false;
+                SaveGameButton.Enabled = false;
+                FinishGameButton.Enabled = false;
+                ExitGameButton.Enabled = false;
             }
         }
 
@@ -534,22 +600,26 @@ namespace Vantagepoint_NEA_Project
         {
             if (hasHealthCare == false)
             {
-                shareCapital = shareCapital - 20000;
-                CapitalDisplay.Text = string.Concat(shareCapital);
+                UpdateCapital(-20000);
                 Button btn = sender as Button;
                 btn.Enabled = false;
                 btn.Visible = false;
                 RollDiceButton.Enabled = true;
+                SaveGameButton.Enabled = true;
+                FinishGameButton.Enabled = true;
+                ExitGameButton.Enabled = true;
                 hasHealthCare = true;
             }
             else if (hasHealthCare == true)
             {
-                shareCapital = shareCapital - 10000;
-                CapitalDisplay.Text = string.Concat(shareCapital);
+                UpdateCapital(-10000);
                 Button btn = sender as Button;
                 btn.Enabled = false;
                 btn.Visible = false;
                 RollDiceButton.Enabled = true;
+                SaveGameButton.Enabled = true;
+                FinishGameButton.Enabled = true;
+                ExitGameButton.Enabled = true;
             }
         }
 
@@ -557,49 +627,59 @@ namespace Vantagepoint_NEA_Project
         {
             if (companyType != "Sole Trader")
             {
-                if (hasPension == false)
+                if (hasBEE == false)
                 {
-                    Button PayForPension = new Button();
-                    PayForPension.Location = new System.Drawing.Point(422, 392);
-                    PayForPension.Size = new System.Drawing.Size(87, 46);
-                    PayForPension.Text = "Pay £30000";
-                    this.Controls.Add(PayForPension);
-                    PayForPension.Click += PayForPension_Click;
+                    Button PayForBEE = new Button();
+                    PayForBEE.Location = new System.Drawing.Point(422, 392);
+                    PayForBEE.Size = new System.Drawing.Size(87, 46);
+                    PayForBEE.Text = "Pay £30000";
+                    this.Controls.Add(PayForBEE);
+                    PayForBEE.Click += PayForBEE_Click;
                     RollDiceButton.Enabled = false;
+                    SaveGameButton.Enabled = false;
+                    FinishGameButton.Enabled = false;
+                    ExitGameButton.Enabled = false;
                 }
-                else if (hasPension == true)
+                else if (hasBEE == true)
                 {
-                    Button PayForPension = new Button();
-                    PayForPension.Location = new System.Drawing.Point(422, 392);
-                    PayForPension.Size = new System.Drawing.Size(87, 46);
-                    PayForPension.Text = "Renew for £15000";
-                    this.Controls.Add(PayForPension);
-                    PayForPension.Click += PayForPension_Click;
+                    Button PayForBEE = new Button();
+                    PayForBEE.Location = new System.Drawing.Point(422, 392);
+                    PayForBEE.Size = new System.Drawing.Size(87, 46);
+                    PayForBEE.Text = "Renew for £15000";
+                    this.Controls.Add(PayForBEE);
+                    PayForBEE.Click += PayForBEE_Click;
                     RollDiceButton.Enabled = false;
+                    SaveGameButton.Enabled = false;
+                    FinishGameButton.Enabled = false;
+                    ExitGameButton.Enabled = false;
                 }
             }
         }
 
-        void PayForPension_Click(object sender, EventArgs e)
+        void PayForBEE_Click(object sender, EventArgs e)
         {
-            if (hasPension == false)
+            if (hasBEE == false)
             {
-                shareCapital = shareCapital - 30000;
-                CapitalDisplay.Text = string.Concat(shareCapital);
+                UpdateCapital(-30000);
                 Button btn = sender as Button;
                 btn.Enabled = false;
                 btn.Visible = false;
                 RollDiceButton.Enabled = true;
-                hasPension = true;
+                SaveGameButton.Enabled = true;
+                FinishGameButton.Enabled = true;
+                ExitGameButton.Enabled = true;
+                hasBEE = true;
             }
-            else if (hasPension == true)
+            else if (hasBEE == true)
             {
-                shareCapital = shareCapital - 15000;
-                CapitalDisplay.Text = string.Concat(shareCapital);
+                UpdateCapital(-15000);
                 Button btn = sender as Button;
                 btn.Enabled = false;
                 btn.Visible = false;
                 RollDiceButton.Enabled = true;
+                SaveGameButton.Enabled = true;
+                FinishGameButton.Enabled = true;
+                ExitGameButton.Enabled = true;
             }
         }
 
@@ -614,6 +694,9 @@ namespace Vantagepoint_NEA_Project
                 this.Controls.Add(PayForPR);
                 PayForPR.Click += PayForPR_Click;
                 RollDiceButton.Enabled = false;
+                SaveGameButton.Enabled = false;
+                FinishGameButton.Enabled = false;
+                ExitGameButton.Enabled = false;
             }
             else if (hasPR == true)
             {
@@ -624,6 +707,9 @@ namespace Vantagepoint_NEA_Project
                 this.Controls.Add(PayForPR);
                 PayForPR.Click += PayForPR_Click;
                 RollDiceButton.Enabled = false;
+                SaveGameButton.Enabled = false;
+                FinishGameButton.Enabled = false;
+                ExitGameButton.Enabled = false;
             }
         }
 
@@ -631,22 +717,26 @@ namespace Vantagepoint_NEA_Project
         {
             if (hasPR == false)
             {
-                shareCapital = shareCapital - 30000;
-                CapitalDisplay.Text = string.Concat(shareCapital);
+                UpdateCapital(-30000);
                 Button btn = sender as Button;
                 btn.Enabled = false;
                 btn.Visible = false;
                 RollDiceButton.Enabled = true;
+                SaveGameButton.Enabled = true;
+                FinishGameButton.Enabled = true;
+                ExitGameButton.Enabled = true;
                 hasPR = true;
             }
             else if (hasPR == true)
             {
-                shareCapital = shareCapital - 15000;
-                CapitalDisplay.Text = string.Concat(shareCapital);
+                UpdateCapital(-15000);
                 Button btn = sender as Button;
                 btn.Enabled = false;
                 btn.Visible = false;
                 RollDiceButton.Enabled = true;
+                SaveGameButton.Enabled = true;
+                FinishGameButton.Enabled = true;
+                ExitGameButton.Enabled = true;
             }
         }
 
@@ -661,6 +751,9 @@ namespace Vantagepoint_NEA_Project
                 this.Controls.Add(PayForMarketing);
                 PayForMarketing.Click += PayForMarketing_Click;
                 RollDiceButton.Enabled = false;
+                SaveGameButton.Enabled = false;
+                FinishGameButton.Enabled = false;
+                ExitGameButton.Enabled = false;
             }
             else if (hasMarketing == true)
             {
@@ -671,6 +764,9 @@ namespace Vantagepoint_NEA_Project
                 this.Controls.Add(PayForMarketing);
                 PayForMarketing.Click += PayForMarketing_Click;
                 RollDiceButton.Enabled = false;
+                SaveGameButton.Enabled = false;
+                FinishGameButton.Enabled = false;
+                ExitGameButton.Enabled = false;
             }
         }
 
@@ -678,22 +774,26 @@ namespace Vantagepoint_NEA_Project
         {
             if (hasMarketing == false)
             {
-                shareCapital = shareCapital - 30000;
-                CapitalDisplay.Text = string.Concat(shareCapital);
+                UpdateCapital(-30000);
                 Button btn = sender as Button;
                 btn.Enabled = false;
                 btn.Visible = false;
                 RollDiceButton.Enabled = true;
+                SaveGameButton.Enabled = true;
+                FinishGameButton.Enabled = true;
+                ExitGameButton.Enabled = true;
                 hasMarketing = true;
             }
             else if (hasMarketing == true)
             {
-                shareCapital = shareCapital - 15000;
-                CapitalDisplay.Text = string.Concat(shareCapital);
+                UpdateCapital(-15000);
                 Button btn = sender as Button;
                 btn.Enabled = false;
                 btn.Visible = false;
                 RollDiceButton.Enabled = true;
+                SaveGameButton.Enabled = true;
+                FinishGameButton.Enabled = true;
+                ExitGameButton.Enabled = true;
             }
         }
 
@@ -706,16 +806,21 @@ namespace Vantagepoint_NEA_Project
             this.Controls.Add(BuyStockButton);
             BuyStockButton.Click += BuyStockButton_Click;
             RollDiceButton.Enabled = false;
+            SaveGameButton.Enabled = false;
+            FinishGameButton.Enabled = false;
+            ExitGameButton.Enabled = false;
         }
 
         void BuyStockButton_Click(object sender, EventArgs e)
         {
-            shareCapital = shareCapital - 50000;
-            CapitalDisplay.Text = string.Concat(shareCapital);
+            UpdateCapital(-50000);
             Button btn = sender as Button;
             btn.Enabled = false;
             btn.Visible = false;
             RollDiceButton.Enabled = true;
+            SaveGameButton.Enabled = true;
+            FinishGameButton.Enabled = true;
+            ExitGameButton.Enabled = true;
             stock = stock + 1;
             StockDisplay.Text = string.Concat(stock);
         }
@@ -747,13 +852,15 @@ namespace Vantagepoint_NEA_Project
                 DoNotRecruitStaff.Click += DoNotRecruitStaff_Click;
                 DoNotRecruitStaffButton = DoNotRecruitStaff;
                 RollDiceButton.Enabled = false;
+                SaveGameButton.Enabled = false;
+                FinishGameButton.Enabled = false;
+                ExitGameButton.Enabled = false;
             }
         }
 
         void RecruitStaff_Click(object sender, EventArgs e)
         {
-            shareCapital = shareCapital - 25000;
-            CapitalDisplay.Text = string.Concat(shareCapital);
+            UpdateCapital(-25000);
             Button btn = sender as Button;
             btn.Enabled = false;
             btn.Visible = false;
@@ -762,6 +869,9 @@ namespace Vantagepoint_NEA_Project
             staff = staff + 1;
             StaffDisplay.Text = string.Concat(staff);
             RollDiceButton.Enabled = true;
+            SaveGameButton.Enabled = true;
+            FinishGameButton.Enabled = true;
+            ExitGameButton.Enabled = true;
         }
 
         void DoNotRecruitStaff_Click(object sender, EventArgs e)
@@ -772,202 +882,300 @@ namespace Vantagepoint_NEA_Project
             RecruitStaffButton.Enabled = false;
             RecruitStaffButton.Visible = false;
             RollDiceButton.Enabled = true;
+            SaveGameButton.Enabled = true;
+            FinishGameButton.Enabled = true;
+            ExitGameButton.Enabled = true;
+        }
+
+        private void GetInsurance()
+        {
+            Button PayForInsurance = new Button();
+            PayForInsurance.Location = new System.Drawing.Point(422, 392);
+            PayForInsurance.Size = new System.Drawing.Size(87, 46);
+            this.Controls.Add(PayForInsurance);
+            PayForInsurance.Click += PayForInsurance_Click;
+            RollDiceButton.Enabled = false;
+            SaveGameButton.Enabled = false;
+            FinishGameButton.Enabled = false;
+            ExitGameButton.Enabled = false;
+            if (hasInsurance == false)
+            {
+                PayForInsurance.Text = "Pay £30000";
+            }
+            else if (hasInsurance == true)
+            {
+                PayForInsurance.Text = "Renew for £15000";
+            }
+        }
+
+        void PayForInsurance_Click(object sender, EventArgs e)
+        {
+            if (hasInsurance == false)
+            {
+                UpdateCapital(-30000);
+                Button btn = sender as Button;
+                btn.Enabled = false;
+                btn.Visible = false;
+                RollDiceButton.Enabled = true;
+                SaveGameButton.Enabled = true;
+                FinishGameButton.Enabled = true;
+                ExitGameButton.Enabled = true;
+                hasInsurance = true;
+            }
+            else if (hasInsurance == true)
+            {
+                UpdateCapital(-15000);
+                Button btn = sender as Button;
+                btn.Enabled = false;
+                btn.Visible = false;
+                RollDiceButton.Enabled = true;
+                SaveGameButton.Enabled = true;
+                FinishGameButton.Enabled = true;
+                ExitGameButton.Enabled = true;
+            }
         }
 
         private void SalesOpportunity()
         {
             int chance = new int();
-            chance = rnd.Next(1, 4);
-            if ((chance == 1) || (chance == 2))
+            chance = rnd.Next(1, 27);
+            if (chance > 12)
             {
-                chance = rnd.Next(1, 27);
-                if (chance > 12)
+                chance = rnd.Next(1, 12);
+                if (chance < 2)
                 {
-                    chance = rnd.Next(1, 12);
-                    if (chance < 2)
+                    if (hasBEE == true)
                     {
-                        if (hasPension == true)
-                        {
-                            salesOpportunities.Add(300000);
-                            salesOpportunities.Sort();
-                            MessageBox.Show("Thanks to your pension plan, you manage to secure a sales opportunity worth £300,000. ");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Sadly, due to not having a pension plan, you are unable to secure a sales opportunity. ");
-                        }
+                        salesOpportunities.Add(300000);
+                        salesOpportunities.Sort();
+                        MessageBox.Show("Thanks to your BEE status, you manage to secure a sales opportunity worth £300,000. ");
                     }
-                    else if (chance < 3)
+                    else
                     {
-                        if (hasWebsite == true)
-                        {
-                            salesOpportunities.Add(300000);
-                            salesOpportunities.Sort();
-                            MessageBox.Show("Thanks to your website, you manage to secure a sales opportunity worth £300,000. ");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Sadly, due to not having a pension plan, you are unable to secure a sales opportunity. ");
-                        }
-                    }
-                    else if (chance < 4)
-                    {
-                        if ((hasWebsite == true) && (hasPension == true))
-                        {
-                            salesOpportunities.Add(300000);
-                            salesOpportunities.Sort();
-                            MessageBox.Show("Thanks to your pension plan and website, you manage to secure a sales opportunity worth £300,000. ");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Sadly, due to not having both a pension plan and website, you are unable to secure a sales opportunity. ");
-                        }
-                    }
-                    else if (chance < 6)
-                    {
-                        //If have sales staff, collect 100,000 sales pipeline
-                        MessageBox.Show("Test");
-                    }
-                    else if (chance < 7)
-                    {
-                        //If have stock, collect 300,000 sales pipeline
-                        MessageBox.Show("Test");
-                    }
-                    else if (chance < 8)
-                    {
-                        //Each salesperson (excluding self) generates 50,000 sales pipeline
-                        MessageBox.Show("Test");
-                    }
-                    else if (chance < 9)
-                    {
-                        if (hasPR == true)
-                        {
-                            //Each sales staff (excluding self) generates 100,000 sales pipeline
-                            MessageBox.Show("Test");
-                        }
-                    }
-                    else if (chance < 10)
-                    {
-                        if (hasHealthCare == true)
-                        {
-                            salesOpportunities.Add(300000);
-                            salesOpportunities.Sort();
-                            MessageBox.Show("Thanks to your healthcare plan, you manage to secure a sales opportunity worth £300,000. ");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Sadly, due to not having a healthcare plan, you are unable to secure a sales opportunity. ");
-                        }
-                    }
-                    else if (chance < 11)
-                    {
-                        if ((hasPension == true) && (hasHealthCare == true))
-                        {
-                            salesOpportunities.Add(500000);
-                            salesOpportunities.Sort();
-                            MessageBox.Show("Thanks to your pension plan and healthcare plan, you manage to secure a sales opportunity worth £500,000. ");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Sadly, due to not having both a healthcare plan and a pension plan, you are unable to secure a sales opportunity. ");
-                        }
-                    }
-                    else if (chance < 12)
-                    {
-                        if (hasPR == true)
-                        {
-                            salesOpportunities.Add(300000);
-                            salesOpportunities.Sort();
-                            MessageBox.Show("Thanks to your PR agreement, you manage to secure a sales opportunity worth £300,000. ");
-                        }
-                        else
-                        {
-                            MessageBox.Show("Sadly, due to not having a PR agreement, you are unable to secure a sales opportunity. ");
-                        }
+                        MessageBox.Show("Sadly, due to not having BEE status, you are unable to secure a sales opportunity. ");
                     }
                 }
-                else
+                else if (chance < 3)
                 {
-                    chance = rnd.Next(1, 16);
-                    if (chance < 4)
+                    if (hasWebsite == true)
                     {
-                        salesOpportunities.Add(50000);
+                        salesOpportunities.Add(300000);
                         salesOpportunities.Sort();
-                        MessageBox.Show("You manage to secure a sales opportunity worth £50,000. ");
+                        MessageBox.Show("Thanks to your website, you manage to secure a sales opportunity worth £300,000. ");
                     }
-                    else if (chance < 7)
+                    else
+                    {
+                        MessageBox.Show("Sadly, due to not having BEE status, you are unable to secure a sales opportunity. ");
+                    }
+                }
+                else if (chance < 4)
+                {
+                    if ((hasWebsite == true) && (hasBEE == true))
+                    {
+                        salesOpportunities.Add(300000);
+                        salesOpportunities.Sort();
+                        MessageBox.Show("Thanks to your BEE status and website, you manage to secure a sales opportunity worth £300,000. ");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Sadly, due to not having both BEE status and website, you are unable to secure a sales opportunity. ");
+                    }
+                }
+                else if (chance < 6)
+                {
+                    if (staff > 0)
                     {
                         salesOpportunities.Add(100000);
                         salesOpportunities.Sort();
-                        MessageBox.Show("You manage to secure a sales opportunity worth £100,000. ");
+                        MessageBox.Show("Thanks to your staff, you manage to secure a sales opportunity worth £100,000. ");
                     }
-                    else if (chance < 9)
+                    else
                     {
-                        shareCapital = shareCapital - 5000;
-                        CapitalDisplay.Text = string.Concat(shareCapital);
-                        salesOpportunities.Add(50000);
+                        MessageBox.Show("Sadly, due to not having staff, you are unable to secure a sales opportunity. ");
+                    }
+                }
+                else if (chance < 7)
+                {
+                    if (stock > 0)
+                    {
+                        salesOpportunities.Add(300000);
                         salesOpportunities.Sort();
-                        MessageBox.Show("You manage to secure a sales opportunity worth £50,000 at the cost of £5000. ");
+                        MessageBox.Show("Thanks to your stock, you manage to secure a sales opportunity worth £300,000. ");
                     }
-                    else if (chance < 11)
+                    else
                     {
-                        //Change best pipeline into order, collect 50,000 sales pipeline
-                        MessageBox.Show("Test");
+                        MessageBox.Show("Sadly, due to not having stock, you are unable to secure a sales opportunity. ");
                     }
-                    else if (chance < 12)
+                }
+                else if (chance < 8)
+                {
+                    if (staff > 0)
                     {
-                        hasPR = false;
-                        salesOpportunities.Add(200000);
+                        foreach (int i in Enumerable.Range(0, staff))
+                        {
+                            salesOpportunities.Add(50000);
+                        }
                         salesOpportunities.Sort();
-                        MessageBox.Show("You manage to secure a sales opportunity worth £200,000 at the cost of any PR agreement you might have. ");
+                        MessageBox.Show("Each of your staff are able to secure a sales opportunity worth £50,000. ");
                     }
-                    else if (chance < 13)
+                    else
                     {
-                        hasWebsite = false;
-                        salesOpportunities.Add(200000);
+                        MessageBox.Show("Sadly, due to not having staff, you are unable to secure a sales opportunity. ");
+                    }
+                }
+                else if (chance < 9)
+                {
+                    if (hasPR == true)
+                    {
+                        if (staff > 0)
+                        {
+                            foreach (int i in Enumerable.Range(0, staff))
+                            {
+                                salesOpportunities.Add(10000);
+                            }
+                            salesOpportunities.Sort();
+                            MessageBox.Show("Each of your staff are able to secure a sales opportunity worth £100,000. ");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Sadly, due to not having staff, you are unable to secure a sales opportunity. ");
+                        }
+                    }
+                }
+                else if (chance < 10)
+                {
+                    if (hasHealthCare == true)
+                    {
+                        salesOpportunities.Add(300000);
                         salesOpportunities.Sort();
-                        MessageBox.Show("You manage to secure a sales opportunity worth £200,000 at the cost of any website agreement you might have. ");
+                        MessageBox.Show("Thanks to your healthcare plan, you manage to secure a sales opportunity worth £300,000. ");
                     }
-                    else if (chance < 14)
+                    else
                     {
-                        hasMarketing = false;
-                        salesOpportunities.Add(200000);
+                        MessageBox.Show("Sadly, due to not having a healthcare plan, you are unable to secure a sales opportunity. ");
+                    }
+                }
+                else if (chance < 11)
+                {
+                    if ((hasBEE == true) && (hasHealthCare == true))
+                    {
+                        salesOpportunities.Add(500000);
                         salesOpportunities.Sort();
-                        MessageBox.Show("You manage to secure a sales opportunity worth £200,000 at the cost of any marketing agreement you might have. ");
+                        MessageBox.Show("Thanks to your BEE status and healthcare plan, you manage to secure a sales opportunity worth £500,000. ");
                     }
-                    else if (chance < 15)
+                    else
                     {
-                        //Pay 10,000 per sales staff (excluding self), collect Sales Training card, collect 50,000 sales pipeline
-                        MessageBox.Show("Test");
+                        MessageBox.Show("Sadly, due to not having both a healthcare plan and BEE status, you are unable to secure a sales opportunity. ");
                     }
-                    else if (chance < 16)
+                }
+                else if (chance < 12)
+                {
+                    if (hasPR == true)
                     {
-                        //Pay 20,000, collect Sales Training card, collect 300,000 sales pipeline
-                        MessageBox.Show("Test");
+                        salesOpportunities.Add(300000);
+                        salesOpportunities.Sort();
+                        MessageBox.Show("Thanks to your PR agreement, you manage to secure a sales opportunity worth £300,000. ");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Sadly, due to not having a PR agreement, you are unable to secure a sales opportunity. ");
                     }
                 }
             }
-            else if (chance == 3)
+            else
             {
-                chance = rnd.Next(1, 14);
-                if (chance < 10)
+                chance = rnd.Next(1, 16);
+                if (chance < 4)
                 {
-                    MessageBox.Show("Test");
+                    salesOpportunities.Add(50000);
+                    salesOpportunities.Sort();
+                    MessageBox.Show("You manage to secure a sales opportunity worth £50,000. ");
                 }
-                else
+                else if (chance < 7)
                 {
-                    MessageBox.Show("Test");
+                    salesOpportunities.Add(100000);
+                    salesOpportunities.Sort();
+                    MessageBox.Show("You manage to secure a sales opportunity worth £100,000. ");
+                }
+                else if (chance < 9)
+                {
+                    UpdateCapital(-5000);
+                    salesOpportunities.Add(50000);
+                    salesOpportunities.Sort();
+                    MessageBox.Show("You manage to secure a sales opportunity worth £50,000 at the cost of £5000. ");
+                }
+                else if (chance < 11)
+                {
+                    if (salesOpportunities.Count() > 0)
+                    {
+                        salesOrders.Add(salesOpportunities.Max());
+                        salesOpportunities.Remove(salesOpportunities.Max());
+                        salesOrders.Sort();
+                    }
+                    salesOpportunities.Add(50000);
+                    salesOpportunities.Sort();
+                    MessageBox.Show("You manage to secure a sales opportunity worth £50,000, and convert your best sales opportunity into an order. ");
+                }
+                else if (chance < 12)
+                {
+                    hasPR = false;
+                    salesOpportunities.Add(200000);
+                    salesOpportunities.Sort();
+                    MessageBox.Show("You manage to secure a sales opportunity worth £200,000 at the cost of any PR agreement you might have. ");
+                }
+                else if (chance < 13)
+                {
+                    hasWebsite = false;
+                    salesOpportunities.Add(200000);
+                    salesOpportunities.Sort();
+                    MessageBox.Show("You manage to secure a sales opportunity worth £200,000 at the cost of any website agreement you might have. ");
+                }
+                else if (chance < 14)
+                {
+                    hasMarketing = false;
+                    salesOpportunities.Add(200000);
+                    salesOpportunities.Sort();
+                    MessageBox.Show("You manage to secure a sales opportunity worth £200,000 at the cost of any marketing agreement you might have. ");
+                }
+                else if (chance < 15)
+                {
+                    if (staff > 0)
+                    {
+                        foreach (int i in Enumerable.Range(0, staff))
+                        {
+                            UpdateCapital(-10000);
+                        }
+                        salesOpportunities.Add(50000);
+                        salesOpportunities.Sort();
+                        MessageBox.Show("You are able to secure a sales opportunity worth £50,000, at the cost of £10,000 for each of your staff. ");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Sadly, due to not having staff, you are unable to secure a sales opportunity. ");
+                    }
+                }
+                else if (chance < 16)
+                {
+                    UpdateCapital(-20000);
+                    salesOpportunities.Add(300000);
+                    MessageBox.Show("You manage to secure a sales opportunity worth £300,000 at the cost of £20000. ");
                 }
             }
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        public void UpdateCapital(int amount)
         {
-            DialogResult answer;
-            answer = MessageBox.Show("Are you sure you want to finish this game? ", "Are you sure? ", MessageBoxButtons.YesNo);
+            shareCapital = shareCapital + amount;
+            CapitalDisplay.Text = string.Concat(shareCapital);
 
-            if (answer == DialogResult.Yes)
+            if (shareCapital < 0)
             {
+                FinishGame();
+            }
+        }
+
+        private void FinishGame()
+        {
                 EndOfMonth finalMonthlyReport = new EndOfMonth();
                 finalMonthlyReport.ShowDialog();
 
@@ -976,6 +1184,16 @@ namespace Vantagepoint_NEA_Project
 
                 this.Hide();
                 this.Close();
+        }
+
+        private void FinishGameButton_Click(object sender, EventArgs e)
+        {
+            DialogResult answer;
+            answer = MessageBox.Show("Are you sure you want to finish this game? ", "Are you sure? ", MessageBoxButtons.YesNo);
+
+            if (answer == DialogResult.Yes)
+            {
+                FinishGame();
             }
         }
 
@@ -983,8 +1201,8 @@ namespace Vantagepoint_NEA_Project
         {
             timeLimit = timeLimit - 1;
 
-            int minutesRemaining = (int) (Math.Floor(timeLimit / 60.0));
-            int secondsRemaining = (int) (Math.Floor(timeLimit - (minutesRemaining * 60.0)));
+            int minutesRemaining = (int)(Math.Floor(timeLimit / 60.0));
+            int secondsRemaining = (int)(Math.Floor(timeLimit - (minutesRemaining * 60.0)));
 
             TimerMinutesDisplay.Text = string.Concat(minutesRemaining) + "minutes";
             TimerSecondsDisplay.Text = string.Concat(secondsRemaining) + "seconds";
@@ -1002,6 +1220,16 @@ namespace Vantagepoint_NEA_Project
         {
             string toDisplay = null;
             foreach (var i in salesOpportunities)
+            {
+                toDisplay = (toDisplay + "£" + string.Concat(i) + ", ");
+            }
+            MessageBox.Show(toDisplay);
+        }
+
+        private void ViewSalesOrders_Click(object sender, EventArgs e)
+        {
+            string toDisplay = null;
+            foreach (int i in salesOrders)
             {
                 toDisplay = (toDisplay + "£" + string.Concat(i) + ", ");
             }

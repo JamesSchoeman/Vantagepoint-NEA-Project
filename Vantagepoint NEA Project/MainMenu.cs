@@ -18,6 +18,7 @@ namespace Vantagepoint_NEA_Project
         public MainMenu()
         {
             InitializeComponent();
+            LogoDisplay.ImageLocation = "Board Images\\VantagePoint Logo Cropped.JPG";
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -50,5 +51,6 @@ namespace Vantagepoint_NEA_Project
             newLoaded.ShowDialog();
             this.Close();
         }
+
     }
 }
