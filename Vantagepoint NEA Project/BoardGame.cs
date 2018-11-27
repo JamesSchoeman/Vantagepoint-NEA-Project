@@ -41,17 +41,25 @@ namespace Vantagepoint_NEA_Project
             SquareDisplay.ImageLocation = ("Board Images\\" + boardPosition + ".JPG");
             SquareDisplay.SizeMode = PictureBoxSizeMode.Zoom;
 
-            commandTest.CommandType = CommandType.Text;
-            commandTest.Connection = dataconn;
-            dataconn.Open();
-            adapter.Fill(data);
-            dataconn.Close();
+            dataAdapter.UpdateCommand = squaresTableCommand;
+            squaresTableCommand.CommandType = CommandType.Text;
+            squaresTableCommand.Connection = dataConnection;
+            dataConnection.Open();
+            dataAdapter.Fill(squaresTable);
+            dataConnection.Close();
+
+            dataAdapter.UpdateCommand = cashFlowCommand;
+            cashFlowCommand.CommandType = CommandType.Text;
+            cashFlowCommand.Connection = dataConnection;
+            dataConnection.Open();
+            dataAdapter.Fill(cashFlowTable);
+            dataConnection.Close();
 
             string squareNamevar = "";
             string squareDescvar = "";
-            squareNamevar = string.Concat(data.Rows[boardPosition - 1][1]);
+            squareNamevar = string.Concat(squaresTable.Rows[boardPosition - 1][1]);
             this.SquareNameDisplay.Text = squareNamevar;
-            squareDescvar = string.Concat(data.Rows[boardPosition - 1][2]);
+            squareDescvar = string.Concat(squaresTable.Rows[boardPosition - 1][2]);
             this.DescriptionDisplay.Text = squareDescvar;
 
             if (timeLimit == 0)
@@ -90,10 +98,14 @@ namespace Vantagepoint_NEA_Project
         public static int stock = 0;
         public static int staff = 0;
 
-        DataTable data = new DataTable();
-        SqlConnection dataconn = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename=|DataDirectory|\\SquaresDatabase.mdf;Integrated Security = True");
-        static SqlCommand commandTest = new SqlCommand("select * from Squares");
-        SqlDataAdapter adapter = new SqlDataAdapter(commandTest);
+        SqlConnection dataConnection = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename=|DataDirectory|\\SquaresDatabase.mdf;Integrated Security = True");
+        SqlDataAdapter dataAdapter = new SqlDataAdapter();
+
+        DataTable squaresTable = new DataTable();
+        static SqlCommand squaresTableCommand = new SqlCommand("select * from Squares");
+
+        DataTable cashFlowTable = new DataTable();
+        static SqlCommand cashFlowCommand = new SqlCommand("select * from CashFlow");
 
         Random rnd = new Random();
 
@@ -120,17 +132,17 @@ namespace Vantagepoint_NEA_Project
                 }
             }
 
-            commandTest.CommandType = CommandType.Text;
-            commandTest.Connection = dataconn;
-            dataconn.Open();
-            adapter.Fill(data);
-            dataconn.Close();
+            squaresTableCommand.CommandType = CommandType.Text;
+            squaresTableCommand.Connection = dataConnection;
+            dataConnection.Open();
+            dataAdapter.Fill(squaresTable);
+            dataConnection.Close();
 
             string squareNamevar = "";
             string squareDescvar = "";
-            squareNamevar = string.Concat(data.Rows[newBoardPosition - 1][1]);
+            squareNamevar = string.Concat(squaresTable.Rows[newBoardPosition - 1][1]);
             this.SquareNameDisplay.Text = squareNamevar;
-            squareDescvar = string.Concat(data.Rows[newBoardPosition - 1][2]);
+            squareDescvar = string.Concat(squaresTable.Rows[newBoardPosition - 1][2]);
             this.DescriptionDisplay.Text = squareDescvar;
             SquareDisplay.ImageLocation = ("Board Images\\" + newBoardPosition + ".JPG");
             SquareDisplay.SizeMode = PictureBoxSizeMode.Zoom;
