@@ -85,6 +85,7 @@ namespace Vantagepoint_NEA_Project
 
 
             dataAdapter.UpdateCommand = squaresTableCommand;
+            dataAdapter.SelectCommand = squaresTableCommand;
             squaresTableCommand.CommandType = CommandType.Text;
             squaresTableCommand.Connection = dataConnection;
             dataConnection.Open();
@@ -92,6 +93,7 @@ namespace Vantagepoint_NEA_Project
             dataConnection.Close();
 
             dataAdapter.UpdateCommand = cashFlowCommand;
+            dataAdapter.SelectCommand = cashFlowCommand;
             cashFlowCommand.CommandType = CommandType.Text;
             cashFlowCommand.Connection = dataConnection;
             dataConnection.Open();
@@ -178,12 +180,6 @@ namespace Vantagepoint_NEA_Project
                 }
             }
 
-            squaresTableCommand.CommandType = CommandType.Text;
-            squaresTableCommand.Connection = dataConnection;
-            dataConnection.Open();
-            dataAdapter.Fill(squaresTable);
-            dataConnection.Close();
-
             string squareNamevar = "";
             string squareDescvar = "";
             squareNamevar = string.Concat(squaresTable.Rows[newBoardPosition - 1][1]);
@@ -197,9 +193,17 @@ namespace Vantagepoint_NEA_Project
             {
                 Square2();
             }
+            else if (newBoardPosition == 4)
+            {
+                CashFlow();
+            }
             else if (newBoardPosition == 6)
             {
                 Square6();
+            }
+            else if (newBoardPosition == 7)
+            {
+                CashFlow();
             }
             else if (newBoardPosition == 8)
             {
@@ -212,6 +216,10 @@ namespace Vantagepoint_NEA_Project
             else if (newBoardPosition == 10)
             {
                 Square10();
+            }
+            else if (newBoardPosition == 11)
+            {
+                CashFlow();
             }
             else if (newBoardPosition == 12)
             {
@@ -237,9 +245,17 @@ namespace Vantagepoint_NEA_Project
             {
                 Square19();
             }
+            else if (newBoardPosition == 20)
+            {
+                CashFlow();
+            }
             else if (newBoardPosition == 21)
             {
                 Square21();
+            }
+            else if (newBoardPosition == 23)
+            {
+                CashFlow();
             }
             else if (newBoardPosition == 25)
             {
@@ -257,6 +273,10 @@ namespace Vantagepoint_NEA_Project
             {
                 Square28();
             }
+            else if (newBoardPosition == 29)
+            {
+                CashFlow();
+            }
             else if (newBoardPosition == 30)
             {
                 Square30();
@@ -264,6 +284,10 @@ namespace Vantagepoint_NEA_Project
             else if (newBoardPosition == 32)
             {
                 StaffRecruitment();
+            }
+            else if (newBoardPosition == 34)
+            {
+                CashFlow();
             }
             else if (newBoardPosition == 35)
             {
@@ -1174,6 +1198,21 @@ namespace Vantagepoint_NEA_Project
                     MessageBox.Show("You manage to secure a sales opportunity worth £300,000 at the cost of £20000. ");
                 }
             }
+        }
+
+        public void CashFlow()
+        {
+            int cardNumber = new int();
+            cardNumber = rnd.Next(0, cashFlowTable.Rows.Count);
+            if (int.Parse(string.Concat(cashFlowTable.Rows[cardNumber][2])) != 0)
+            {
+                UpdateCapital(int.Parse(string.Concat(cashFlowTable.Rows[cardNumber][2])));
+            }
+            else if (int.Parse(string.Concat(cashFlowTable.Rows[cardNumber][2])) == 0)
+            {
+                shareCapital = shareCapital * int.Parse(string.Concat(cashFlowTable.Rows[cardNumber][3]));
+            }
+            MessageBox.Show(string.Concat(cashFlowTable.Rows[cardNumber][1]));
         }
 
         public void UpdateCapital(int amount)
