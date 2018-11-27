@@ -123,7 +123,7 @@ namespace Vantagepoint_NEA_Project
         public static string companyName;
         public static string shareholders;
         public static string natureOfBusiness;
-        public static int shareCapital;
+        public static float shareCapital;
         public static int timeLimit;
         public static int diceRollResult;
         public static int boardPosition;
@@ -330,7 +330,7 @@ namespace Vantagepoint_NEA_Project
             public string saveCompanyName;
             public string saveShareholders;
             public string saveNatureOfBusiness;
-            public int saveShareCapital;
+            public float saveShareCapital;
             public int saveTimeLimit;
             public int saveBoardPosition;
             public bool saveRegFeesPaid;
@@ -1204,21 +1204,22 @@ namespace Vantagepoint_NEA_Project
         {
             int cardNumber = new int();
             cardNumber = rnd.Next(0, cashFlowTable.Rows.Count);
-            if (int.Parse(string.Concat(cashFlowTable.Rows[cardNumber][2])) != 0)
+            if (float.Parse(string.Concat(cashFlowTable.Rows[cardNumber][2])) != 0)
             {
-                UpdateCapital(int.Parse(string.Concat(cashFlowTable.Rows[cardNumber][2])));
+                UpdateCapital(float.Parse(string.Concat(cashFlowTable.Rows[cardNumber][2])));
             }
-            else if (int.Parse(string.Concat(cashFlowTable.Rows[cardNumber][2])) == 0)
+            else if (float.Parse(string.Concat(cashFlowTable.Rows[cardNumber][2])) == 0)
             {
-                shareCapital = shareCapital * int.Parse(string.Concat(cashFlowTable.Rows[cardNumber][3]));
+                shareCapital = shareCapital * float.Parse(string.Concat(cashFlowTable.Rows[cardNumber][3]));
+                CapitalDisplay.Text = "£" + string.Concat(shareCapital);
             }
             MessageBox.Show(string.Concat(cashFlowTable.Rows[cardNumber][1]));
         }
 
-        public void UpdateCapital(int amount)
+        public void UpdateCapital(float amount)
         {
             shareCapital = shareCapital + amount;
-            CapitalDisplay.Text = string.Concat(shareCapital);
+            CapitalDisplay.Text = "£" + string.Concat(shareCapital);
 
             if (shareCapital < 0)
             {

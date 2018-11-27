@@ -16,7 +16,7 @@ namespace Vantagepoint_NEA_Project
         public static string companyName;
         public static string shareholders;
         public static string natureOfBusiness;
-        public static int shareCapital;
+        public static float shareCapital;
         public static string companyType;
         public static int timeLimit;
 
@@ -68,7 +68,7 @@ namespace Vantagepoint_NEA_Project
                 companyName = CompanyNameInput.Text;
                 shareholders = ShareholdersInput.Text;
                 natureOfBusiness = NatureOfBusinessInput.Text;
-                shareCapital = int.Parse(ShareCapitalInput.Text);
+                shareCapital = float.Parse(ShareCapitalInput.Text);
                 companyType = comboBox1.Text;
 
                 if (comboBox2.Text != "None")

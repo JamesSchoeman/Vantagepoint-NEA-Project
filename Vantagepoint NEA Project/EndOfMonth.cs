@@ -14,7 +14,7 @@ namespace Vantagepoint_NEA_Project
     {
 
         public string parentType = null;
-        private int localShareCapital;
+        private float localShareCapital;
         private int localStaff;
         private string localCompanyType;
         private static List<int> localSalesOpportunities = new List<int>();
@@ -99,7 +99,7 @@ namespace Vantagepoint_NEA_Project
             this.Close();
         }
 
-        public void UpdateCapital(int amount)
+        public void UpdateCapital(float amount)
         {
             localShareCapital = localShareCapital + amount;
             CapitalDisplay.Text = string.Concat(localShareCapital);
