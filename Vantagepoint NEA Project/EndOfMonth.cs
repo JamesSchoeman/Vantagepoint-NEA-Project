@@ -65,7 +65,7 @@ namespace Vantagepoint_NEA_Project
 
             CapitalDisplay.Text = string.Concat(localShareCapital);
             StaffDisplay.Text = string.Concat(localStaff);
-            PayVATButton.Text = "Pay VAT of £" + string.Concat(localShareCapital / 10);
+            PayVATButton.Text = ("Pay VAT of -----");
             SalariesButton.Text = "Pay salaries of £" + string.Concat(localStaff * 25000);
 
             if (localCompanyType == "Sole Trader")
@@ -183,6 +183,7 @@ namespace Vantagepoint_NEA_Project
 
             if ((localCompanyType == "Sole Trader") || (localStaff == 0))
             {
+                PayVATButton.Text = ("Pay VAT of " + string.Concat(localShareCapital / 10));
                 PayVATButton.Enabled = true;
             }
             else
@@ -195,6 +196,7 @@ namespace Vantagepoint_NEA_Project
         private void SalariesButton_Click(object sender, EventArgs e)
         {
             UpdateCapital(localStaff * -25000);
+            PayVATButton.Text = ("Pay VAT of " + string.Concat(localShareCapital / 10));
             PayVATButton.Enabled = true;
             SalariesButton.Enabled = false;
         }
