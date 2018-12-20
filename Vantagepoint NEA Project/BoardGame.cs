@@ -118,6 +118,12 @@ namespace Vantagepoint_NEA_Project
 
         private void RollDiceButton_Click(object sender, EventArgs e)
         {
+            if (shareCapital < 0)
+            {
+                MessageBox.Show("You have insufficient share capital to continue.", "Bankrupt!");
+                FinishGame();
+            }
+
             diceRollResult = rnd.Next(1, 7);
             this.RollResultDisplay.Text = string.Concat(diceRollResult);
 
@@ -303,32 +309,7 @@ namespace Vantagepoint_NEA_Project
 
         private void SaveGameButton_Click(object sender, EventArgs e)
         {
-            DataToBeSaved newSave = new DataToBeSaved();
-            newSave.saveCompanyType = companyType;
-            newSave.saveCompanyName = companyName;
-            newSave.saveShareholders = shareholders;
-            newSave.saveNatureOfBusiness = natureOfBusiness;
-            newSave.saveShareCapital = shareCapital;
-            newSave.saveTimeLimit = timeLimit;
-            newSave.saveBoardPosition = boardPosition;
-            newSave.saveRegFeesPaid = regFeesPaid;
-            newSave.saveBankLoanTaken = bankLoanTaken;
-            newSave.saveHasWebsite = hasWebsite;
-            newSave.saveHasHealthCare = hasHealthCare;
-            newSave.saveHasBEE = hasBEE;
-            newSave.saveHasPR = hasPR;
-            newSave.saveHasMarketing = hasMarketing;
-            newSave.saveSalesOpportunities = salesOpportunities;
-            newSave.saveSalesOrders = salesOrders;
-            newSave.saveStock = stock;
-            newSave.saveStaff = staff;
-            newSave.saveHasInsurance = hasInsurance;
-
-            XmlSerializer xs = new XmlSerializer(typeof(DataToBeSaved));
-            using (System.IO.FileStream fs = new FileStream(companyName + ".xml", FileMode.Create))
-            {
-                xs.Serialize(fs, newSave);
-            }
+            SaveGame();
         }
 
         private void Square1()
@@ -939,11 +920,11 @@ namespace Vantagepoint_NEA_Project
                     {
                         salesOpportunities.Add(300000);
                         salesOpportunities.Sort();
-                        MessageBox.Show("Thanks to your BEE status, you manage to secure a sales opportunity worth £300,000. ");
+                        MessageBox.Show("Thanks to your BEE status, you manage to secure a sales opportunity worth £300,000. ", "Passed or landed on a sales opportunity square!");
                     }
                     else
                     {
-                        MessageBox.Show("Sadly, due to not having BEE status, you are unable to secure a sales opportunity. ");
+                        MessageBox.Show("Sadly, due to not having BEE status, you are unable to secure a sales opportunity. ", "Passed or landed on a sales opportunity square!");
                     }
                 }
                 else if (chance < 3)
@@ -952,11 +933,11 @@ namespace Vantagepoint_NEA_Project
                     {
                         salesOpportunities.Add(300000);
                         salesOpportunities.Sort();
-                        MessageBox.Show("Thanks to your website, you manage to secure a sales opportunity worth £300,000. ");
+                        MessageBox.Show("Thanks to your website, you manage to secure a sales opportunity worth £300,000. ", "Passed or landed on a sales opportunity square!");
                     }
                     else
                     {
-                        MessageBox.Show("Sadly, due to not having BEE status, you are unable to secure a sales opportunity. ");
+                        MessageBox.Show("Sadly, due to not having BEE status, you are unable to secure a sales opportunity. ", "Passed or landed on a sales opportunity square!");
                     }
                 }
                 else if (chance < 4)
@@ -965,11 +946,11 @@ namespace Vantagepoint_NEA_Project
                     {
                         salesOpportunities.Add(300000);
                         salesOpportunities.Sort();
-                        MessageBox.Show("Thanks to your BEE status and website, you manage to secure a sales opportunity worth £300,000. ");
+                        MessageBox.Show("Thanks to your BEE status and website, you manage to secure a sales opportunity worth £300,000. ", "Passed or landed on a sales opportunity square!");
                     }
                     else
                     {
-                        MessageBox.Show("Sadly, due to not having both BEE status and website, you are unable to secure a sales opportunity. ");
+                        MessageBox.Show("Sadly, due to not having both BEE status and website, you are unable to secure a sales opportunity. ", "Passed or landed on a sales opportunity square!");
                     }
                 }
                 else if (chance < 6)
@@ -978,11 +959,11 @@ namespace Vantagepoint_NEA_Project
                     {
                         salesOpportunities.Add(100000);
                         salesOpportunities.Sort();
-                        MessageBox.Show("Thanks to your staff, you manage to secure a sales opportunity worth £100,000. ");
+                        MessageBox.Show("Thanks to your staff, you manage to secure a sales opportunity worth £100,000. ", "Passed or landed on a sales opportunity square!");
                     }
                     else
                     {
-                        MessageBox.Show("Sadly, due to not having staff, you are unable to secure a sales opportunity. ");
+                        MessageBox.Show("Sadly, due to not having staff, you are unable to secure a sales opportunity. ", "Passed or landed on a sales opportunity square!");
                     }
                 }
                 else if (chance < 7)
@@ -991,11 +972,11 @@ namespace Vantagepoint_NEA_Project
                     {
                         salesOpportunities.Add(300000);
                         salesOpportunities.Sort();
-                        MessageBox.Show("Thanks to your stock, you manage to secure a sales opportunity worth £300,000. ");
+                        MessageBox.Show("Thanks to your stock, you manage to secure a sales opportunity worth £300,000. ", "Passed or landed on a sales opportunity square!");
                     }
                     else
                     {
-                        MessageBox.Show("Sadly, due to not having stock, you are unable to secure a sales opportunity. ");
+                        MessageBox.Show("Sadly, due to not having stock, you are unable to secure a sales opportunity. ", "Passed or landed on a sales opportunity square!");
                     }
                 }
                 else if (chance < 8)
@@ -1007,11 +988,11 @@ namespace Vantagepoint_NEA_Project
                             salesOpportunities.Add(50000);
                         }
                         salesOpportunities.Sort();
-                        MessageBox.Show("Each of your staff are able to secure a sales opportunity worth £50,000. ");
+                        MessageBox.Show("Each of your staff are able to secure a sales opportunity worth £50,000. ", "Passed or landed on a sales opportunity square!");
                     }
                     else
                     {
-                        MessageBox.Show("Sadly, due to not having staff, you are unable to secure a sales opportunity. ");
+                        MessageBox.Show("Sadly, due to not having staff, you are unable to secure a sales opportunity. ", "Passed or landed on a sales opportunity square!");
                     }
                 }
                 else if (chance < 9)
@@ -1025,11 +1006,11 @@ namespace Vantagepoint_NEA_Project
                                 salesOpportunities.Add(10000);
                             }
                             salesOpportunities.Sort();
-                            MessageBox.Show("Each of your staff are able to secure a sales opportunity worth £100,000. ");
+                            MessageBox.Show("Each of your staff are able to secure a sales opportunity worth £100,000. ", "Passed or landed on a sales opportunity square!");
                         }
                         else
                         {
-                            MessageBox.Show("Sadly, due to not having staff, you are unable to secure a sales opportunity. ");
+                            MessageBox.Show("Sadly, due to not having staff, you are unable to secure a sales opportunity. ", "Passed or landed on a sales opportunity square!");
                         }
                     }
                 }
@@ -1039,11 +1020,11 @@ namespace Vantagepoint_NEA_Project
                     {
                         salesOpportunities.Add(300000);
                         salesOpportunities.Sort();
-                        MessageBox.Show("Thanks to your healthcare plan, you manage to secure a sales opportunity worth £300,000. ");
+                        MessageBox.Show("Thanks to your healthcare plan, you manage to secure a sales opportunity worth £300,000. ", "Passed or landed on a sales opportunity square!");
                     }
                     else
                     {
-                        MessageBox.Show("Sadly, due to not having a healthcare plan, you are unable to secure a sales opportunity. ");
+                        MessageBox.Show("Sadly, due to not having a healthcare plan, you are unable to secure a sales opportunity. ", "Passed or landed on a sales opportunity square!");
                     }
                 }
                 else if (chance < 11)
@@ -1052,11 +1033,11 @@ namespace Vantagepoint_NEA_Project
                     {
                         salesOpportunities.Add(500000);
                         salesOpportunities.Sort();
-                        MessageBox.Show("Thanks to your BEE status and healthcare plan, you manage to secure a sales opportunity worth £500,000. ");
+                        MessageBox.Show("Thanks to your BEE status and healthcare plan, you manage to secure a sales opportunity worth £500,000. ", "Passed or landed on a sales opportunity square!");
                     }
                     else
                     {
-                        MessageBox.Show("Sadly, due to not having both a healthcare plan and BEE status, you are unable to secure a sales opportunity. ");
+                        MessageBox.Show("Sadly, due to not having both a healthcare plan and BEE status, you are unable to secure a sales opportunity. ", "Passed or landed on a sales opportunity square!");
                     }
                 }
                 else if (chance < 12)
@@ -1065,11 +1046,11 @@ namespace Vantagepoint_NEA_Project
                     {
                         salesOpportunities.Add(300000);
                         salesOpportunities.Sort();
-                        MessageBox.Show("Thanks to your PR agreement, you manage to secure a sales opportunity worth £300,000. ");
+                        MessageBox.Show("Thanks to your PR agreement, you manage to secure a sales opportunity worth £300,000. ", "Passed or landed on a sales opportunity square!");
                     }
                     else
                     {
-                        MessageBox.Show("Sadly, due to not having a PR agreement, you are unable to secure a sales opportunity. ");
+                        MessageBox.Show("Sadly, due to not having a PR agreement, you are unable to secure a sales opportunity. ", "Passed or landed on a sales opportunity square!");
                     }
                 }
             }
@@ -1080,20 +1061,20 @@ namespace Vantagepoint_NEA_Project
                 {
                     salesOpportunities.Add(50000);
                     salesOpportunities.Sort();
-                    MessageBox.Show("You manage to secure a sales opportunity worth £50,000. ");
+                    MessageBox.Show("You manage to secure a sales opportunity worth £50,000. ", "Passed or landed on a sales opportunity square!");
                 }
                 else if (chance < 7)
                 {
                     salesOpportunities.Add(100000);
                     salesOpportunities.Sort();
-                    MessageBox.Show("You manage to secure a sales opportunity worth £100,000. ");
+                    MessageBox.Show("You manage to secure a sales opportunity worth £100,000. ", "Passed or landed on a sales opportunity square!");
                 }
                 else if (chance < 9)
                 {
                     UpdateCapital(-5000);
                     salesOpportunities.Add(50000);
                     salesOpportunities.Sort();
-                    MessageBox.Show("You manage to secure a sales opportunity worth £50,000 at the cost of £5000. ");
+                    MessageBox.Show("You manage to secure a sales opportunity worth £50,000 at the cost of £5000. ", "Passed or landed on a sales opportunity square!");
                 }
                 else if (chance < 11)
                 {
@@ -1105,28 +1086,28 @@ namespace Vantagepoint_NEA_Project
                     }
                     salesOpportunities.Add(50000);
                     salesOpportunities.Sort();
-                    MessageBox.Show("You manage to secure a sales opportunity worth £50,000, and convert your best sales opportunity into an order. ");
+                    MessageBox.Show("You manage to secure a sales opportunity worth £50,000, and convert your best sales opportunity into an order. ", "Passed or landed on a sales opportunity square!");
                 }
                 else if (chance < 12)
                 {
                     hasPR = false;
                     salesOpportunities.Add(200000);
                     salesOpportunities.Sort();
-                    MessageBox.Show("You manage to secure a sales opportunity worth £200,000 at the cost of any PR agreement you might have. ");
+                    MessageBox.Show("You manage to secure a sales opportunity worth £200,000 at the cost of any PR agreement you might have. ", "Passed or landed on a sales opportunity square!");
                 }
                 else if (chance < 13)
                 {
                     hasWebsite = false;
                     salesOpportunities.Add(200000);
                     salesOpportunities.Sort();
-                    MessageBox.Show("You manage to secure a sales opportunity worth £200,000 at the cost of any website agreement you might have. ");
+                    MessageBox.Show("You manage to secure a sales opportunity worth £200,000 at the cost of any website agreement you might have. ", "Passed or landed on a sales opportunity square!");
                 }
                 else if (chance < 14)
                 {
                     hasMarketing = false;
                     salesOpportunities.Add(200000);
                     salesOpportunities.Sort();
-                    MessageBox.Show("You manage to secure a sales opportunity worth £200,000 at the cost of any marketing agreement you might have. ");
+                    MessageBox.Show("You manage to secure a sales opportunity worth £200,000 at the cost of any marketing agreement you might have. ", "Passed or landed on a sales opportunity square!");
                 }
                 else if (chance < 15)
                 {
@@ -1138,18 +1119,18 @@ namespace Vantagepoint_NEA_Project
                         }
                         salesOpportunities.Add(50000);
                         salesOpportunities.Sort();
-                        MessageBox.Show("You are able to secure a sales opportunity worth £50,000, at the cost of £10,000 for each of your staff. ");
+                        MessageBox.Show("You are able to secure a sales opportunity worth £50,000, at the cost of £10,000 for each of your staff. ", "Passed or landed on a sales opportunity square!");
                     }
                     else
                     {
-                        MessageBox.Show("Sadly, due to not having staff, you are unable to secure a sales opportunity. ");
+                        MessageBox.Show("Sadly, due to not having staff, you are unable to secure a sales opportunity. ", "Passed or landed on a sales opportunity square!");
                     }
                 }
                 else if (chance < 16)
                 {
                     UpdateCapital(-20000);
                     salesOpportunities.Add(300000);
-                    MessageBox.Show("You manage to secure a sales opportunity worth £300,000 at the cost of £20000. ");
+                    MessageBox.Show("You manage to secure a sales opportunity worth £300,000 at the cost of £20000. ", "Passed or landed on a sales opportunity square!");
                 }
             }
         }
@@ -1167,7 +1148,7 @@ namespace Vantagepoint_NEA_Project
                 shareCapital = shareCapital * float.Parse(string.Concat(cashFlowTable.Rows[cardNumber][3]));
                 CapitalDisplay.Text = "£" + string.Concat(shareCapital);
             }
-            MessageBox.Show(string.Concat(cashFlowTable.Rows[cardNumber][1]));
+            MessageBox.Show(string.Concat(cashFlowTable.Rows[cardNumber][1]), "Cash Flow!");
         }
 
         public void UpdateCapital(float amount)
@@ -1183,8 +1164,7 @@ namespace Vantagepoint_NEA_Project
 
         private void FinishGame()
         {
-            EndOfMonth finalMonthlyReport = new EndOfMonth();
-            finalMonthlyReport.ShowDialog();
+            SaveGame();
 
             FinishPage newFinishPage = new FinishPage();
             newFinishPage.ShowDialog();
@@ -1241,6 +1221,36 @@ namespace Vantagepoint_NEA_Project
                 toDisplay = (toDisplay + "£" + string.Concat(i) + ", ");
             }
             MessageBox.Show(toDisplay);
+        }
+
+        private void SaveGame()
+        {
+            DataToBeSaved newSave = new DataToBeSaved();
+            newSave.saveCompanyType = companyType;
+            newSave.saveCompanyName = companyName;
+            newSave.saveShareholders = shareholders;
+            newSave.saveNatureOfBusiness = natureOfBusiness;
+            newSave.saveShareCapital = shareCapital;
+            newSave.saveTimeLimit = timeLimit;
+            newSave.saveBoardPosition = boardPosition;
+            newSave.saveRegFeesPaid = regFeesPaid;
+            newSave.saveBankLoanTaken = bankLoanTaken;
+            newSave.saveHasWebsite = hasWebsite;
+            newSave.saveHasHealthCare = hasHealthCare;
+            newSave.saveHasBEE = hasBEE;
+            newSave.saveHasPR = hasPR;
+            newSave.saveHasMarketing = hasMarketing;
+            newSave.saveSalesOpportunities = salesOpportunities;
+            newSave.saveSalesOrders = salesOrders;
+            newSave.saveStock = stock;
+            newSave.saveStaff = staff;
+            newSave.saveHasInsurance = hasInsurance;
+
+            XmlSerializer xs = new XmlSerializer(typeof(DataToBeSaved));
+            using (System.IO.FileStream fs = new FileStream(companyName + ".xml", FileMode.Create))
+            {
+                xs.Serialize(fs, newSave);
+            }
         }
     }
 }

@@ -157,7 +157,7 @@
             this.ViewSalesOpportunities.Name = "ViewSalesOpportunities";
             this.ViewSalesOpportunities.Size = new System.Drawing.Size(87, 46);
             this.ViewSalesOpportunities.TabIndex = 50;
-            this.ViewSalesOpportunities.Text = "View Sales Opportunities";
+            this.ViewSalesOpportunities.Text = "View Sales Pipeline";
             this.ViewSalesOpportunities.UseVisualStyleBackColor = true;
             this.ViewSalesOpportunities.Click += new System.EventHandler(this.ViewSalesOpportunities_Click);
             // 
@@ -177,7 +177,7 @@
             this.SalesOpportunitiesButton.Name = "SalesOpportunitiesButton";
             this.SalesOpportunitiesButton.Size = new System.Drawing.Size(87, 46);
             this.SalesOpportunitiesButton.TabIndex = 53;
-            this.SalesOpportunitiesButton.Text = "Close sales opportunities";
+            this.SalesOpportunitiesButton.Text = "Close sales pipeline";
             this.SalesOpportunitiesButton.UseVisualStyleBackColor = true;
             this.SalesOpportunitiesButton.Click += new System.EventHandler(this.SalesOpportunitiesButton_Click);
             // 
@@ -187,9 +187,9 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.label2.Location = new System.Drawing.Point(12, 86);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(262, 20);
+            this.label2.Size = new System.Drawing.Size(224, 20);
             this.label2.TabIndex = 52;
-            this.label2.Text = "Attempt to close sales opportunities";
+            this.label2.Text = "Attempt to close sales pipeline";
             // 
             // SalariesButton
             // 

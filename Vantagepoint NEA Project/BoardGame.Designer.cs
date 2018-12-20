@@ -294,7 +294,7 @@
             this.ViewSalesOpportunities.Name = "ViewSalesOpportunities";
             this.ViewSalesOpportunities.Size = new System.Drawing.Size(87, 46);
             this.ViewSalesOpportunities.TabIndex = 33;
-            this.ViewSalesOpportunities.Text = "View Sales Opportunities";
+            this.ViewSalesOpportunities.Text = "View Sales Pipeline";
             this.ViewSalesOpportunities.UseVisualStyleBackColor = true;
             this.ViewSalesOpportunities.Click += new System.EventHandler(this.ViewSalesOpportunities_Click);
             // 
