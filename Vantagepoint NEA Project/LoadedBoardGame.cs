@@ -100,6 +100,14 @@ namespace Vantagepoint_NEA_Project
             dataAdapter.Fill(cashFlowTable);
             dataConnection.Close();
 
+            dataAdapter.UpdateCommand = luckyBreakCommand;
+            dataAdapter.SelectCommand = luckyBreakCommand;
+            luckyBreakCommand.CommandType = CommandType.Text;
+            luckyBreakCommand.Connection = dataConnection;
+            dataConnection.Open();
+            dataAdapter.Fill(luckyBreakTable);
+            dataConnection.Close();
+
             string squareNamevar = "";
             string squareDescvar = "";
             squareNamevar = string.Concat(squaresTable.Rows[boardPosition - 1][1]);
@@ -155,6 +163,9 @@ namespace Vantagepoint_NEA_Project
         DataTable cashFlowTable = new DataTable();
         static SqlCommand cashFlowCommand = new SqlCommand("select * from CashFlow");
 
+        DataTable luckyBreakTable = new DataTable();
+        static SqlCommand luckyBreakCommand = new SqlCommand("select * from LuckyBreak");
+
         Random rnd = new Random();
 
         private void Board_Game_Load(object sender, EventArgs e)
@@ -174,7 +185,7 @@ namespace Vantagepoint_NEA_Project
             this.RollResultDisplay.Text = string.Concat(diceRollResult);
 
             newBoardPosition = boardPosition + diceRollResult;
-            if (newBoardPosition > 36)
+            if ((newBoardPosition > 36) && (boardPosition < 36))
             {
                 newBoardPosition = newBoardPosition - 36;
                 EndOfMonth monthlyReport = new EndOfMonth();
@@ -184,6 +195,10 @@ namespace Vantagepoint_NEA_Project
                 {
                     SalesOpportunity();
                 }
+            }
+            else if (newBoardPosition > 36)
+            {
+                newBoardPosition = newBoardPosition - 36;
             }
 
             string squareNamevar = "";
@@ -198,6 +213,10 @@ namespace Vantagepoint_NEA_Project
             if (newBoardPosition == 2)
             {
                 Square2();
+            }
+            else if (newBoardPosition == 3)
+            {
+                LuckyBreak();
             }
             else if (newBoardPosition == 4)
             {
@@ -231,6 +250,10 @@ namespace Vantagepoint_NEA_Project
             {
                 Square12();
             }
+            else if (newBoardPosition == 13)
+            {
+                LuckyBreak();
+            }
             else if (newBoardPosition == 14)
             {
                 StaffRecruitment();
@@ -258,6 +281,10 @@ namespace Vantagepoint_NEA_Project
             else if (newBoardPosition == 21)
             {
                 Square21();
+            }
+            else if (newBoardPosition == 22)
+            {
+                LuckyBreak();
             }
             else if (newBoardPosition == 23)
             {
@@ -287,6 +314,10 @@ namespace Vantagepoint_NEA_Project
             {
                 Square30();
             }
+            else if (newBoardPosition == 31)
+            {
+                LuckyBreak();
+            }
             else if (newBoardPosition == 32)
             {
                 StaffRecruitment();
@@ -298,6 +329,16 @@ namespace Vantagepoint_NEA_Project
             else if (newBoardPosition == 35)
             {
                 Square35();
+            }
+            else if (newBoardPosition == 36)
+            {
+                EndOfMonth monthlyReport = new EndOfMonth();
+                monthlyReport.ShowDialog(this);
+                CapitalDisplay.Text = string.Concat(shareCapital);
+                foreach (int i in Enumerable.Range(0, staff + 1))
+                {
+                    SalesOpportunity();
+                }
             }
 
             if ((boardPosition < 9) && (newBoardPosition > 9))
@@ -1195,6 +1236,12 @@ namespace Vantagepoint_NEA_Project
                 CapitalDisplay.Text = "£" + string.Concat(shareCapital);
             }
             MessageBox.Show(string.Concat(cashFlowTable.Rows[cardNumber][1]), "Cash Flow!");
+        }
+
+        public void LuckyBreak()
+        {
+            string description = string.Concat(luckyBreakTable.Rows[rnd.Next(0, luckyBreakTable.Rows.Count)][1]);
+            MessageBox.Show(description, "Lucky Break!");
         }
 
         public void UpdateCapital(float amount)
