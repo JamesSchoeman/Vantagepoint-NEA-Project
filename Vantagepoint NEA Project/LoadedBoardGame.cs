@@ -1240,7 +1240,7 @@ namespace Vantagepoint_NEA_Project
 
         public void LuckyBreak()
         {
-            string description = string.Concat(luckyBreakTable.Rows[rnd.Next(0, luckyBreakTable.Rows.Count)][1]);
+            string description = string.Concat(luckyBreakTable.Rows[rnd.Next(0, luckyBreakTable.Rows.Count)]["Description"]);
             MessageBox.Show(description, "Lucky Break!");
         }
 
