@@ -1240,8 +1240,21 @@ namespace Vantagepoint_NEA_Project
 
         public void LuckyBreak()
         {
-            string description = string.Concat(luckyBreakTable.Rows[rnd.Next(0, luckyBreakTable.Rows.Count)]["Description"]);
-            MessageBox.Show(description, "Lucky Break!");
+            int cardNumber = new int();
+            cardNumber = rnd.Next(0, luckyBreakTable.Rows.Count);
+            if (!(companyType == "Sole Trader" && string.Concat(luckyBreakTable.Rows[cardNumber]["ExcludeSoleTrader"]) == "Yes"))
+            {
+                if (!(hasHealthCare == true && string.Concat(luckyBreakTable.Rows[cardNumber]["ExcludeSoleTrader"]) == "Yes"))
+                    if (float.Parse(string.Concat(luckyBreakTable.Rows[cardNumber][6])) != 0)
+                    {
+                        UpdateCapital(float.Parse(string.Concat(luckyBreakTable.Rows[cardNumber][6])));
+                    }
+                MessageBox.Show(string.Concat(luckyBreakTable.Rows[cardNumber][1]), "Lucky Break!");
+            }
+            else
+            {
+                MessageBox.Show("Due to being a sole trader, your lucky break falls through. ", "Lucky Break!");
+            }
         }
 
         public void UpdateCapital(float amount)

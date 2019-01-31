@@ -1194,8 +1194,53 @@ namespace Vantagepoint_NEA_Project
 
         public void LuckyBreak()
         {
-            string description = string.Concat(luckyBreakTable.Rows[rnd.Next(0, luckyBreakTable.Rows.Count)]["Description"]);
-            MessageBox.Show(description, "Lucky Break!");
+            bool eligible = true;
+            string notEligibleReason = "";
+            int cardNumber = new int();
+            cardNumber = rnd.Next(0, luckyBreakTable.Rows.Count);
+
+            if (companyType == "Sole Trader" && string.Concat(luckyBreakTable.Rows[cardNumber]["ExcludeSoleTrader"]) == "Yes")
+            {
+                eligible = false;
+                notEligibleReason = "Sole Trader";
+            }
+            else if (hasHealthCare == false && string.Concat(luckyBreakTable.Rows[cardNumber]["NeedsHealthcare"]) == "Yes")
+            {
+                eligible = false;
+                notEligibleReason = "Healthcare";
+            }
+            else if (hasBEE == false && string.Concat(luckyBreakTable.Rows[cardNumber]["NeedsBEE"]) == "Yes")
+            {
+                eligible = false;
+                notEligibleReason = "BEE";
+            }
+            //Check for sales training when implemented
+
+            if (eligible == true)
+            {
+                if (float.Parse(string.Concat(luckyBreakTable.Rows[cardNumber][6])) != 0)
+                {
+                    UpdateCapital(float.Parse(string.Concat(luckyBreakTable.Rows[cardNumber][6])));
+                }
+                MessageBox.Show(string.Concat(luckyBreakTable.Rows[cardNumber][1]), "Lucky Break!");
+            }
+            else if (eligible == false)
+            {
+                if (notEligibleReason == "Sole Trader")
+                {
+                    MessageBox.Show("Your lucky break fell through due to being a Sole Trader. ", "Lucky Break!");
+                }
+                if (notEligibleReason == "Healthcare")
+                {
+                    MessageBox.Show("Your lucky break fell through due to not having a healthcare plan. ", "Lucky Break!");
+                }
+                if (notEligibleReason == "BEE")
+                {
+                    MessageBox.Show("Your lucky break fell through due to not having BEE accreditation. ", "Lucky Break!");
+                }
+                //Sales training reason when implemented
+            }
+            
         }
 
         public void UpdateCapital(float amount)
