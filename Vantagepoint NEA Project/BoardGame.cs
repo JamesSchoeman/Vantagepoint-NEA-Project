@@ -1218,11 +1218,97 @@ namespace Vantagepoint_NEA_Project
 
             if (eligible == true)
             {
-                if (float.Parse(string.Concat(luckyBreakTable.Rows[cardNumber][6])) != 0)
-                {
-                    UpdateCapital(float.Parse(string.Concat(luckyBreakTable.Rows[cardNumber][6])));
-                }
                 MessageBox.Show(string.Concat(luckyBreakTable.Rows[cardNumber][1]), "Lucky Break!");
+
+                if (float.Parse(string.Concat(luckyBreakTable.Rows[cardNumber]["CapitalChange"])) != 0)
+                {
+                    UpdateCapital(float.Parse(string.Concat(luckyBreakTable.Rows[cardNumber]["CapitalChange"])));
+                }
+                if (luckyBreakTable.Rows[cardNumber]["StockChange"] != DBNull.Value)
+                {
+                    stock += int.Parse(string.Concat(luckyBreakTable.Rows[cardNumber]["StockChange"]));
+                    StockDisplay.Text = string.Concat(stock);
+                }
+                if (luckyBreakTable.Rows[cardNumber]["SalesOrder"] != DBNull.Value)
+                {
+                    salesOrders.Add(int.Parse(string.Concat(luckyBreakTable.Rows[cardNumber]["SalesOrder"])));
+                }
+                if (luckyBreakTable.Rows[cardNumber]["SalesPipeline"] != DBNull.Value)
+                {
+                    salesOpportunities.Add(int.Parse(string.Concat(luckyBreakTable.Rows[cardNumber]["SalesPipeline"])));
+                }
+                if (string.Concat(luckyBreakTable.Rows[cardNumber]["LoseBEE"]) == "Yes")
+                {
+                    hasBEE = false;
+                    //Change BEE display
+                }
+                if (string.Concat(luckyBreakTable.Rows[cardNumber]["LoseMarketing"]) == "Yes")
+                {
+                    hasMarketing = false;
+                    //Change marketing display
+                }
+                if (luckyBreakTable.Rows[cardNumber]["StaffChange"] != DBNull.Value)
+                {
+                    if (companyType == "Sole Trader")
+                    {
+                        MessageBox.Show("Due to being a sole trader, you weren't able to recruit any staff. ", "Recruitment failed!");
+                    }
+                    else if (companyType == "Partnership" && staff > 0)
+                    {
+                        MessageBox.Show("Due to being in a partnership, you were unable to recruit any more staff. ", "Recruitment failed!");
+                    }
+                    else if (companyType == "Limited" && staff > 2)
+                    {
+                        MessageBox.Show("Recruiting any mroe staff would take you over your staff limit. ", "Recruitment failed!");
+                    }
+                    else
+                    {
+                        staff += int.Parse(string.Concat(luckyBreakTable.Rows[cardNumber]["StaffChange"]));
+                        StaffDisplay.Text = string.Concat(staff);
+                    }
+                }
+                if (luckyBreakTable.Rows[cardNumber]["CloseBestPipeline"] != DBNull.Value)
+                {
+                    UpdateCapital(salesOpportunities.Max());
+                    salesOpportunities.Remove(salesOpportunities.Max());
+                    salesOpportunities.Sort();
+                }
+                if (luckyBreakTable.Rows[cardNumber]["MoveMonthEnd"] != DBNull.Value)
+                {
+                    if (newBoardPosition >= 2 && newBoardPosition <= 8)
+                    {
+                        SalesOpportunity();
+                        SalesOpportunity();
+                        SalesOpportunity();
+                    }
+                    else if (newBoardPosition >= 9 && newBoardPosition <= 17)
+                    {
+                        SalesOpportunity();
+                        SalesOpportunity();
+                    }
+                    else if (newBoardPosition >= 18 && newBoardPosition <= 26)
+                    {
+                        SalesOpportunity();
+                    }
+                    newBoardPosition = 36;
+                    string squareNamevar = "";
+                    string squareDescvar = "";
+                    squareNamevar = string.Concat(squaresTable.Rows[newBoardPosition - 1][1]);
+                    this.SquareNameDisplay.Text = squareNamevar;
+                    squareDescvar = string.Concat(squaresTable.Rows[newBoardPosition - 1][2]);
+                    this.DescriptionDisplay.Text = squareDescvar;
+                    SquareDisplay.ImageLocation = ("Board Images\\" + newBoardPosition + ".JPG");
+                    SquareDisplay.SizeMode = PictureBoxSizeMode.Zoom;
+                    EndOfMonth monthlyReport = new EndOfMonth();
+                    monthlyReport.ShowDialog(this);
+                    CapitalDisplay.Text = string.Concat(shareCapital);
+                    foreach (int i in Enumerable.Range(0, staff + 1))
+                    {
+                        SalesOpportunity();
+                    }
+
+                }
+                
             }
             else if (eligible == false)
             {
