@@ -1305,7 +1305,7 @@ namespace Vantagepoint_NEA_Project
                     }
                     else if (companyType == "Limited" && staff > 2)
                     {
-                        MessageBox.Show("Recruiting any mroe staff would take you over your staff limit. ", "Recruitment failed!");
+                        MessageBox.Show("Recruiting any more staff would take you over your staff limit. ", "Recruitment failed!");
                     }
                     else
                     {
@@ -1430,20 +1430,38 @@ namespace Vantagepoint_NEA_Project
         private void ViewSalesOpportunities_Click(object sender, EventArgs e)
         {
             string toDisplay = null;
-            foreach (var i in salesOpportunities)
+
+            if (salesOpportunities.Count != 0)
             {
-                toDisplay = (toDisplay + "£" + string.Concat(i) + ", ");
+                foreach (var i in salesOpportunities)
+                {
+                    toDisplay = (toDisplay + "£" + string.Concat(i) + ", ");
+                }
             }
+            else
+            {
+                toDisplay = "You have no sales pipeline. ";
+            }
+
             MessageBox.Show(toDisplay);
         }
 
         private void ViewSalesOrders_Click(object sender, EventArgs e)
         {
             string toDisplay = null;
-            foreach (int i in salesOrders)
+
+            if (salesOrders.Count != 0)
             {
-                toDisplay = (toDisplay + "£" + string.Concat(i) + ", ");
+                foreach (int i in salesOrders)
+                {
+                    toDisplay = (toDisplay + "£" + string.Concat(i) + ", ");
+                }
             }
+            else
+            {
+                toDisplay = "You have no sales orders. ";
+            }
+
             MessageBox.Show(toDisplay);
         }
 
@@ -1475,6 +1493,59 @@ namespace Vantagepoint_NEA_Project
             {
                 xs.Serialize(fs, newSave);
             }
+        }
+
+        private void AgreementsButton_Click(object sender, EventArgs e)
+        {
+            string toDisplay = "";
+
+            if (hasBEE == true)
+            {
+                toDisplay = "BEE accreditation";
+            }
+            if (hasHealthCare == true)
+            {
+                if (toDisplay != "")
+                {
+                    toDisplay += ", ";
+                }
+                toDisplay += "Healthcare agreement";
+            }
+            if (hasInsurance == true)
+            {
+                if (toDisplay != "")
+                {
+                    toDisplay += ", ";
+                }
+                toDisplay += "Insurance";
+            }
+            if (hasMarketing == true)
+            {
+                if (toDisplay != "")
+                {
+                    toDisplay += ", ";
+                }
+                toDisplay += "Marketing agreement";
+            }
+            if (hasPR == true)
+            {
+                if (toDisplay != "")
+                {
+                    toDisplay += ", ";
+                }
+                toDisplay += "PR agreement";
+            }
+            if (hasWebsite == true)
+            {
+                if (toDisplay != "")
+                {
+                    toDisplay += ", ";
+                }
+                toDisplay += "Website";
+            }
+
+            MessageBox.Show(toDisplay, "Current agreements and holdings");
+
         }
     }
 }

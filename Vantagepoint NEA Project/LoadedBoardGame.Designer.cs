@@ -58,6 +58,7 @@
             this.StaffLabel = new System.Windows.Forms.Label();
             this.StaffLimitDisplay = new System.Windows.Forms.Label();
             this.ViewSalesOrders = new System.Windows.Forms.Button();
+            this.AgreementsButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.SquareDisplay)).BeginInit();
             this.SuspendLayout();
             // 
@@ -363,11 +364,21 @@
             this.ViewSalesOrders.UseVisualStyleBackColor = true;
             this.ViewSalesOrders.Click += new System.EventHandler(this.ViewSalesOrders_Click);
             // 
+            // AgreementsButton
+            // 
+            this.AgreementsButton.Location = new System.Drawing.Point(515, 340);
+            this.AgreementsButton.Name = "AgreementsButton";
+            this.AgreementsButton.Size = new System.Drawing.Size(87, 46);
+            this.AgreementsButton.TabIndex = 53;
+            this.AgreementsButton.Text = "View owned objects";
+            this.AgreementsButton.UseVisualStyleBackColor = true;
+            // 
             // LoadedBoardGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.AgreementsButton);
             this.Controls.Add(this.ViewSalesOrders);
             this.Controls.Add(this.StaffLimitDisplay);
             this.Controls.Add(this.StaffDisplay);
@@ -437,5 +448,6 @@
         private System.Windows.Forms.Label StaffLimitDisplay;
         private System.Windows.Forms.Label CapitalDisplay;
         private System.Windows.Forms.Button ViewSalesOrders;
+        private System.Windows.Forms.Button AgreementsButton;
     }
 }
