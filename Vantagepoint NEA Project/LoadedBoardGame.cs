@@ -1315,9 +1315,16 @@ namespace Vantagepoint_NEA_Project
                 }
                 if (luckyBreakTable.Rows[cardNumber]["CloseBestPipeline"] != DBNull.Value)
                 {
-                    UpdateCapital(salesOpportunities.Max());
-                    salesOpportunities.Remove(salesOpportunities.Max());
-                    salesOpportunities.Sort();
+                    if (salesOpportunities.Count > 0)
+                    {
+                        UpdateCapital(salesOpportunities.Max());
+                        salesOpportunities.Remove(salesOpportunities.Max());
+                        salesOpportunities.Sort();
+                    }
+                    else
+                    {
+                        MessageBox.Show("You have no sales opportunities, making this lucky break ineffectual. ", "No sales opportunities");
+                    }
                 }
                 if (luckyBreakTable.Rows[cardNumber]["MoveMonthEnd"] != DBNull.Value)
                 {
@@ -1395,6 +1402,7 @@ namespace Vantagepoint_NEA_Project
 
             this.Hide();
             this.Close();
+            Application.Exit();
         }
 
         private void FinishGameButton_Click(object sender, EventArgs e)

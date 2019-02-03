@@ -18,7 +18,7 @@ namespace Vantagepoint_NEA_Project
         public MainMenu()
         {
             InitializeComponent();
-            LogoDisplay.ImageLocation = "Board Images\\VantagePoint Logo Cropped.JPG";
+            LogoDisplay.ImageLocation = "Board Images\\VantagePointLogo.JPG";
         }
 
         private void button3_Click(object sender, EventArgs e)
