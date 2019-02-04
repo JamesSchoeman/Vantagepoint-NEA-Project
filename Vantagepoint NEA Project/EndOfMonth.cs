@@ -31,7 +31,6 @@ namespace Vantagepoint_NEA_Project
             PayVATButton.Enabled = false;
             SalariesButton.Enabled = false;
             
-
             foreach (var i in Application.OpenForms)
             {
                 if (string.Concat(i) == "Vantagepoint_NEA_Project.BoardGame, Text: Board Game")
