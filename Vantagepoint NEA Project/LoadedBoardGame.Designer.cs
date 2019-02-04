@@ -372,6 +372,7 @@
             this.AgreementsButton.TabIndex = 53;
             this.AgreementsButton.Text = "View owned objects";
             this.AgreementsButton.UseVisualStyleBackColor = true;
+            this.AgreementsButton.Click += new System.EventHandler(this.AgreementsButton_Click);
             // 
             // LoadedBoardGame
             // 
