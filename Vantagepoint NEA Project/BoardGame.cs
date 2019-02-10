@@ -65,6 +65,14 @@ namespace Vantagepoint_NEA_Project
             dataAdapter.Fill(luckyBreakTable);
             dataConnection.Close();
 
+            dataAdapter.UpdateCommand = moralDilemmasCommand;
+            dataAdapter.SelectCommand = moralDilemmasCommand;
+            moralDilemmasCommand.CommandType = CommandType.Text;
+            moralDilemmasCommand.Connection = dataConnection;
+            dataConnection.Open();
+            dataAdapter.Fill(moralDilemmasTable);
+            dataConnection.Close();
+
             string squareNamevar = "";
             string squareDescvar = "";
             squareNamevar = string.Concat(squaresTable.Rows[boardPosition - 1][1]);
@@ -119,6 +127,9 @@ namespace Vantagepoint_NEA_Project
 
         DataTable luckyBreakTable = new DataTable();
         static SqlCommand luckyBreakCommand = new SqlCommand("select * from LuckyBreak");
+
+        DataTable moralDilemmasTable = new DataTable();
+        static SqlCommand moralDilemmasCommand = new SqlCommand("select * from MoralDilemmas");
 
         Random rnd = new Random();
 
@@ -1195,9 +1206,43 @@ namespace Vantagepoint_NEA_Project
         public void LuckyBreak()
         {
             bool eligible = true;
-            string notEligibleReason = "";
+            string notEligibleReason = null;
             int cardNumber = new int();
             cardNumber = rnd.Next(0, luckyBreakTable.Rows.Count);
+            string moralDilemma = string.Concat(luckyBreakTable.Rows[cardNumber]["MoralDilemma"]);
+
+            if (moralDilemma == "Yes")
+            {
+                int dilemmaNumber = rnd.Next(0, moralDilemmasTable.Rows.Count);
+                MessageBox.Show(string.Concat(moralDilemmasTable.Rows[dilemmaNumber]["Description"]), "Moral Dilemma!");
+                if (string.Concat(moralDilemmasTable.Rows[dilemmaNumber]["GetDeal"]) == "No")
+                {
+                    eligible = false;
+                }
+                if (moralDilemmasTable.Rows[dilemmaNumber]["DiceNumber"] != DBNull.Value && moralDilemmasTable.Rows[dilemmaNumber]["Multiplier"] != DBNull.Value)
+                {
+                    int diceNumber = int.Parse(string.Concat(moralDilemmasTable.Rows[dilemmaNumber]["DiceNumber"]));
+                    int multiplier = int.Parse(string.Concat(moralDilemmasTable.Rows[dilemmaNumber]["Multiplier"]));
+                    UpdateCapital(-(rnd.Next(diceNumber, (diceNumber * 6) + 1) * multiplier));
+                }
+                if (moralDilemmasTable.Rows[dilemmaNumber]["StaffChange"] != DBNull.Value && staff > 0)
+                {
+                    staff = staff + int.Parse(string.Concat(moralDilemmasTable.Rows[dilemmaNumber]["StaffChange"]));
+                    StaffDisplay.Text = string.Concat(staff);
+                }
+                if (string.Concat(moralDilemmasTable.Rows[dilemmaNumber]["LoseBEE"]) == "Yes")
+                {
+                    hasBEE = false;
+                }
+                if (string.Concat(moralDilemmasTable.Rows[dilemmaNumber]["LoseMarketing"]) == "Yes")
+                {
+                    hasMarketing = false;
+                }
+                if (string.Concat(moralDilemmasTable.Rows[dilemmaNumber]["LosePR"]) == "Yes")
+                {
+                    hasPR = false;
+                }
+            }
 
             if (companyType == "Sole Trader" && string.Concat(luckyBreakTable.Rows[cardNumber]["ExcludeSoleTrader"]) == "Yes")
             {
@@ -1317,7 +1362,7 @@ namespace Vantagepoint_NEA_Project
                 }
                 
             }
-            else if (eligible == false)
+            else if (eligible == false && moralDilemma != "Yes")
             {
                 if (notEligibleReason == "Sole Trader")
                 {
@@ -1404,7 +1449,7 @@ namespace Vantagepoint_NEA_Project
             {
                 toDisplay = "You have no sales pipeline. ";
             }
-            
+
             MessageBox.Show(toDisplay);
         }
 
