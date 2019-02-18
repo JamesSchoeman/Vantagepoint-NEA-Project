@@ -176,9 +176,9 @@ namespace Vantagepoint_NEA_Project
             {
                 localSalesOpportunities.Remove(i);
             }
-            localSalesOpportunities.Sort();
+            BubbleSort(localSalesOpportunities);
             opportunitiesToRemove.Clear();
-            localSalesOrders.Sort();
+            BubbleSort(localSalesOrders);
 
             if ((localCompanyType == "Sole Trader") || (localStaff == 0))
             {
@@ -198,6 +198,33 @@ namespace Vantagepoint_NEA_Project
             PayVATButton.Text = ("Pay VAT of " + string.Concat(localShareCapital / 10));
             PayVATButton.Enabled = true;
             SalariesButton.Enabled = false;
+        }
+
+        public void BubbleSort(List<int> subject)
+        {
+            if (subject.Count != 0)
+            {
+                foreach (int i in Enumerable.Range(0, subject.Count - 1))
+                {
+                    bool swapped = false;
+
+                    foreach (int j in Enumerable.Range(0, subject.Count - 1))
+                    {
+                        if (subject[j] > subject[j + 1])
+                        {
+                            int temp = subject[j];
+                            subject[j] = subject[j + 1];
+                            subject[j + 1] = temp;
+                            swapped = true;
+                        }
+                    }
+
+                    if (swapped == false)
+                    {
+                        break;
+                    }
+                }
+            }
         }
     }
 }
