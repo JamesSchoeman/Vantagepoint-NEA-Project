@@ -1231,60 +1231,88 @@ namespace Vantagepoint_NEA_Project
             cardNumber = rnd.Next(0, luckyBreakTable.Rows.Count);
             string moralDilemma = string.Concat(luckyBreakTable.Rows[cardNumber]["MoralDilemma"]);
 
+            MessageBox.Show(string.Concat(luckyBreakTable.Rows[cardNumber][1]), "Lucky Break!");
+
             if (moralDilemma == "Yes")
             {
-                int dilemmaNumber = rnd.Next(0, moralDilemmasTable.Rows.Count);
-                MessageBox.Show(string.Concat(moralDilemmasTable.Rows[dilemmaNumber]["Description"]), "Moral Dilemma!");
-                if (string.Concat(moralDilemmasTable.Rows[dilemmaNumber]["GetDeal"]) == "No")
+                DialogResult answer;
+                answer = MessageBox.Show("Do you take the deal? ", "Take the deal? ", MessageBoxButtons.YesNo);
+
+                if (answer == DialogResult.Yes)
+                {
+
+                    int dilemmaNumber = rnd.Next(0, moralDilemmasTable.Rows.Count);
+                    MessageBox.Show(string.Concat(moralDilemmasTable.Rows[dilemmaNumber]["Description"]), "Moral Dilemma!");
+                    if (string.Concat(moralDilemmasTable.Rows[dilemmaNumber]["GetDeal"]) == "No")
+                    {
+                        eligible = false;
+                        if (notEligibleReason == null)
+                        {
+                            notEligibleReason = "DilemmaLostDeal";
+                        }       
+                    }
+                    if (moralDilemmasTable.Rows[dilemmaNumber]["DiceNumber"] != DBNull.Value && moralDilemmasTable.Rows[dilemmaNumber]["Multiplier"] != DBNull.Value)
+                    {
+                        int diceNumber = int.Parse(string.Concat(moralDilemmasTable.Rows[dilemmaNumber]["DiceNumber"]));
+                        int multiplier = int.Parse(string.Concat(moralDilemmasTable.Rows[dilemmaNumber]["Multiplier"]));
+                        UpdateCapital(-(rnd.Next(diceNumber, (diceNumber * 6) + 1) * multiplier));
+                    }
+                    if (moralDilemmasTable.Rows[dilemmaNumber]["StaffChange"] != DBNull.Value && staff > 0)
+                    {
+                        staff = staff + int.Parse(string.Concat(moralDilemmasTable.Rows[dilemmaNumber]["StaffChange"]));
+                        StaffDisplay.Text = string.Concat(staff);
+                    }
+                    if (string.Concat(moralDilemmasTable.Rows[dilemmaNumber]["LoseBEE"]) == "Yes")
+                    {
+                        hasBEE = false;
+                    }
+                    if (string.Concat(moralDilemmasTable.Rows[dilemmaNumber]["LoseMarketing"]) == "Yes")
+                    {
+                        hasMarketing = false;
+                    }
+                    if (string.Concat(moralDilemmasTable.Rows[dilemmaNumber]["LosePR"]) == "Yes")
+                    {
+                        hasPR = false;
+                    }
+                }
+                else
                 {
                     eligible = false;
-                }
-                if (moralDilemmasTable.Rows[dilemmaNumber]["DiceNumber"] != DBNull.Value && moralDilemmasTable.Rows[dilemmaNumber]["Multiplier"] != DBNull.Value)
-                {
-                    int diceNumber = int.Parse(string.Concat(moralDilemmasTable.Rows[dilemmaNumber]["DiceNumber"]));
-                    int multiplier = int.Parse(string.Concat(moralDilemmasTable.Rows[dilemmaNumber]["Multiplier"]));
-                    UpdateCapital(-(rnd.Next(diceNumber, (diceNumber * 6) + 1) * multiplier));
-                }
-                if (moralDilemmasTable.Rows[dilemmaNumber]["StaffChange"] != DBNull.Value && staff > 0)
-                {
-                    staff = staff + int.Parse(string.Concat(moralDilemmasTable.Rows[dilemmaNumber]["StaffChange"]));
-                    StaffDisplay.Text = string.Concat(staff);
-                }
-                if (string.Concat(moralDilemmasTable.Rows[dilemmaNumber]["LoseBEE"]) == "Yes")
-                {
-                    hasBEE = false;
-                }
-                if (string.Concat(moralDilemmasTable.Rows[dilemmaNumber]["LoseMarketing"]) == "Yes")
-                {
-                    hasMarketing = false;
-                }
-                if (string.Concat(moralDilemmasTable.Rows[dilemmaNumber]["LosePR"]) == "Yes")
-                {
-                    hasPR = false;
+                    if (notEligibleReason == null)
+                    {
+                        notEligibleReason = "DilemmaRejected";
+                    }  
                 }
             }
 
             if (companyType == "Sole Trader" && string.Concat(luckyBreakTable.Rows[cardNumber]["ExcludeSoleTrader"]) == "Yes")
             {
                 eligible = false;
-                notEligibleReason = "Sole Trader";
+                if (notEligibleReason == null)
+                {
+                    notEligibleReason = "Sole Trader";
+                }
             }
             else if (hasHealthCare == false && string.Concat(luckyBreakTable.Rows[cardNumber]["NeedsHealthcare"]) == "Yes")
             {
                 eligible = false;
-                notEligibleReason = "Healthcare";
+                if (notEligibleReason == null)
+                {
+                    notEligibleReason = "Healthcare";
+                }
             }
             else if (hasBEE == false && string.Concat(luckyBreakTable.Rows[cardNumber]["NeedsBEE"]) == "Yes")
             {
                 eligible = false;
-                notEligibleReason = "BEE";
+                if (notEligibleReason == null)
+                {
+                    notEligibleReason = "BEE";
+                }
             }
             //Check for sales training when implemented
 
             if (eligible == true)
             {
-                MessageBox.Show(string.Concat(luckyBreakTable.Rows[cardNumber][1]), "Lucky Break!");
-
                 if (float.Parse(string.Concat(luckyBreakTable.Rows[cardNumber]["CapitalChange"])) != 0)
                 {
                     UpdateCapital(float.Parse(string.Concat(luckyBreakTable.Rows[cardNumber]["CapitalChange"])));
@@ -1383,8 +1411,12 @@ namespace Vantagepoint_NEA_Project
                 }
                 
             }
-            else if (eligible == false && moralDilemma != "Yes")
+            else if (eligible == false)
             {
+                if (notEligibleReason == "DilemmaRejected")
+                {
+                    MessageBox.Show("You did not get the lucky break as you elected not to go through with the deal. ", "Lucky Break!");
+                }
                 if (notEligibleReason == "Sole Trader")
                 {
                     MessageBox.Show("Your lucky break fell through due to being a Sole Trader. ", "Lucky Break!");
@@ -1573,7 +1605,6 @@ namespace Vantagepoint_NEA_Project
             }
 
             MessageBox.Show(toDisplay, "Current agreements and holdings");
-
         }
 
         public void BubbleSort(List<int> subject)
