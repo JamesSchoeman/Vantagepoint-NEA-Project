@@ -116,6 +116,14 @@ namespace Vantagepoint_NEA_Project
             dataAdapter.Fill(moralDilemmasTable);
             dataConnection.Close();
 
+            dataAdapter.UpdateCommand = penaltyCommand;
+            dataAdapter.SelectCommand = penaltyCommand;
+            penaltyCommand.CommandType = CommandType.Text;
+            penaltyCommand.Connection = dataConnection;
+            dataConnection.Open();
+            dataAdapter.Fill(penaltyTable);
+            dataConnection.Close();
+
             string squareNamevar = "";
             string squareDescvar = "";
             squareNamevar = string.Concat(squaresTable.Rows[boardPosition - 1][1]);
@@ -177,6 +185,9 @@ namespace Vantagepoint_NEA_Project
         DataTable moralDilemmasTable = new DataTable();
         static SqlCommand moralDilemmasCommand = new SqlCommand("select * from MoralDilemmas");
 
+        DataTable penaltyTable = new DataTable();
+        static SqlCommand penaltyCommand = new SqlCommand("select * from Penalty");
+
         Random rnd = new Random();
 
         private void Board_Game_Load(object sender, EventArgs e)
@@ -233,6 +244,10 @@ namespace Vantagepoint_NEA_Project
             {
                 CashFlow();
             }
+            else if (newBoardPosition == 5)
+            {
+                Penalty();
+            }
             else if (newBoardPosition == 6)
             {
                 Square6();
@@ -269,6 +284,10 @@ namespace Vantagepoint_NEA_Project
             {
                 StaffRecruitment();
             }
+            else if (newBoardPosition == 15)
+            {
+                Penalty();
+            }
             else if (newBoardPosition == 16)
             {
                 Square16();
@@ -301,6 +320,10 @@ namespace Vantagepoint_NEA_Project
             {
                 CashFlow();
             }
+            else if (newBoardPosition == 24)
+            {
+                Penalty();
+            }
             else if (newBoardPosition == 25)
             {
                 StaffRecruitment();
@@ -332,6 +355,10 @@ namespace Vantagepoint_NEA_Project
             else if (newBoardPosition == 32)
             {
                 StaffRecruitment();
+            }
+            else if (newBoardPosition == 33)
+            {
+                Penalty();
             }
             else if (newBoardPosition == 34)
             {
@@ -1690,6 +1717,70 @@ namespace Vantagepoint_NEA_Project
                     tw.WriteLine(s);
                 }
             }
+        }
+
+        public void Penalty()
+        {
+            int penaltyNumber = new int();
+            int toPay = new int();
+            bool insurance = false;
+            penaltyNumber = rnd.Next(0, penaltyTable.Rows.Count);
+
+            MessageBox.Show(string.Concat(penaltyTable.Rows[penaltyNumber]["Description"]), "Penalty!");
+            if (hasInsurance == true && string.Concat(penaltyTable.Rows[penaltyNumber]["Insurance"]) == "Yes")
+            {
+                MessageBox.Show("Your insurance takes effect!", "Penalty");
+                insurance = true;
+            }
+
+            if ((penaltyTable.Rows[penaltyNumber]["CashLimited"] != DBNull.Value) && (penaltyTable.Rows[penaltyNumber]["CashPartnership"] != DBNull.Value) && (penaltyTable.Rows[penaltyNumber]["CashSoleTrader"] != DBNull.Value))
+            {
+                if (companyType == "Limited")
+                {
+                    toPay = int.Parse(string.Concat(penaltyTable.Rows[penaltyNumber]["CashLimited"]));
+                }
+                else if (companyType == "Partnership")
+                {
+                    toPay = int.Parse(string.Concat(penaltyTable.Rows[penaltyNumber]["CashPartnership"]));
+                }
+                else if (companyType == "SoleTrader")
+                {
+                    toPay = int.Parse(string.Concat(penaltyTable.Rows[penaltyNumber]["CashSoleTrader"]));
+                }
+            }
+
+            if (toPay < 0)
+            {
+                if (penaltyTable.Rows[penaltyNumber]["CashMultiplyEmployees"] != DBNull.Value)
+                {
+                    if (insurance == true)
+                    {
+                        UpdateCapital((toPay * staff) / 5);
+                    }
+                    else
+                    {
+                        UpdateCapital(toPay * staff);
+                    }
+                }
+                else
+                {
+                    if (insurance == true)
+                    {
+                        UpdateCapital(toPay / 5);
+                    }
+                    else
+                    {
+                        UpdateCapital(toPay);
+                    }
+                }
+            }
+
+            if (string.Concat(penaltyTable.Rows[penaltyNumber]["LoseBestProspect"]) == "Yes")
+            {
+                salesOpportunities.Remove(salesOpportunities.Max());
+                BubbleSort(salesOpportunities);
+            }
+
         }
     }
 }

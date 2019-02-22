@@ -106,6 +106,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SquaresDatabaseDataSet.xsd</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="FinishPage.resx">
+      <DependentUpon>FinishPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoadedBoardGame.resx">
       <DependentUpon>LoadedBoardGame.cs</DependentUpon>
     </EmbeddedResource>
