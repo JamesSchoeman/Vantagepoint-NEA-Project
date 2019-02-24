@@ -260,7 +260,7 @@
             // 
             this.TimerSecondsDisplay.AutoSize = true;
             this.TimerSecondsDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TimerSecondsDisplay.Location = new System.Drawing.Point(661, 195);
+            this.TimerSecondsDisplay.Location = new System.Drawing.Point(680, 195);
             this.TimerSecondsDisplay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.TimerSecondsDisplay.Name = "TimerSecondsDisplay";
             this.TimerSecondsDisplay.Size = new System.Drawing.Size(34, 20);
@@ -379,6 +379,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ControlBox = false;
             this.Controls.Add(this.AgreementsButton);
             this.Controls.Add(this.ViewSalesOrders);
             this.Controls.Add(this.StaffLimitDisplay);
@@ -408,6 +409,7 @@
             this.Controls.Add(this.ShareholdersLabel);
             this.Controls.Add(this.CompanyNameLabel);
             this.Controls.Add(this.RollDiceButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "LoadedBoardGame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Board Game";

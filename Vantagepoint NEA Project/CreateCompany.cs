@@ -23,6 +23,7 @@ namespace Vantagepoint_NEA_Project
         public CreateCompany()
         {
             InitializeComponent();
+            LogoDisplay.ImageLocation = "Board Images\\VantagePointLogo.JPG";
         }
 
         private void button1_Click(object sender, EventArgs e)

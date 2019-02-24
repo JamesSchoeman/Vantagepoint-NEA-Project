@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Vantagepoint_NEA_Project
 {
@@ -62,6 +63,7 @@ namespace Vantagepoint_NEA_Project
                 localSalesOrders = LoadedBoardGame.salesOrders;
             }
 
+            BubbleSort(localSalesOpportunities);
             CapitalDisplay.Text = string.Concat(localShareCapital);
             StaffDisplay.Text = string.Concat(localStaff);
             PayVATButton.Text = ("Pay VAT of -----");
@@ -127,11 +129,15 @@ namespace Vantagepoint_NEA_Project
         private void ViewSalesOpportunities_Click(object sender, EventArgs e)
         {
             string toDisplay = null;
-            foreach (int i in localSalesOpportunities)
+            foreach (var i in localSalesOpportunities)
             {
-                toDisplay = (toDisplay + "£" + string.Concat(i) + ", ");
+                toDisplay = ReadFromFile("salesOpportunities");
             }
-            MessageBox.Show(toDisplay);
+            if (toDisplay == null)
+            {
+                toDisplay = "You have no sales pipeline. ";
+            }
+            MessageBox.Show(toDisplay, "Sales Opportunities");
         }
 
         private void ViewSalesOrders_Click(object sender, EventArgs e)
@@ -141,7 +147,7 @@ namespace Vantagepoint_NEA_Project
             {
                 toDisplay = (toDisplay + "£" + string.Concat(i) + ", ");
             }
-            MessageBox.Show(toDisplay);
+            MessageBox.Show(toDisplay, "Sales Orders");
         }
 
         private void SalesOpportunitiesButton_Click(object sender, EventArgs e)
@@ -190,6 +196,8 @@ namespace Vantagepoint_NEA_Project
                 SalariesButton.Enabled = true;
             }
             SalesOpportunitiesButton.Enabled = false;
+
+            writeToFile(localSalesOpportunities, "salesOpportunities");
         }
 
         private void SalariesButton_Click(object sender, EventArgs e)
@@ -224,6 +232,37 @@ namespace Vantagepoint_NEA_Project
                         break;
                     }
                 }
+            }
+        }
+
+        public void writeToFile(List<int> subject, string name)
+        {
+            System.IO.Directory.CreateDirectory(System.Environment.CurrentDirectory + "\\SavedVariables\\");
+            using (TextWriter tw = new StreamWriter(System.Environment.CurrentDirectory + "\\SavedVariables\\" + name + ".txt"))
+            {
+                foreach (int s in subject)
+                {
+                    tw.WriteLine(s);
+                }
+            }
+        }
+
+        public string ReadFromFile(string name)
+        {
+            try
+            {
+                string[] lines = File.ReadAllLines(System.Environment.CurrentDirectory + "\\SavedVariables\\" + name + ".txt");
+                string toDisplay = null;
+                foreach (string line in lines)
+                {
+                    toDisplay = (toDisplay + "£" + line + ", ");
+                }
+                return toDisplay;
+            }
+            catch
+            {
+                string toDisplay = null;
+                return toDisplay;
             }
         }
     }

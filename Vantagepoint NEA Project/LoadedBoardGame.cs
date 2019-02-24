@@ -1220,6 +1220,7 @@ namespace Vantagepoint_NEA_Project
                     {
                         salesOrders.Add(salesOpportunities.Max());
                         salesOpportunities.Remove(salesOpportunities.Max());
+                        writeToFile(salesOpportunities, nameof(salesOpportunities));
                         salesOrders.Sort();
                     }
                     salesOpportunities.Add(50000);
@@ -1548,8 +1549,8 @@ namespace Vantagepoint_NEA_Project
             int minutesRemaining = (int)(Math.Floor(timeLimit / 60.0));
             int secondsRemaining = (int)(Math.Floor(timeLimit - (minutesRemaining * 60.0)));
 
-            TimerMinutesDisplay.Text = string.Concat(minutesRemaining) + "minutes";
-            TimerSecondsDisplay.Text = string.Concat(secondsRemaining) + "seconds";
+            TimerMinutesDisplay.Text = string.Concat(minutesRemaining) + " minutes";
+            TimerSecondsDisplay.Text = string.Concat(secondsRemaining) + " seconds";
 
             if (timeLimit == 0)
             {
@@ -1563,20 +1564,15 @@ namespace Vantagepoint_NEA_Project
         private void ViewSalesOpportunities_Click(object sender, EventArgs e)
         {
             string toDisplay = null;
-
-            if (salesOpportunities.Count != 0)
+            foreach (var i in salesOpportunities)
             {
-                foreach (var i in salesOpportunities)
-                {
-                    toDisplay = (toDisplay + "£" + string.Concat(i) + ", ");
-                }
+                toDisplay = ReadFromFile(nameof(salesOpportunities));
             }
-            else
+            if (toDisplay == null)
             {
                 toDisplay = "You have no sales pipeline. ";
             }
-
-            MessageBox.Show(toDisplay);
+            MessageBox.Show(toDisplay, "Sales Opportunities");
         }
 
         private void ViewSalesOrders_Click(object sender, EventArgs e)
@@ -1595,7 +1591,7 @@ namespace Vantagepoint_NEA_Project
                 toDisplay = "You have no sales orders. ";
             }
 
-            MessageBox.Show(toDisplay);
+            MessageBox.Show(toDisplay, "Sales Orders");
         }
 
         private void SaveGame()
@@ -1719,6 +1715,25 @@ namespace Vantagepoint_NEA_Project
             }
         }
 
+        public string ReadFromFile(string name)
+        {
+            try
+            {
+                string[] lines = File.ReadAllLines(System.Environment.CurrentDirectory + "\\SavedVariables\\" + name + ".txt");
+                string toDisplay = null;
+                foreach (string line in lines)
+                {
+                    toDisplay = (toDisplay + "£" + line + ", ");
+                }
+                return toDisplay;
+            }
+            catch
+            {
+                string toDisplay = null;
+                return toDisplay;
+            }
+        }
+
         public void Penalty()
         {
             int penaltyNumber = new int();
@@ -1729,7 +1744,7 @@ namespace Vantagepoint_NEA_Project
             MessageBox.Show(string.Concat(penaltyTable.Rows[penaltyNumber]["Description"]), "Penalty!");
             if (hasInsurance == true && string.Concat(penaltyTable.Rows[penaltyNumber]["Insurance"]) == "Yes")
             {
-                MessageBox.Show("Your insurance takes effect!", "Penalty");
+                MessageBox.Show("Your insurance takes effect! An excess of 20% is payable. ", "Penalty");
                 insurance = true;
             }
 
@@ -1779,6 +1794,7 @@ namespace Vantagepoint_NEA_Project
             {
                 salesOpportunities.Remove(salesOpportunities.Max());
                 BubbleSort(salesOpportunities);
+                writeToFile(salesOpportunities, nameof(salesOpportunities));
             }
 
         }

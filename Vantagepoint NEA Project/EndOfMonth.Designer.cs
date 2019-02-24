@@ -233,6 +233,7 @@
             this.Controls.Add(this.CapitalLabel);
             this.Controls.Add(this.VATLabel);
             this.Controls.Add(this.CloseButton);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Name = "EndOfMonth";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

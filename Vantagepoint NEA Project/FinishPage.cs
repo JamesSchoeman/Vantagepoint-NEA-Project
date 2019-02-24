@@ -13,6 +13,7 @@ namespace Vantagepoint_NEA_Project
     public partial class FinishPage : Form
     {
         public string parentType = null;
+        public float localCapital = new float();
 
         public FinishPage()
         {
@@ -34,18 +35,39 @@ namespace Vantagepoint_NEA_Project
             
             if (parentType == "NonLoaded")
             {
-                
+                localCapital = BoardGame.shareCapital;
+                if (BoardGame.bankLoanTaken == false)
+                {
+                    PayLoanButton.Enabled = false;
+                    CloseButton.Enabled = true;
+                    PostLoanDisplay.Text = string.Concat(BoardGame.shareCapital);
+                }
             }
 
             if (parentType == "Loaded")
             {
-
+                localCapital = LoadedBoardGame.shareCapital;
+                if (LoadedBoardGame.bankLoanTaken == false)
+                {
+                    PayLoanButton.Enabled = false;
+                    CloseButton.Enabled = true;
+                    PostLoanDisplay.Text = string.Concat(LoadedBoardGame.shareCapital);
+                }
             }
+            CapitalDisplay.Text = "£" + string.Concat(localCapital);
         }
 
         private void PayLoanButton_Click(object sender, EventArgs e)
         {
+            localCapital = localCapital - 300000;
+            PostLoanDisplay.Text = "£" + string.Concat(localCapital);
+            PayLoanButton.Enabled = false;
+            CloseButton.Enabled = true;
+        }
 
+        private void CloseButton_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
