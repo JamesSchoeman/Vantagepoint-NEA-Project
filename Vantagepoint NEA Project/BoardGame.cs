@@ -40,6 +40,8 @@ namespace Vantagepoint_NEA_Project
             }
             SquareDisplay.ImageLocation = ("Board Images\\" + boardPosition + ".JPG");
             SquareDisplay.SizeMode = PictureBoxSizeMode.Zoom;
+            BoardDisplay.ImageLocation = ("Board Images\\VP Board.JPG");
+            BoardDisplay.SizeMode = PictureBoxSizeMode.Zoom;
 
             dataAdapter.UpdateCommand = squaresTableCommand;
             dataAdapter.SelectCommand = squaresTableCommand;

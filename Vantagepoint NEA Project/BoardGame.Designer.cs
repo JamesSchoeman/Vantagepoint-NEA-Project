@@ -38,7 +38,7 @@
             this.SHDisplay = new System.Windows.Forms.Label();
             this.NOBDisplay = new System.Windows.Forms.Label();
             this.CTDisplay = new System.Windows.Forms.Label();
-            this.SquareDisplay = new System.Windows.Forms.PictureBox();
+            this.BoardDisplay = new System.Windows.Forms.PictureBox();
             this.DescriptionDisplay = new System.Windows.Forms.Label();
             this.RollResultDisplay = new System.Windows.Forms.Label();
             this.SquareNameDisplay = new System.Windows.Forms.Label();
@@ -59,6 +59,8 @@
             this.StaffLabel = new System.Windows.Forms.Label();
             this.ViewSalesOrders = new System.Windows.Forms.Button();
             this.AgreementsButton = new System.Windows.Forms.Button();
+            this.SquareDisplay = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.BoardDisplay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SquareDisplay)).BeginInit();
             this.SuspendLayout();
             // 
@@ -160,14 +162,14 @@
             this.CTDisplay.TabIndex = 20;
             this.CTDisplay.Text = "-----";
             // 
-            // SquareDisplay
+            // BoardDisplay
             // 
-            this.SquareDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.SquareDisplay.Location = new System.Drawing.Point(117, 61);
-            this.SquareDisplay.Name = "SquareDisplay";
-            this.SquareDisplay.Size = new System.Drawing.Size(300, 300);
-            this.SquareDisplay.TabIndex = 21;
-            this.SquareDisplay.TabStop = false;
+            this.BoardDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.BoardDisplay.Location = new System.Drawing.Point(117, 61);
+            this.BoardDisplay.Name = "BoardDisplay";
+            this.BoardDisplay.Size = new System.Drawing.Size(300, 300);
+            this.BoardDisplay.TabIndex = 21;
+            this.BoardDisplay.TabStop = false;
             // 
             // DescriptionDisplay
             // 
@@ -374,12 +376,22 @@
             this.AgreementsButton.UseVisualStyleBackColor = true;
             this.AgreementsButton.Click += new System.EventHandler(this.AgreementsButton_Click);
             // 
+            // SquareDisplay
+            // 
+            this.SquareDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.SquareDisplay.Location = new System.Drawing.Point(192, 136);
+            this.SquareDisplay.Name = "SquareDisplay";
+            this.SquareDisplay.Size = new System.Drawing.Size(150, 150);
+            this.SquareDisplay.TabIndex = 54;
+            this.SquareDisplay.TabStop = false;
+            // 
             // BoardGame
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.SquareDisplay);
             this.Controls.Add(this.AgreementsButton);
             this.Controls.Add(this.ViewSalesOrders);
             this.Controls.Add(this.StaffLimitDisplay);
@@ -399,7 +411,7 @@
             this.Controls.Add(this.SquareNameDisplay);
             this.Controls.Add(this.RollResultDisplay);
             this.Controls.Add(this.DescriptionDisplay);
-            this.Controls.Add(this.SquareDisplay);
+            this.Controls.Add(this.BoardDisplay);
             this.Controls.Add(this.CTDisplay);
             this.Controls.Add(this.NOBDisplay);
             this.Controls.Add(this.SHDisplay);
@@ -414,6 +426,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Board Game";
             this.Load += new System.EventHandler(this.Board_Game_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.BoardDisplay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SquareDisplay)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -431,7 +444,7 @@
         private System.Windows.Forms.Label SHDisplay;
         private System.Windows.Forms.Label NOBDisplay;
         private System.Windows.Forms.Label CTDisplay;
-        private System.Windows.Forms.PictureBox SquareDisplay;
+        private System.Windows.Forms.PictureBox BoardDisplay;
         private System.Windows.Forms.Label DescriptionDisplay;
         private System.Windows.Forms.Label RollResultDisplay;
         private System.Windows.Forms.Label SquareNameDisplay;
@@ -452,5 +465,6 @@
         private System.Windows.Forms.Label CapitalDisplay;
         private System.Windows.Forms.Button ViewSalesOrders;
         private System.Windows.Forms.Button AgreementsButton;
+        private System.Windows.Forms.PictureBox SquareDisplay;
     }
 }
