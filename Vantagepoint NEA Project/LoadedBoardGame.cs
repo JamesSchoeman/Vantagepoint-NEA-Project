@@ -1045,7 +1045,7 @@ namespace Vantagepoint_NEA_Project
                     if (hasBEE == true)
                     {
                         salesOpportunities.Add(300000);
-                        BubbleSort(salesOpportunities);
+                        salesOpportunities = MergeSort(salesOpportunities);
                         writeToFile(salesOpportunities, nameof(salesOpportunities));
                         MessageBox.Show("Thanks to your BEE status, you manage to secure a sales opportunity worth £300,000. ", "Passed or landed on a sales opportunity square!");
                     }
@@ -1059,7 +1059,7 @@ namespace Vantagepoint_NEA_Project
                     if (hasWebsite == true)
                     {
                         salesOpportunities.Add(300000);
-                        BubbleSort(salesOpportunities);
+                        salesOpportunities = MergeSort(salesOpportunities);
                         writeToFile(salesOpportunities, nameof(salesOpportunities));
                         MessageBox.Show("Thanks to your website, you manage to secure a sales opportunity worth £300,000. ", "Passed or landed on a sales opportunity square!");
                     }
@@ -1073,7 +1073,7 @@ namespace Vantagepoint_NEA_Project
                     if ((hasWebsite == true) && (hasBEE == true))
                     {
                         salesOpportunities.Add(300000);
-                        BubbleSort(salesOpportunities);
+                        salesOpportunities = MergeSort(salesOpportunities);
                         writeToFile(salesOpportunities, nameof(salesOpportunities));
                         MessageBox.Show("Thanks to your BEE status and website, you manage to secure a sales opportunity worth £300,000. ", "Passed or landed on a sales opportunity square!");
                     }
@@ -1087,7 +1087,7 @@ namespace Vantagepoint_NEA_Project
                     if (staff > 0)
                     {
                         salesOpportunities.Add(100000);
-                        BubbleSort(salesOpportunities);
+                        salesOpportunities = MergeSort(salesOpportunities);
                         writeToFile(salesOpportunities, nameof(salesOpportunities));
                         MessageBox.Show("Thanks to your staff, you manage to secure a sales opportunity worth £100,000. ", "Passed or landed on a sales opportunity square!");
                     }
@@ -1101,7 +1101,7 @@ namespace Vantagepoint_NEA_Project
                     if (stock > 0)
                     {
                         salesOpportunities.Add(300000);
-                        BubbleSort(salesOpportunities);
+                        salesOpportunities = MergeSort(salesOpportunities);
                         writeToFile(salesOpportunities, nameof(salesOpportunities));
                         MessageBox.Show("Thanks to your stock, you manage to secure a sales opportunity worth £300,000. ", "Passed or landed on a sales opportunity square!");
                     }
@@ -1118,7 +1118,7 @@ namespace Vantagepoint_NEA_Project
                         {
                             salesOpportunities.Add(50000);
                         }
-                        BubbleSort(salesOpportunities);
+                        salesOpportunities = MergeSort(salesOpportunities);
                         writeToFile(salesOpportunities, nameof(salesOpportunities));
                         MessageBox.Show("Each of your staff are able to secure a sales opportunity worth £50,000. ", "Passed or landed on a sales opportunity square!");
                     }
@@ -1137,7 +1137,7 @@ namespace Vantagepoint_NEA_Project
                             {
                                 salesOpportunities.Add(10000);
                             }
-                            BubbleSort(salesOpportunities);
+                            salesOpportunities = MergeSort(salesOpportunities);
                             writeToFile(salesOpportunities, nameof(salesOpportunities));
                             MessageBox.Show("Each of your staff are able to secure a sales opportunity worth £100,000. ", "Passed or landed on a sales opportunity square!");
                         }
@@ -1152,7 +1152,7 @@ namespace Vantagepoint_NEA_Project
                     if (hasHealthCare == true)
                     {
                         salesOpportunities.Add(300000);
-                        BubbleSort(salesOpportunities);
+                        salesOpportunities = MergeSort(salesOpportunities);
                         writeToFile(salesOpportunities, nameof(salesOpportunities));
                         MessageBox.Show("Thanks to your healthcare plan, you manage to secure a sales opportunity worth £300,000. ", "Passed or landed on a sales opportunity square!");
                     }
@@ -1166,7 +1166,7 @@ namespace Vantagepoint_NEA_Project
                     if ((hasBEE == true) && (hasHealthCare == true))
                     {
                         salesOpportunities.Add(500000);
-                        BubbleSort(salesOpportunities);
+                        salesOpportunities = MergeSort(salesOpportunities);
                         writeToFile(salesOpportunities, nameof(salesOpportunities));
                         MessageBox.Show("Thanks to your BEE status and healthcare plan, you manage to secure a sales opportunity worth £500,000. ", "Passed or landed on a sales opportunity square!");
                     }
@@ -1180,7 +1180,7 @@ namespace Vantagepoint_NEA_Project
                     if (hasPR == true)
                     {
                         salesOpportunities.Add(300000);
-                        BubbleSort(salesOpportunities);
+                        salesOpportunities = MergeSort(salesOpportunities);
                         writeToFile(salesOpportunities, nameof(salesOpportunities));
                         MessageBox.Show("Thanks to your PR agreement, you manage to secure a sales opportunity worth £300,000. ", "Passed or landed on a sales opportunity square!");
                     }
@@ -1196,14 +1196,14 @@ namespace Vantagepoint_NEA_Project
                 if (chance < 4)
                 {
                     salesOpportunities.Add(50000);
-                    BubbleSort(salesOpportunities);
+                    salesOpportunities = MergeSort(salesOpportunities);
                     writeToFile(salesOpportunities, nameof(salesOpportunities));
                     MessageBox.Show("You manage to secure a sales opportunity worth £50,000. ", "Passed or landed on a sales opportunity square!");
                 }
                 else if (chance < 7)
                 {
                     salesOpportunities.Add(100000);
-                    BubbleSort(salesOpportunities);
+                    salesOpportunities = MergeSort(salesOpportunities);
                     writeToFile(salesOpportunities, nameof(salesOpportunities));
                     MessageBox.Show("You manage to secure a sales opportunity worth £100,000. ", "Passed or landed on a sales opportunity square!");
                 }
@@ -1211,7 +1211,7 @@ namespace Vantagepoint_NEA_Project
                 {
                     UpdateCapital(-5000);
                     salesOpportunities.Add(50000);
-                    BubbleSort(salesOpportunities);
+                    salesOpportunities = MergeSort(salesOpportunities);
                     writeToFile(salesOpportunities, nameof(salesOpportunities));
                     MessageBox.Show("You manage to secure a sales opportunity worth £50,000 at the cost of £5000. ", "Passed or landed on a sales opportunity square!");
                 }
@@ -1225,7 +1225,7 @@ namespace Vantagepoint_NEA_Project
                         salesOrders.Sort();
                     }
                     salesOpportunities.Add(50000);
-                    BubbleSort(salesOpportunities);
+                    salesOpportunities = MergeSort(salesOpportunities);
                     writeToFile(salesOpportunities, nameof(salesOpportunities));
                     MessageBox.Show("You manage to secure a sales opportunity worth £50,000, and convert your best sales opportunity into an order. ", "Passed or landed on a sales opportunity square!");
                 }
@@ -1233,7 +1233,7 @@ namespace Vantagepoint_NEA_Project
                 {
                     hasPR = false;
                     salesOpportunities.Add(200000);
-                    BubbleSort(salesOpportunities);
+                    salesOpportunities = MergeSort(salesOpportunities);
                     writeToFile(salesOpportunities, nameof(salesOpportunities));
                     MessageBox.Show("You manage to secure a sales opportunity worth £200,000 at the cost of any PR agreement you might have. ", "Passed or landed on a sales opportunity square!");
                 }
@@ -1241,7 +1241,7 @@ namespace Vantagepoint_NEA_Project
                 {
                     hasWebsite = false;
                     salesOpportunities.Add(200000);
-                    BubbleSort(salesOpportunities);
+                    salesOpportunities = MergeSort(salesOpportunities);
                     writeToFile(salesOpportunities, nameof(salesOpportunities));
                     MessageBox.Show("You manage to secure a sales opportunity worth £200,000 at the cost of any website agreement you might have. ", "Passed or landed on a sales opportunity square!");
                 }
@@ -1249,7 +1249,7 @@ namespace Vantagepoint_NEA_Project
                 {
                     hasMarketing = false;
                     salesOpportunities.Add(200000);
-                    BubbleSort(salesOpportunities);
+                    salesOpportunities = MergeSort(salesOpportunities);
                     writeToFile(salesOpportunities, nameof(salesOpportunities));
                     MessageBox.Show("You manage to secure a sales opportunity worth £200,000 at the cost of any marketing agreement you might have. ", "Passed or landed on a sales opportunity square!");
                 }
@@ -1262,7 +1262,7 @@ namespace Vantagepoint_NEA_Project
                             UpdateCapital(-10000);
                         }
                         salesOpportunities.Add(50000);
-                        BubbleSort(salesOpportunities);
+                        salesOpportunities = MergeSort(salesOpportunities);
                         writeToFile(salesOpportunities, nameof(salesOpportunities));
                         MessageBox.Show("You are able to secure a sales opportunity worth £50,000, at the cost of £10,000 for each of your staff. ", "Passed or landed on a sales opportunity square!");
                     }
@@ -1275,7 +1275,7 @@ namespace Vantagepoint_NEA_Project
                 {
                     UpdateCapital(-20000);
                     salesOpportunities.Add(300000);
-                    BubbleSort(salesOpportunities);
+                    salesOpportunities = MergeSort(salesOpportunities);
                     writeToFile(salesOpportunities, nameof(salesOpportunities));
                     MessageBox.Show("You manage to secure a sales opportunity worth £300,000 at the cost of £20000. ", "Passed or landed on a sales opportunity square!");
                 }
@@ -1404,6 +1404,8 @@ namespace Vantagepoint_NEA_Project
                 if (luckyBreakTable.Rows[cardNumber]["SalesPipeline"] != DBNull.Value)
                 {
                     salesOpportunities.Add(int.Parse(string.Concat(luckyBreakTable.Rows[cardNumber]["SalesPipeline"])));
+                    salesOpportunities = MergeSort(salesOpportunities);
+                    writeToFile(salesOpportunities, nameof(salesOpportunities));
                 }
                 if (string.Concat(luckyBreakTable.Rows[cardNumber]["LoseBEE"]) == "Yes")
                 {
@@ -1441,7 +1443,7 @@ namespace Vantagepoint_NEA_Project
                     {
                         UpdateCapital(salesOpportunities.Max());
                         salesOpportunities.Remove(salesOpportunities.Max());
-                        BubbleSort(salesOpportunities);
+                        salesOpportunities = MergeSort(salesOpportunities);
                         writeToFile(salesOpportunities, nameof(salesOpportunities));
                     }
                     else
@@ -1704,6 +1706,71 @@ namespace Vantagepoint_NEA_Project
             }
         }
 
+        public List<int> MergeSort(List<int> subject)
+        {
+            if (subject.Count != 0)
+            {
+                if (subject.Count == 1)
+                {
+                    return subject;
+                }
+
+                List<int> firstHalf = new List<int>();
+                foreach (int i in Enumerable.Range(0, int.Parse(string.Concat(Math.Floor(Convert.ToDecimal((subject.Count / 2)))))))
+                {
+                    firstHalf.Add(subject[i]);
+                }
+
+                List<int> secondHalf = new List<int>();
+                foreach (int i in Enumerable.Range(int.Parse(string.Concat(Math.Floor(Convert.ToDecimal((subject.Count / 2))))), int.Parse(string.Concat(Math.Floor(Convert.ToDecimal((subject.Count / 2)))))))
+                {
+                    secondHalf.Add(subject[i]);
+                }
+
+                firstHalf = MergeSort(firstHalf);
+                secondHalf = MergeSort(secondHalf);
+
+                return Merge(firstHalf, secondHalf);
+            }
+            else
+            {
+                return subject;
+            }
+        }
+
+        public List<int> Merge(List<int> firstHalf, List<int> secondHalf)
+        {
+            List<int> sorted = new List<int>();
+
+            while (firstHalf.Count != 0 && secondHalf.Count != 0)
+            {
+                if (firstHalf[0] > secondHalf[0])
+                {
+                    sorted.Add(secondHalf[0]);
+                    secondHalf.Remove(secondHalf[0]);
+                }
+                else
+                {
+                    sorted.Add(firstHalf[0]);
+                    firstHalf.Remove(firstHalf[0]);
+                }
+            }
+
+            while (firstHalf.Count != 0)
+            {
+                sorted.Add(firstHalf[0]);
+                firstHalf.Remove(firstHalf[0]);
+            }
+
+            while (secondHalf.Count != 0)
+            {
+                sorted.Add(secondHalf[0]);
+                secondHalf.Remove(secondHalf[0]);
+            }
+
+            return sorted;
+        }
+
         public void writeToFile(List<int> subject, string name)
         {
             System.IO.Directory.CreateDirectory(System.Environment.CurrentDirectory + "\\SavedVariables\\");
@@ -1794,7 +1861,7 @@ namespace Vantagepoint_NEA_Project
             if (string.Concat(penaltyTable.Rows[penaltyNumber]["LoseBestProspect"]) == "Yes")
             {
                 salesOpportunities.Remove(salesOpportunities.Max());
-                BubbleSort(salesOpportunities);
+                salesOpportunities = MergeSort(salesOpportunities);
                 writeToFile(salesOpportunities, nameof(salesOpportunities));
             }
 
