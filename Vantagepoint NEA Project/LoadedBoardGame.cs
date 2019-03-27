@@ -21,9 +21,8 @@ namespace Vantagepoint_NEA_Project
 
             try
             {
-                OpenFileDialog openFileDialog1 = new OpenFileDialog();
-                openFileDialog1.ShowDialog();
-                filePath = openFileDialog1.SafeFileName;
+                SelectSave selectSave = new SelectSave();
+                selectSave.ShowDialog(this);
                 DataToBeSaved loadedSave;
                 XmlSerializer xs = new XmlSerializer(typeof(DataToBeSaved));
                 using (FileStream fs = new FileStream(filePath, FileMode.Open))
@@ -1621,7 +1620,8 @@ namespace Vantagepoint_NEA_Project
             newSave.saveHasInsurance = hasInsurance;
 
             XmlSerializer xs = new XmlSerializer(typeof(DataToBeSaved));
-            using (System.IO.FileStream fs = new FileStream(companyName + ".xml", FileMode.Create))
+            System.IO.Directory.CreateDirectory("Saves");
+            using (System.IO.FileStream fs = new FileStream("Saves\\" + companyName + ".xml", FileMode.Create))
             {
                 xs.Serialize(fs, newSave);
             }

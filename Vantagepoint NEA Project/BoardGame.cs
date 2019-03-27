@@ -1581,7 +1581,8 @@ namespace Vantagepoint_NEA_Project
             newSave.saveHasInsurance = hasInsurance;
 
             XmlSerializer xs = new XmlSerializer(typeof(DataToBeSaved));
-            using (System.IO.FileStream fs = new FileStream(companyName + ".xml", FileMode.Create))
+            System.IO.Directory.CreateDirectory("Saves");
+            using (System.IO.FileStream fs = new FileStream("Saves\\" + companyName + ".xml", FileMode.Create))
             {
                 xs.Serialize(fs, newSave);
             }
