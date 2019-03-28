@@ -31,6 +31,7 @@
             this.SaveList = new System.Windows.Forms.ListBox();
             this.RefreshButton = new System.Windows.Forms.Button();
             this.SearchBar = new System.Windows.Forms.TextBox();
+            this.ConfirmSave = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // SaveList
@@ -43,7 +44,7 @@
             // 
             // RefreshButton
             // 
-            this.RefreshButton.Location = new System.Drawing.Point(701, 392);
+            this.RefreshButton.Location = new System.Drawing.Point(509, 12);
             this.RefreshButton.Name = "RefreshButton";
             this.RefreshButton.Size = new System.Drawing.Size(87, 46);
             this.RefreshButton.TabIndex = 1;
@@ -58,11 +59,22 @@
             this.SearchBar.Size = new System.Drawing.Size(311, 20);
             this.SearchBar.TabIndex = 2;
             // 
+            // ConfirmSave
+            // 
+            this.ConfirmSave.Location = new System.Drawing.Point(701, 392);
+            this.ConfirmSave.Name = "ConfirmSave";
+            this.ConfirmSave.Size = new System.Drawing.Size(87, 46);
+            this.ConfirmSave.TabIndex = 3;
+            this.ConfirmSave.Text = "Confirm";
+            this.ConfirmSave.UseVisualStyleBackColor = true;
+            this.ConfirmSave.Click += new System.EventHandler(this.ConfirmSave_Click);
+            // 
             // SelectSave
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.ConfirmSave);
             this.Controls.Add(this.SearchBar);
             this.Controls.Add(this.RefreshButton);
             this.Controls.Add(this.SaveList);
@@ -78,5 +90,6 @@
         private System.Windows.Forms.ListBox SaveList;
         private System.Windows.Forms.Button RefreshButton;
         private System.Windows.Forms.TextBox SearchBar;
+        private System.Windows.Forms.Button ConfirmSave;
     }
 }
