@@ -92,7 +92,6 @@ namespace Vantagepoint_NEA_Project
             this.Name = "MainMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Main Menu";
-            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.LogoDisplay)).EndInit();
             this.ResumeLayout(false);
 

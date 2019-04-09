@@ -23,6 +23,7 @@ namespace Vantagepoint_NEA_Project
         private static List<int> localSalesOrders = new List<int>();
         Random rnd = new Random();
 
+        //Initialises the class and sets all its attributes to the correct state
         public EndOfMonth()
         {
             InitializeComponent();
@@ -83,6 +84,7 @@ namespace Vantagepoint_NEA_Project
             }
         }
 
+        //When the Close button is pressed, sets the parents' attributes to their updated values and then closes this form
         private void CloseButton_Click(object sender, EventArgs e)
         {
             if (parentType == "NonLoaded")
@@ -100,12 +102,14 @@ namespace Vantagepoint_NEA_Project
             this.Close();
         }
 
+        //Updates the localShareCapital attribute and the text on the CapitalDisplay by whatever value is passed into the subroutine
         public void UpdateCapital(float amount)
         {
             localShareCapital = localShareCapital + amount;
             CapitalDisplay.Text = string.Concat(localShareCapital);
         }
 
+        //Reduces Share Capital by 10%, disables the VAT button and enables the subsequent button
         private void PayVATButton_Click(object sender, EventArgs e)
         {
             UpdateCapital(localShareCapital / -10);
@@ -114,6 +118,7 @@ namespace Vantagepoint_NEA_Project
             CloseButton.Enabled = true;
         }
 
+        //Converts sales orders into capital and then clears the sales orders list
         private void SalesOrdersButton_Click(object sender, EventArgs e)
         {
             foreach (int i in localSalesOrders)
@@ -126,6 +131,7 @@ namespace Vantagepoint_NEA_Project
             SalesOpportunitiesButton.Enabled = true;
         }
 
+        //Shows a dialogue box displaying the user's current sales prospects
         private void ViewSalesOpportunities_Click(object sender, EventArgs e)
         {
             string toDisplay = null;
@@ -140,6 +146,7 @@ namespace Vantagepoint_NEA_Project
             MessageBox.Show(toDisplay, "Sales Opportunities");
         }
 
+        //Shows a dialogue box displaying the user's current sales orders
         private void ViewSalesOrders_Click(object sender, EventArgs e)
         {
             string toDisplay = null;
@@ -150,6 +157,7 @@ namespace Vantagepoint_NEA_Project
             MessageBox.Show(toDisplay, "Sales Orders");
         }
 
+        //Converts sales pipeline to sales orders
         private void SalesOpportunitiesButton_Click(object sender, EventArgs e)
         {
             foreach (int i in localSalesOpportunities)
@@ -200,6 +208,7 @@ namespace Vantagepoint_NEA_Project
             writeToFile(localSalesOpportunities, "salesOpportunities");
         }
 
+        //Pays a salary of 25000 to each of the user's staff members
         private void SalariesButton_Click(object sender, EventArgs e)
         {
             UpdateCapital(localStaff * -25000);
@@ -208,6 +217,7 @@ namespace Vantagepoint_NEA_Project
             SalariesButton.Enabled = false;
         }
 
+        //Bubble sort subroutine
         public void BubbleSort(List<int> subject)
         {
             if (subject.Count != 0)
@@ -235,6 +245,7 @@ namespace Vantagepoint_NEA_Project
             }
         }
 
+        //Writes the specified list to a file
         public void writeToFile(List<int> subject, string name)
         {
             System.IO.Directory.CreateDirectory(System.Environment.CurrentDirectory + "\\SavedVariables\\");
@@ -247,6 +258,7 @@ namespace Vantagepoint_NEA_Project
             }
         }
 
+        //Reads the specified list from a file
         public string ReadFromFile(string name)
         {
             try

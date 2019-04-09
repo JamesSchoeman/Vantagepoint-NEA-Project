@@ -20,12 +20,14 @@ namespace Vantagepoint_NEA_Project
         public static string companyType;
         public static int timeLimit;
 
+        //This sibroutine initialises the class
         public CreateCompany()
         {
             InitializeComponent();
             LogoDisplay.ImageLocation = "Board Images\\VantagePointLogo.JPG";
         }
 
+        //Called when the Back button is clicked; creates an instance of the MainMenu class and then closes this form
         private void button1_Click(object sender, EventArgs e)
         {
             MainMenu newMainMenu = new MainMenu();
@@ -34,6 +36,7 @@ namespace Vantagepoint_NEA_Project
             this.Close();
         }
 
+        //When the user selects a different company type, this subroutine is called to display the relevant company description
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.comboBox1.Text == "Sole Trader")
@@ -62,6 +65,7 @@ namespace Vantagepoint_NEA_Project
             }
         }
 
+        //When the Register and Pay Fees button is clicked, this subroutine is called; it checks whether all fields are filled, and if so, passes the entered information to a new instance of the BoardGame class and then closes this form. If not, it tells the user to fill all fields. 
         private void GoButton_Click(object sender, EventArgs e)
         {
             if ((this.CompanyNameInput.Text != "") && (this.ShareholdersInput.Text != "") && (this.NatureOfBusinessInput.Text != "") && (this.NatureOfBusinessInput.Text != "") && (this.ShareCapitalInput.Text != "") && (this.comboBox1.Text != "") && (this.comboBox2.Text != ""))

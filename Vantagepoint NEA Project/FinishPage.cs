@@ -15,6 +15,7 @@ namespace Vantagepoint_NEA_Project
         public string parentType = null;
         public float localCapital = new float();
 
+        //Initialises the subroutine and sets all its attributes to the correct state
         public FinishPage()
         {
             InitializeComponent();
@@ -57,6 +58,7 @@ namespace Vantagepoint_NEA_Project
             CapitalDisplay.Text = "£" + string.Concat(localCapital);
         }
 
+        //Deducts 300000 from the user's capital and updates the display
         private void PayLoanButton_Click(object sender, EventArgs e)
         {
             localCapital = localCapital - 300000;
@@ -65,6 +67,7 @@ namespace Vantagepoint_NEA_Project
             CloseButton.Enabled = true;
         }
 
+        //Closes the program
         private void CloseButton_Click(object sender, EventArgs e)
         {
             Application.Exit();

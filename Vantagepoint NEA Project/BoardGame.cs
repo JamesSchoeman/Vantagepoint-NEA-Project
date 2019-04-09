@@ -15,6 +15,7 @@ namespace Vantagepoint_NEA_Project
 {
     public partial class BoardGame : Form
     {
+        //Initialises the program and sets all attributes to their correct values
         public BoardGame()
         {
             InitializeComponent();
@@ -151,6 +152,7 @@ namespace Vantagepoint_NEA_Project
 
         }
 
+        //Checks if the player has gone bankrupt, rolls the dice, moves the player, enacts end of month procedures if necessary, calls the subroutine of the square the player has landed on
         private void RollDiceButton_Click(object sender, EventArgs e)
         {
             foreach (int i in Enumerable.Range(0, salesOpportunities.Count))
@@ -359,6 +361,7 @@ namespace Vantagepoint_NEA_Project
 
         }
 
+        //Quits the game, after checking with the player
         private void ExitGameButton_Click(object sender, EventArgs e)
         {
             DialogResult answer;
@@ -370,6 +373,7 @@ namespace Vantagepoint_NEA_Project
             }
         }
 
+        //Defines the class to be used to save data
         public class DataToBeSaved
         {
             public string saveCompanyType;
@@ -393,11 +397,13 @@ namespace Vantagepoint_NEA_Project
             public bool saveHasInsurance;
         }
 
+        //Calls the SaveGame subroutine
         private void SaveGameButton_Click(object sender, EventArgs e)
         {
             SaveGame();
         }
 
+        //Charges the player a different amount of money depending on their company type
         private void Square1()
         {
             if (regFeesPaid == false)
@@ -418,6 +424,7 @@ namespace Vantagepoint_NEA_Project
             }
         }
 
+        //Offers the player a bank loan, if they have not already taken one
         private void Square2()
         {
             if (bankLoanTaken == false)
@@ -443,6 +450,7 @@ namespace Vantagepoint_NEA_Project
             }
         }
 
+        //Gives the player the bank loan, should they accept the offer
         void TakeLoan_Click(object sender, EventArgs e)
         {
             UpdateCapital(250000);
@@ -458,6 +466,7 @@ namespace Vantagepoint_NEA_Project
             DoNotTakeLoanButton.Visible = false;
         }
 
+        //Moves the program on, should the player reject the offer of a bank loan
         void DoNotTakeLoan_Click(object sender, EventArgs e)
         {
             RollDiceButton.Enabled = true;
@@ -471,6 +480,7 @@ namespace Vantagepoint_NEA_Project
             TakeLoanButton.Enabled = false;
         }
 
+        //Creates button
         private void Square6()
         {
             Button PayForEquipment = new Button();
@@ -486,6 +496,7 @@ namespace Vantagepoint_NEA_Project
 
         }
 
+        //Deducts set amount of capital
         void PayForEquipment_Click(object sender, EventArgs e)
         {
             UpdateCapital(-15000);
@@ -498,6 +509,7 @@ namespace Vantagepoint_NEA_Project
             ExitGameButton.Enabled = true;
         }
 
+        //Creates button whose contents differ depending on a whether the player already has a website
         private void Square10()
         {
             Button PayForWebsite = new Button();
@@ -518,7 +530,8 @@ namespace Vantagepoint_NEA_Project
                 PayForWebsite.Text = "Renew for £10000";
             }
         }
-
+        
+        //Deducts different amount of money depending on a whether the player already has a website
         void PayForWebsite_Click(object sender, EventArgs e)
         {
             if (hasWebsite == false)
@@ -545,7 +558,7 @@ namespace Vantagepoint_NEA_Project
                 ExitGameButton.Enabled = true;
             }
         }
-
+        //Creates button
         private void Square12()
         {
             Button PayForRates = new Button();
@@ -560,6 +573,7 @@ namespace Vantagepoint_NEA_Project
             ExitGameButton.Enabled = false;
         }
 
+        //Deducts set amount of capital
         void PayForRates_Click(object sender, EventArgs e)
         {
             UpdateCapital(-15000);
@@ -572,6 +586,7 @@ namespace Vantagepoint_NEA_Project
             ExitGameButton.Enabled = true;
         }
 
+        //Creates button
         private void Square21()
         {
             Button PayForPremises = new Button();
@@ -586,6 +601,7 @@ namespace Vantagepoint_NEA_Project
             ExitGameButton.Enabled = false;
         }
 
+        //Deducts set amount of capital
         void PayForPremises_Click(object sender, EventArgs e)
         {
             UpdateCapital(-30000);
@@ -598,6 +614,7 @@ namespace Vantagepoint_NEA_Project
             ExitGameButton.Enabled = true;
         }
 
+        //Creates button
         private void Square28()
         {
             Button PayForTelephone = new Button();
@@ -612,6 +629,7 @@ namespace Vantagepoint_NEA_Project
             ExitGameButton.Enabled = false;
         }
 
+        //Deducts set amount of capital
         void PayForTelephone_Click(object sender, EventArgs e)
         {
             UpdateCapital(-20000);
@@ -624,6 +642,7 @@ namespace Vantagepoint_NEA_Project
             ExitGameButton.Enabled = true;
         }
 
+        //Creates button whose contents differ depending on a whether the player already has a healthcare agreement
         private void Square19()
         {
             if (hasHealthCare == false)
@@ -654,6 +673,7 @@ namespace Vantagepoint_NEA_Project
             }
         }
 
+        //Deducts different amount of money depending on a whether the player already has a healthcare agreement
         void PayForHealthCare_Click(object sender, EventArgs e)
         {
             if (hasHealthCare == false)
@@ -681,6 +701,7 @@ namespace Vantagepoint_NEA_Project
             }
         }
 
+        //Creates button if the company type is not sole trader and whose contents differ depending on whether the user already has a BEE agreement
         private void Square30()
         {
             if (companyType != "Sole Trader")
@@ -714,6 +735,7 @@ namespace Vantagepoint_NEA_Project
             }
         }
 
+        //Deducts different amount of money depending on a whether the player already has a BEE agreement
         void PayForBEE_Click(object sender, EventArgs e)
         {
             if (hasBEE == false)
@@ -741,6 +763,7 @@ namespace Vantagepoint_NEA_Project
             }
         }
 
+        //Creates button whose contents differ depending on whether the user already has a PR agreement
         private void Square26()
         {
             if (hasPR == false)
@@ -771,6 +794,7 @@ namespace Vantagepoint_NEA_Project
             }
         }
 
+        //Deducts different amount of money depending on a whether the player already has a PR agreement
         void PayForPR_Click(object sender, EventArgs e)
         {
             if (hasPR == false)
@@ -798,6 +822,7 @@ namespace Vantagepoint_NEA_Project
             }
         }
 
+        //Creates button whose contents differ depending on whether the user already has a Marketing agreement
         private void Square35()
         {
             if (hasMarketing == false)
@@ -828,6 +853,7 @@ namespace Vantagepoint_NEA_Project
             }
         }
 
+        //Deducts different amount of money depending on a whether the player already has a Marketing agreement
         void PayForMarketing_Click(object sender, EventArgs e)
         {
             if (hasMarketing == false)
@@ -855,6 +881,7 @@ namespace Vantagepoint_NEA_Project
             }
         }
 
+        //Creates button
         void Square16()
         {
             Button BuyStockButton = new Button();
@@ -869,6 +896,7 @@ namespace Vantagepoint_NEA_Project
             ExitGameButton.Enabled = false;
         }
 
+        //Deducts set amount of capital
         void BuyStockButton_Click(object sender, EventArgs e)
         {
             UpdateCapital(-50000);
@@ -883,6 +911,7 @@ namespace Vantagepoint_NEA_Project
             StockDisplay.Text = string.Concat(stock);
         }
 
+        //Creates button if the company type is not sole trader and disables it if the user has staff equal to or greater than the staff cap for their company type
         void StaffRecruitment()
         {
             if (companyType != "Sole Trader")
@@ -916,6 +945,7 @@ namespace Vantagepoint_NEA_Project
             }
         }
 
+        //Deducts set amount of capital
         void RecruitStaff_Click(object sender, EventArgs e)
         {
             UpdateCapital(-25000);
@@ -932,6 +962,7 @@ namespace Vantagepoint_NEA_Project
             ExitGameButton.Enabled = true;
         }
 
+        //Advances the game should the user choose not to recruit staff
         void DoNotRecruitStaff_Click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
@@ -945,6 +976,7 @@ namespace Vantagepoint_NEA_Project
             ExitGameButton.Enabled = true;
         }
 
+        //Creates button whose contents differ depending on whether the user already has Insurance
         private void GetInsurance()
         {
             Button PayForInsurance = new Button();
@@ -966,6 +998,7 @@ namespace Vantagepoint_NEA_Project
             }
         }
 
+        //Deducts different amount of money depending on a whether the player already has Insurance
         void PayForInsurance_Click(object sender, EventArgs e)
         {
             if (hasInsurance == false)
@@ -993,6 +1026,7 @@ namespace Vantagepoint_NEA_Project
             }
         }
 
+        //Selects a random sales pipeline from the sales pipeline database table, and adds it to the sales pipeling list should the player meet the requirements to recieve it
         private void SalesOpportunity()
         {
             int chance = new int();
@@ -1242,6 +1276,7 @@ namespace Vantagepoint_NEA_Project
             }
         }
 
+        //Selects a random cash flow card from the Cash Flow database table and alters the player's capital to carry out the selected card
         public void CashFlow()
         {
             int cardNumber = new int();
@@ -1258,6 +1293,7 @@ namespace Vantagepoint_NEA_Project
             MessageBox.Show(string.Concat(cashFlowTable.Rows[cardNumber][1]), "Cash Flow!");
         }
 
+        //Selects a random Lucky Break card from the Lucky Break database table and carries it out if the company meets the requirements
         public void LuckyBreak()
         {
             bool eligible = true;
@@ -1471,6 +1507,7 @@ namespace Vantagepoint_NEA_Project
             
         }
 
+        //Alters the player's capital by the value passed in, and updates the capital display
         public void UpdateCapital(float amount)
         {
             shareCapital = shareCapital + amount;
@@ -1482,6 +1519,7 @@ namespace Vantagepoint_NEA_Project
             }
         }
 
+        //Creates a new instance of the FinishPage class and, when that is closed, exits the program
         private void FinishGame()
         {
             SaveGame();
@@ -1494,6 +1532,7 @@ namespace Vantagepoint_NEA_Project
             Application.Exit();
         }
 
+        //Checks whether the player really wants to finish the game, and if they do, calls the FinishGame subroutine
         private void FinishGameButton_Click(object sender, EventArgs e)
         {
             DialogResult answer;
@@ -1505,6 +1544,7 @@ namespace Vantagepoint_NEA_Project
             }
         }
 
+        //Advances the timer and checks whether the player has run out of time. If they have, it finishes the game
         private void timer1_Tick(object sender, EventArgs e)
         {
             timeLimit = timeLimit - 1;
@@ -1515,7 +1555,7 @@ namespace Vantagepoint_NEA_Project
             TimerMinutesDisplay.Text = string.Concat(minutesRemaining) + " minutes";
             TimerSecondsDisplay.Text = string.Concat(secondsRemaining) + " seconds";
 
-            if (timeLimit == 0)
+            if (timeLimit <= 0)
             {
                 FinishPage newFinishPage = new FinishPage();
                 this.Hide();
@@ -1524,6 +1564,7 @@ namespace Vantagepoint_NEA_Project
             }
         }
 
+        //Shows a dialogue box displaying the user's current sales prospects
         private void ViewSalesOpportunities_Click(object sender, EventArgs e)
         {
             string toDisplay = null;
@@ -1538,6 +1579,7 @@ namespace Vantagepoint_NEA_Project
             MessageBox.Show(toDisplay, "Sales Opportunities");
         }
 
+        //Shows a dialogue box displaying the user's current sales orders
         private void ViewSalesOrders_Click(object sender, EventArgs e)
         {
             string toDisplay = null;
@@ -1557,6 +1599,7 @@ namespace Vantagepoint_NEA_Project
             MessageBox.Show(toDisplay, "Sales Orders");
         }
 
+        //Saves the game
         private void SaveGame()
         {
             DataToBeSaved newSave = new DataToBeSaved();
@@ -1588,6 +1631,7 @@ namespace Vantagepoint_NEA_Project
             }
         }
 
+        //Displays a dialogue box showing all the player's current agreements
         private void AgreementsButton_Click(object sender, EventArgs e)
         {
             string toDisplay = "";
@@ -1640,6 +1684,7 @@ namespace Vantagepoint_NEA_Project
             MessageBox.Show(toDisplay, "Current agreements and holdings");
         }
 
+        //Bubble sort algorithm
         public void BubbleSort(List<int> subject)
         {
             if (subject.Count != 0)
@@ -1667,6 +1712,7 @@ namespace Vantagepoint_NEA_Project
             }
         }
 
+        //Part of mergesort algorithm
         public List<int> MergeSort(List<int> subject)
         {
             if (subject.Count != 0)
@@ -1699,6 +1745,7 @@ namespace Vantagepoint_NEA_Project
             }
         }
 
+        //Part of mergesort algorithm
         public List<int> Merge(List<int> firstHalf, List<int> secondHalf)
         {
             List<int> sorted = new List<int>();
@@ -1732,6 +1779,7 @@ namespace Vantagepoint_NEA_Project
             return sorted;
         }
 
+        //Writes specified list to file
         public void writeToFile(List<int> subject, string name)
         {
             System.IO.Directory.CreateDirectory(System.Environment.CurrentDirectory + "\\SavedVariables\\");
@@ -1744,6 +1792,7 @@ namespace Vantagepoint_NEA_Project
             }
         }
 
+        //Reads specified file to list
         public string ReadFromFile(string name)
         {
             try
@@ -1763,6 +1812,7 @@ namespace Vantagepoint_NEA_Project
             }
         }
 
+        //Selects a random penalty card from the Penalty database table and carries out its contents
         public void Penalty()
         {
             int penaltyNumber = new int();
