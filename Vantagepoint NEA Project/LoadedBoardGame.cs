@@ -1587,20 +1587,23 @@ namespace Vantagepoint_NEA_Project
         //Advances the timer and checks whether the player has run out of time. If they have, it finishes the game
         private void timer1_Tick(object sender, EventArgs e)
         {
-            timeLimit = timeLimit - 1;
-
-            int minutesRemaining = (int)(Math.Floor(timeLimit / 60.0));
-            int secondsRemaining = (int)(Math.Floor(timeLimit - (minutesRemaining * 60.0)));
-
-            TimerMinutesDisplay.Text = string.Concat(minutesRemaining) + " minutes";
-            TimerSecondsDisplay.Text = string.Concat(secondsRemaining) + " seconds";
-
-            if (timeLimit <= 0)
+            if (regFeesPaid == true)
             {
-                FinishPage newFinishPage = new FinishPage();
-                this.Hide();
-                newFinishPage.ShowDialog();
-                this.Close();
+                timeLimit = timeLimit - 1;
+
+                int minutesRemaining = (int)(Math.Floor(timeLimit / 60.0));
+                int secondsRemaining = (int)(Math.Floor(timeLimit - (minutesRemaining * 60.0)));
+
+                TimerMinutesDisplay.Text = string.Concat(minutesRemaining) + " minutes";
+                TimerSecondsDisplay.Text = string.Concat(secondsRemaining) + " seconds";
+
+                if (timeLimit <= 0)
+                {
+                    FinishPage newFinishPage = new FinishPage();
+                    this.Hide();
+                    newFinishPage.ShowDialog();
+                    this.Close();
+                }
             }
         }
 
@@ -1662,12 +1665,66 @@ namespace Vantagepoint_NEA_Project
             newSave.saveStaff = staff;
             newSave.saveHasInsurance = hasInsurance;
 
+
             XmlSerializer xs = new XmlSerializer(typeof(DataToBeSaved));
             System.IO.Directory.CreateDirectory("Saves");
-            using (System.IO.FileStream fs = new FileStream("Saves\\" + companyName + ".xml", FileMode.Create))
+            using (System.IO.FileStream fs = new FileStream("Saves\\" + companyName + "OLDMETHOD.xml", FileMode.Create))
             {
                 xs.Serialize(fs, newSave);
             }
+
+
+            System.IO.Directory.CreateDirectory("Saves");
+            using (TextWriter tw = new StreamWriter("Saves\\" + companyName + ".xml"))
+            {
+                tw.WriteLine("<?xml version=\"1.0\"?>");
+                tw.WriteLine("<" + newSave.GetType().Name + " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">");
+                tw.WriteLine("  <" + nameof(newSave.saveCompanyType) + ">" + string.Concat(newSave.saveCompanyType) + "</" + nameof(newSave.saveCompanyType) + ">");
+                tw.WriteLine("  <" + nameof(newSave.saveCompanyName) + ">" + string.Concat(newSave.saveCompanyName) + "</" + nameof(newSave.saveCompanyName) + ">");
+                tw.WriteLine("  <" + nameof(newSave.saveShareholders) + ">" + string.Concat(newSave.saveShareholders) + "</" + nameof(newSave.saveShareholders) + ">");
+                tw.WriteLine("  <" + nameof(newSave.saveNatureOfBusiness) + ">" + string.Concat(newSave.saveNatureOfBusiness) + "</" + nameof(newSave.saveNatureOfBusiness) + ">");
+                tw.WriteLine("  <" + nameof(newSave.saveShareCapital) + ">" + string.Concat(newSave.saveShareCapital) + "</" + nameof(newSave.saveShareCapital) + ">");
+                tw.WriteLine("  <" + nameof(newSave.saveTimeLimit) + ">" + string.Concat(newSave.saveTimeLimit) + "</" + nameof(newSave.saveTimeLimit) + ">");
+                tw.WriteLine("  <" + nameof(newSave.saveBoardPosition) + ">" + string.Concat(newSave.saveBoardPosition) + "</" + nameof(newSave.saveBoardPosition) + ">");
+                tw.WriteLine("  <" + nameof(newSave.saveRegFeesPaid) + ">" + string.Concat(newSave.saveRegFeesPaid).ToLower() + "</" + nameof(newSave.saveRegFeesPaid) + ">");
+                tw.WriteLine("  <" + nameof(newSave.saveBankLoanTaken) + ">" + string.Concat(newSave.saveBankLoanTaken).ToLower() + "</" + nameof(newSave.saveBankLoanTaken) + ">");
+                tw.WriteLine("  <" + nameof(newSave.saveHasWebsite) + ">" + string.Concat(newSave.saveHasWebsite).ToLower() + "</" + nameof(newSave.saveHasWebsite) + ">");
+                tw.WriteLine("  <" + nameof(newSave.saveHasHealthCare) + ">" + string.Concat(newSave.saveHasHealthCare).ToLower() + "</" + nameof(newSave.saveHasHealthCare) + ">");
+                tw.WriteLine("  <" + nameof(newSave.saveHasBEE) + ">" + string.Concat(newSave.saveHasBEE).ToLower() + "</" + nameof(newSave.saveHasBEE) + ">");
+                tw.WriteLine("  <" + nameof(newSave.saveHasPR) + ">" + string.Concat(newSave.saveHasPR).ToLower() + "</" + nameof(newSave.saveHasPR) + ">");
+                tw.WriteLine("  <" + nameof(newSave.saveHasMarketing) + ">" + string.Concat(newSave.saveHasMarketing).ToLower() + "</" + nameof(newSave.saveHasMarketing) + ">");
+                if (newSave.saveSalesOpportunities.Count != 0)
+                {
+                    tw.WriteLine("  <" + nameof(newSave.saveSalesOpportunities) + ">");
+                    foreach (int i in Enumerable.Range(0, newSave.saveSalesOpportunities.Count))
+                    {
+                        tw.WriteLine("    <int>" + string.Concat(newSave.saveSalesOpportunities[i]) + "</int>");
+                    }
+                    tw.WriteLine("  </" + nameof(newSave.saveSalesOpportunities) + ">");
+                }
+                else
+                {
+                    tw.WriteLine("  <saveSalesOpportunities />");
+                }
+                if (newSave.saveSalesOrders.Count != 0)
+                {
+                    tw.WriteLine("  <" + nameof(newSave.saveSalesOrders) + ">");
+                    foreach (int i in Enumerable.Range(0, newSave.saveSalesOrders.Count))
+                    {
+                        tw.WriteLine("    <int>" + string.Concat(newSave.saveSalesOrders[i]) + "</int>");
+                    }
+                    tw.WriteLine("  </" + nameof(newSave.saveSalesOrders) + ">");
+                }
+                else
+                {
+                    tw.WriteLine("  <saveSalesOrders />");
+                }
+                tw.WriteLine("  <" + nameof(newSave.saveStock) + ">" + string.Concat(newSave.saveStock) + "</" + nameof(newSave.saveStock) + ">");
+                tw.WriteLine("  <" + nameof(newSave.saveStaff) + ">" + string.Concat(newSave.saveStaff) + "</" + nameof(newSave.saveStaff) + ">");
+                tw.WriteLine("  <" + nameof(newSave.saveHasInsurance) + ">" + string.Concat(newSave.saveHasInsurance).ToLower() + "</" + nameof(newSave.saveHasInsurance) + ">");
+                tw.WriteLine("</" + newSave.GetType().Name + ">");
+            }
+
         }
 
         //Displays a dialogue box showing all the player's current agreements
