@@ -1665,14 +1665,14 @@ namespace Vantagepoint_NEA_Project
             newSave.saveStaff = staff;
             newSave.saveHasInsurance = hasInsurance;
 
-
+            /*
             XmlSerializer xs = new XmlSerializer(typeof(DataToBeSaved));
             System.IO.Directory.CreateDirectory("Saves");
             using (System.IO.FileStream fs = new FileStream("Saves\\" + companyName + "OLDMETHOD.xml", FileMode.Create))
             {
                 xs.Serialize(fs, newSave);
             }
-
+            */
 
             System.IO.Directory.CreateDirectory("Saves");
             using (TextWriter tw = new StreamWriter("Saves\\" + companyName + ".xml"))
