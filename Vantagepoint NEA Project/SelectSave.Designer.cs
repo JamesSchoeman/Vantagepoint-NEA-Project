@@ -32,19 +32,21 @@
             this.RefreshButton = new System.Windows.Forms.Button();
             this.SearchBar = new System.Windows.Forms.TextBox();
             this.ConfirmSave = new System.Windows.Forms.Button();
+            this.SearchLabel = new System.Windows.Forms.Label();
+            this.GamesLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // SaveList
             // 
             this.SaveList.FormattingEnabled = true;
-            this.SaveList.Location = new System.Drawing.Point(12, 12);
+            this.SaveList.Location = new System.Drawing.Point(12, 39);
             this.SaveList.Name = "SaveList";
             this.SaveList.Size = new System.Drawing.Size(491, 95);
             this.SaveList.TabIndex = 0;
             // 
             // RefreshButton
             // 
-            this.RefreshButton.Location = new System.Drawing.Point(509, 12);
+            this.RefreshButton.Location = new System.Drawing.Point(509, 39);
             this.RefreshButton.Name = "RefreshButton";
             this.RefreshButton.Size = new System.Drawing.Size(87, 46);
             this.RefreshButton.TabIndex = 1;
@@ -69,11 +71,31 @@
             this.ConfirmSave.UseVisualStyleBackColor = true;
             this.ConfirmSave.Click += new System.EventHandler(this.ConfirmSave_Click);
             // 
+            // SearchLabel
+            // 
+            this.SearchLabel.AutoSize = true;
+            this.SearchLabel.Location = new System.Drawing.Point(12, 402);
+            this.SearchLabel.Name = "SearchLabel";
+            this.SearchLabel.Size = new System.Drawing.Size(41, 13);
+            this.SearchLabel.TabIndex = 4;
+            this.SearchLabel.Text = "Search";
+            // 
+            // GamesLabel
+            // 
+            this.GamesLabel.AutoSize = true;
+            this.GamesLabel.Location = new System.Drawing.Point(12, 23);
+            this.GamesLabel.Name = "GamesLabel";
+            this.GamesLabel.Size = new System.Drawing.Size(74, 13);
+            this.GamesLabel.TabIndex = 5;
+            this.GamesLabel.Text = "Saved Games";
+            // 
             // SelectSave
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.GamesLabel);
+            this.Controls.Add(this.SearchLabel);
             this.Controls.Add(this.ConfirmSave);
             this.Controls.Add(this.SearchBar);
             this.Controls.Add(this.RefreshButton);
@@ -91,5 +113,7 @@
         private System.Windows.Forms.Button RefreshButton;
         private System.Windows.Forms.TextBox SearchBar;
         private System.Windows.Forms.Button ConfirmSave;
+        private System.Windows.Forms.Label SearchLabel;
+        private System.Windows.Forms.Label GamesLabel;
     }
 }

@@ -1597,6 +1597,33 @@ namespace Vantagepoint_NEA_Project
                 TimerMinutesDisplay.Text = string.Concat(minutesRemaining) + " minutes";
                 TimerSecondsDisplay.Text = string.Concat(secondsRemaining) + " seconds";
 
+                if (salesOpportunities.Count == 0)
+                {
+                    ViewSalesOpportunities.Enabled = false;
+                }
+                else
+                {
+                    ViewSalesOpportunities.Enabled = true;
+                }
+
+                if (salesOrders.Count == 0)
+                {
+                    ViewSalesOrders.Enabled = false;
+                }
+                else
+                {
+                    ViewSalesOrders.Enabled = true;
+                }
+
+                if ((hasBEE == true) || (hasHealthCare == true) || (hasInsurance == true) || (hasMarketing == true) || (hasPR == true) || (hasWebsite == true))
+                {
+                    AgreementsButton.Enabled = true;
+                }
+                else
+                {
+                    AgreementsButton.Enabled = false;
+                }
+
                 if (timeLimit <= 0)
                 {
                     FinishPage newFinishPage = new FinishPage();
