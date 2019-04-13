@@ -1894,7 +1894,7 @@ namespace Vantagepoint_NEA_Project
                 {
                     toPay = int.Parse(string.Concat(penaltyTable.Rows[penaltyNumber]["CashPartnership"]));
                 }
-                else if (companyType == "SoleTrader")
+                else if (companyType == "Sole Trader")
                 {
                     toPay = int.Parse(string.Concat(penaltyTable.Rows[penaltyNumber]["CashSoleTrader"]));
                 }

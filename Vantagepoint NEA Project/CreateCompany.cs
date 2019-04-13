@@ -25,6 +25,15 @@ namespace Vantagepoint_NEA_Project
         {
             InitializeComponent();
             LogoDisplay.ImageLocation = "Board Images\\VantagePointLogo.JPG";
+            CompanyTypeHeaderLabel.Visible = false;
+            CompanyTypeLabel.Visible = false;
+            CompanyDescriptionLabel.Visible = false;
+            FeesLabel.Visible = false;
+            SalesStaffLabel.Visible = false;
+            ShareCapitalInput.Visible = false;
+            CompanyTypeHeaderLabel.Visible = false;
+            FeesHeader.Visible = false;
+            SalesStaffHeader.Visible = false;
         }
 
         //Called when the Back button is clicked; creates an instance of the MainMenu class and then closes this form
@@ -39,6 +48,16 @@ namespace Vantagepoint_NEA_Project
         //When the user selects a different company type, this subroutine is called to display the relevant company description
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            CompanyTypeHeaderLabel.Visible = true;
+            CompanyTypeLabel.Visible = true;
+            CompanyDescriptionLabel.Visible = true;
+            FeesLabel.Visible = true;
+            SalesStaffLabel.Visible = true;
+            ShareCapitalInput.Visible = true;
+            CompanyTypeHeaderLabel.Visible = true;
+            FeesHeader.Visible = true;
+            SalesStaffHeader.Visible = true;
+
             if (this.comboBox1.Text == "Sole Trader")
             {
                 this.CompanyTypeLabel.Text = ("Sole Trader");

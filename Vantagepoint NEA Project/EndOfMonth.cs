@@ -194,14 +194,18 @@ namespace Vantagepoint_NEA_Project
             opportunitiesToRemove.Clear();
             BubbleSort(localSalesOrders);
 
-            if ((localCompanyType == "Sole Trader") || (localStaff == 0))
+            if ((localStaff == 0) && (localCompanyType != "Sole Trader"))
             {
                 PayVATButton.Text = ("Pay VAT of " + string.Concat(localShareCapital / 10));
                 PayVATButton.Enabled = true;
             }
-            else
+            else if (localStaff > 0)
             {
                 SalariesButton.Enabled = true;
+            }
+            else if (localCompanyType == "Sole Trader")
+            {
+                CloseButton.Enabled = true;
             }
             SalesOpportunitiesButton.Enabled = false;
 
