@@ -132,6 +132,11 @@ namespace Vantagepoint_NEA_Project
             squareDescvar = string.Concat(squaresTable.Rows[boardPosition - 1][2]);
             this.DescriptionDisplay.Text = squareDescvar;
 
+            if (companyType == "Sole Trader")
+            {
+                hasBEE = true;
+            }
+
             if (timeLimit == 0)
             {
                 timer1.Stop();
@@ -203,6 +208,11 @@ namespace Vantagepoint_NEA_Project
             {
                 MessageBox.Show("You have insufficient share capital to continue.", "Bankrupt!");
                 FinishGame();
+            }
+
+            if (companyType == "Sole Trader")
+            {
+                hasBEE = true;
             }
 
             diceRollResult = rnd.Next(1, 7);
@@ -1344,6 +1354,12 @@ namespace Vantagepoint_NEA_Project
 
             MessageBox.Show(string.Concat(luckyBreakTable.Rows[cardNumber][1]), "Lucky Break!");
 
+            if ((companyType == "Sole Trader") && (string.Concat(luckyBreakTable.Rows[cardNumber][1]).Contains("VAT") == true))
+            {
+                eligible = false;
+                notEligibleReason = "SoleTraderVAT";
+            }
+
             if (moralDilemma == "Yes")
             {
                 DialogResult answer;
@@ -1541,6 +1557,10 @@ namespace Vantagepoint_NEA_Project
                 if (notEligibleReason == "BEE")
                 {
                     MessageBox.Show("Your lucky break fell through due to not having BEE accreditation. ", "Lucky Break!");
+                }
+                if (notEligibleReason == "SoleTraderVAT")
+                {
+                    MessageBox.Show("Your lucky break fell through due to VAT not applying to Sole Traders. ", "Lucky Break!");
                 }
                 //Sales training reason when implemented
             }
