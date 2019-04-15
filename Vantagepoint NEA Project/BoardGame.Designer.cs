@@ -60,6 +60,42 @@
             this.ViewSalesOrders = new System.Windows.Forms.Button();
             this.AgreementsButton = new System.Windows.Forms.Button();
             this.SquareDisplay = new System.Windows.Forms.PictureBox();
+            this.Pos20 = new System.Windows.Forms.Label();
+            this.Pos19 = new System.Windows.Forms.Label();
+            this.Pos18 = new System.Windows.Forms.Label();
+            this.Pos17 = new System.Windows.Forms.Label();
+            this.Pos16 = new System.Windows.Forms.Label();
+            this.Pos15 = new System.Windows.Forms.Label();
+            this.Pos14 = new System.Windows.Forms.Label();
+            this.Pos13 = new System.Windows.Forms.Label();
+            this.Pos12 = new System.Windows.Forms.Label();
+            this.Pos11 = new System.Windows.Forms.Label();
+            this.Pos21 = new System.Windows.Forms.Label();
+            this.Pos22 = new System.Windows.Forms.Label();
+            this.Pos23 = new System.Windows.Forms.Label();
+            this.Pos10 = new System.Windows.Forms.Label();
+            this.Pos9 = new System.Windows.Forms.Label();
+            this.Pos8 = new System.Windows.Forms.Label();
+            this.Pos24 = new System.Windows.Forms.Label();
+            this.Pos25 = new System.Windows.Forms.Label();
+            this.Pos26 = new System.Windows.Forms.Label();
+            this.Pos27 = new System.Windows.Forms.Label();
+            this.Pos28 = new System.Windows.Forms.Label();
+            this.Pos7 = new System.Windows.Forms.Label();
+            this.Pos6 = new System.Windows.Forms.Label();
+            this.Pos5 = new System.Windows.Forms.Label();
+            this.Pos4 = new System.Windows.Forms.Label();
+            this.Pos3 = new System.Windows.Forms.Label();
+            this.Pos2 = new System.Windows.Forms.Label();
+            this.Pos1 = new System.Windows.Forms.Label();
+            this.Pos31 = new System.Windows.Forms.Label();
+            this.Pos32 = new System.Windows.Forms.Label();
+            this.Pos33 = new System.Windows.Forms.Label();
+            this.Pos34 = new System.Windows.Forms.Label();
+            this.Pos35 = new System.Windows.Forms.Label();
+            this.Pos36 = new System.Windows.Forms.Label();
+            this.Pos29 = new System.Windows.Forms.Label();
+            this.Pos30 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.BoardDisplay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SquareDisplay)).BeginInit();
             this.SuspendLayout();
@@ -165,7 +201,8 @@
             // BoardDisplay
             // 
             this.BoardDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.BoardDisplay.Location = new System.Drawing.Point(117, 61);
+            this.BoardDisplay.InitialImage = null;
+            this.BoardDisplay.Location = new System.Drawing.Point(117, 55);
             this.BoardDisplay.Name = "BoardDisplay";
             this.BoardDisplay.Size = new System.Drawing.Size(300, 300);
             this.BoardDisplay.TabIndex = 21;
@@ -174,7 +211,7 @@
             // DescriptionDisplay
             // 
             this.DescriptionDisplay.AutoSize = true;
-            this.DescriptionDisplay.Location = new System.Drawing.Point(114, 375);
+            this.DescriptionDisplay.Location = new System.Drawing.Point(114, 390);
             this.DescriptionDisplay.MaximumSize = new System.Drawing.Size(300, 0);
             this.DescriptionDisplay.Name = "DescriptionDisplay";
             this.DescriptionDisplay.Size = new System.Drawing.Size(22, 13);
@@ -194,7 +231,7 @@
             // SquareNameDisplay
             // 
             this.SquareNameDisplay.AutoSize = true;
-            this.SquareNameDisplay.Location = new System.Drawing.Point(114, 25);
+            this.SquareNameDisplay.Location = new System.Drawing.Point(114, 10);
             this.SquareNameDisplay.Name = "SquareNameDisplay";
             this.SquareNameDisplay.Size = new System.Drawing.Size(22, 13);
             this.SquareNameDisplay.TabIndex = 24;
@@ -379,11 +416,373 @@
             // SquareDisplay
             // 
             this.SquareDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.SquareDisplay.Location = new System.Drawing.Point(192, 136);
+            this.SquareDisplay.Location = new System.Drawing.Point(192, 130);
             this.SquareDisplay.Name = "SquareDisplay";
             this.SquareDisplay.Size = new System.Drawing.Size(150, 150);
             this.SquareDisplay.TabIndex = 54;
             this.SquareDisplay.TabStop = false;
+            // 
+            // Pos20
+            // 
+            this.Pos20.AutoSize = true;
+            this.Pos20.Location = new System.Drawing.Point(329, 358);
+            this.Pos20.Name = "Pos20";
+            this.Pos20.Size = new System.Drawing.Size(19, 13);
+            this.Pos20.TabIndex = 167;
+            this.Pos20.Text = "20";
+            this.Pos20.Visible = false;
+            // 
+            // Pos19
+            // 
+            this.Pos19.AutoSize = true;
+            this.Pos19.Location = new System.Drawing.Point(358, 358);
+            this.Pos19.Name = "Pos19";
+            this.Pos19.Size = new System.Drawing.Size(19, 13);
+            this.Pos19.TabIndex = 166;
+            this.Pos19.Text = "19";
+            this.Pos19.Visible = false;
+            // 
+            // Pos18
+            // 
+            this.Pos18.AutoSize = true;
+            this.Pos18.Location = new System.Drawing.Point(388, 358);
+            this.Pos18.Name = "Pos18";
+            this.Pos18.Size = new System.Drawing.Size(19, 13);
+            this.Pos18.TabIndex = 165;
+            this.Pos18.Text = "18";
+            this.Pos18.Visible = false;
+            // 
+            // Pos17
+            // 
+            this.Pos17.AutoSize = true;
+            this.Pos17.Location = new System.Drawing.Point(420, 300);
+            this.Pos17.Name = "Pos17";
+            this.Pos17.Size = new System.Drawing.Size(19, 13);
+            this.Pos17.TabIndex = 164;
+            this.Pos17.Text = "17";
+            this.Pos17.Visible = false;
+            // 
+            // Pos16
+            // 
+            this.Pos16.AutoSize = true;
+            this.Pos16.Location = new System.Drawing.Point(420, 271);
+            this.Pos16.Name = "Pos16";
+            this.Pos16.Size = new System.Drawing.Size(19, 13);
+            this.Pos16.TabIndex = 163;
+            this.Pos16.Text = "16";
+            this.Pos16.Visible = false;
+            // 
+            // Pos15
+            // 
+            this.Pos15.AutoSize = true;
+            this.Pos15.Location = new System.Drawing.Point(420, 242);
+            this.Pos15.Name = "Pos15";
+            this.Pos15.Size = new System.Drawing.Size(19, 13);
+            this.Pos15.TabIndex = 162;
+            this.Pos15.Text = "15";
+            this.Pos15.Visible = false;
+            // 
+            // Pos14
+            // 
+            this.Pos14.AutoSize = true;
+            this.Pos14.Location = new System.Drawing.Point(420, 212);
+            this.Pos14.Name = "Pos14";
+            this.Pos14.Size = new System.Drawing.Size(19, 13);
+            this.Pos14.TabIndex = 161;
+            this.Pos14.Text = "14";
+            this.Pos14.Visible = false;
+            // 
+            // Pos13
+            // 
+            this.Pos13.AutoSize = true;
+            this.Pos13.Location = new System.Drawing.Point(420, 183);
+            this.Pos13.Name = "Pos13";
+            this.Pos13.Size = new System.Drawing.Size(19, 13);
+            this.Pos13.TabIndex = 160;
+            this.Pos13.Text = "13";
+            this.Pos13.Visible = false;
+            // 
+            // Pos12
+            // 
+            this.Pos12.AutoSize = true;
+            this.Pos12.Location = new System.Drawing.Point(420, 154);
+            this.Pos12.Name = "Pos12";
+            this.Pos12.Size = new System.Drawing.Size(19, 13);
+            this.Pos12.TabIndex = 159;
+            this.Pos12.Text = "12";
+            this.Pos12.Visible = false;
+            // 
+            // Pos11
+            // 
+            this.Pos11.AutoSize = true;
+            this.Pos11.Location = new System.Drawing.Point(420, 125);
+            this.Pos11.Name = "Pos11";
+            this.Pos11.Size = new System.Drawing.Size(19, 13);
+            this.Pos11.TabIndex = 158;
+            this.Pos11.Text = "11";
+            this.Pos11.Visible = false;
+            // 
+            // Pos21
+            // 
+            this.Pos21.AutoSize = true;
+            this.Pos21.Location = new System.Drawing.Point(301, 358);
+            this.Pos21.Name = "Pos21";
+            this.Pos21.Size = new System.Drawing.Size(19, 13);
+            this.Pos21.TabIndex = 151;
+            this.Pos21.Text = "21";
+            this.Pos21.Visible = false;
+            // 
+            // Pos22
+            // 
+            this.Pos22.AutoSize = true;
+            this.Pos22.Location = new System.Drawing.Point(271, 358);
+            this.Pos22.Name = "Pos22";
+            this.Pos22.Size = new System.Drawing.Size(19, 13);
+            this.Pos22.TabIndex = 150;
+            this.Pos22.Text = "22";
+            this.Pos22.Visible = false;
+            // 
+            // Pos23
+            // 
+            this.Pos23.AutoSize = true;
+            this.Pos23.Location = new System.Drawing.Point(243, 358);
+            this.Pos23.Name = "Pos23";
+            this.Pos23.Size = new System.Drawing.Size(19, 13);
+            this.Pos23.TabIndex = 149;
+            this.Pos23.Text = "23";
+            this.Pos23.Visible = false;
+            // 
+            // Pos10
+            // 
+            this.Pos10.AutoSize = true;
+            this.Pos10.Location = new System.Drawing.Point(420, 97);
+            this.Pos10.Name = "Pos10";
+            this.Pos10.Size = new System.Drawing.Size(19, 13);
+            this.Pos10.TabIndex = 148;
+            this.Pos10.Text = "10";
+            this.Pos10.Visible = false;
+            // 
+            // Pos9
+            // 
+            this.Pos9.AutoSize = true;
+            this.Pos9.Location = new System.Drawing.Point(391, 39);
+            this.Pos9.Name = "Pos9";
+            this.Pos9.Size = new System.Drawing.Size(13, 13);
+            this.Pos9.TabIndex = 147;
+            this.Pos9.Text = "9";
+            this.Pos9.Visible = false;
+            // 
+            // Pos8
+            // 
+            this.Pos8.AutoSize = true;
+            this.Pos8.Location = new System.Drawing.Point(362, 39);
+            this.Pos8.Name = "Pos8";
+            this.Pos8.Size = new System.Drawing.Size(13, 13);
+            this.Pos8.TabIndex = 146;
+            this.Pos8.Text = "8";
+            this.Pos8.Visible = false;
+            // 
+            // Pos24
+            // 
+            this.Pos24.AutoSize = true;
+            this.Pos24.Location = new System.Drawing.Point(213, 358);
+            this.Pos24.Name = "Pos24";
+            this.Pos24.Size = new System.Drawing.Size(19, 13);
+            this.Pos24.TabIndex = 145;
+            this.Pos24.Text = "24";
+            this.Pos24.Visible = false;
+            // 
+            // Pos25
+            // 
+            this.Pos25.AutoSize = true;
+            this.Pos25.Location = new System.Drawing.Point(183, 358);
+            this.Pos25.Name = "Pos25";
+            this.Pos25.Size = new System.Drawing.Size(19, 13);
+            this.Pos25.TabIndex = 144;
+            this.Pos25.Text = "25";
+            this.Pos25.Visible = false;
+            // 
+            // Pos26
+            // 
+            this.Pos26.AutoSize = true;
+            this.Pos26.Location = new System.Drawing.Point(154, 358);
+            this.Pos26.Name = "Pos26";
+            this.Pos26.Size = new System.Drawing.Size(19, 13);
+            this.Pos26.TabIndex = 143;
+            this.Pos26.Text = "26";
+            this.Pos26.Visible = false;
+            // 
+            // Pos27
+            // 
+            this.Pos27.AutoSize = true;
+            this.Pos27.Location = new System.Drawing.Point(125, 358);
+            this.Pos27.Name = "Pos27";
+            this.Pos27.Size = new System.Drawing.Size(19, 13);
+            this.Pos27.TabIndex = 142;
+            this.Pos27.Text = "27";
+            this.Pos27.Visible = false;
+            // 
+            // Pos28
+            // 
+            this.Pos28.AutoSize = true;
+            this.Pos28.Location = new System.Drawing.Point(101, 300);
+            this.Pos28.Name = "Pos28";
+            this.Pos28.Size = new System.Drawing.Size(19, 13);
+            this.Pos28.TabIndex = 141;
+            this.Pos28.Text = "28";
+            this.Pos28.Visible = false;
+            // 
+            // Pos7
+            // 
+            this.Pos7.AutoSize = true;
+            this.Pos7.Location = new System.Drawing.Point(332, 39);
+            this.Pos7.Name = "Pos7";
+            this.Pos7.Size = new System.Drawing.Size(13, 13);
+            this.Pos7.TabIndex = 138;
+            this.Pos7.Text = "7";
+            this.Pos7.Visible = false;
+            // 
+            // Pos6
+            // 
+            this.Pos6.AutoSize = true;
+            this.Pos6.Location = new System.Drawing.Point(304, 39);
+            this.Pos6.Name = "Pos6";
+            this.Pos6.Size = new System.Drawing.Size(13, 13);
+            this.Pos6.TabIndex = 137;
+            this.Pos6.Text = "6";
+            this.Pos6.Visible = false;
+            // 
+            // Pos5
+            // 
+            this.Pos5.AutoSize = true;
+            this.Pos5.Location = new System.Drawing.Point(275, 39);
+            this.Pos5.Name = "Pos5";
+            this.Pos5.Size = new System.Drawing.Size(13, 13);
+            this.Pos5.TabIndex = 136;
+            this.Pos5.Text = "5";
+            this.Pos5.Visible = false;
+            // 
+            // Pos4
+            // 
+            this.Pos4.AutoSize = true;
+            this.Pos4.Location = new System.Drawing.Point(246, 39);
+            this.Pos4.Name = "Pos4";
+            this.Pos4.Size = new System.Drawing.Size(13, 13);
+            this.Pos4.TabIndex = 135;
+            this.Pos4.Text = "4";
+            this.Pos4.Visible = false;
+            // 
+            // Pos3
+            // 
+            this.Pos3.AutoSize = true;
+            this.Pos3.Location = new System.Drawing.Point(217, 39);
+            this.Pos3.Name = "Pos3";
+            this.Pos3.Size = new System.Drawing.Size(13, 13);
+            this.Pos3.TabIndex = 134;
+            this.Pos3.Text = "3";
+            this.Pos3.Visible = false;
+            // 
+            // Pos2
+            // 
+            this.Pos2.AutoSize = true;
+            this.Pos2.Location = new System.Drawing.Point(188, 39);
+            this.Pos2.Name = "Pos2";
+            this.Pos2.Size = new System.Drawing.Size(13, 13);
+            this.Pos2.TabIndex = 133;
+            this.Pos2.Text = "2";
+            this.Pos2.Visible = false;
+            // 
+            // Pos1
+            // 
+            this.Pos1.AutoSize = true;
+            this.Pos1.Location = new System.Drawing.Point(159, 39);
+            this.Pos1.Name = "Pos1";
+            this.Pos1.Size = new System.Drawing.Size(13, 13);
+            this.Pos1.TabIndex = 132;
+            this.Pos1.Text = "1";
+            this.Pos1.Visible = false;
+            // 
+            // Pos31
+            // 
+            this.Pos31.AutoSize = true;
+            this.Pos31.BackColor = System.Drawing.Color.Transparent;
+            this.Pos31.ForeColor = System.Drawing.Color.Black;
+            this.Pos31.Location = new System.Drawing.Point(101, 213);
+            this.Pos31.Name = "Pos31";
+            this.Pos31.Size = new System.Drawing.Size(19, 13);
+            this.Pos31.TabIndex = 157;
+            this.Pos31.Text = "31";
+            this.Pos31.Visible = false;
+            // 
+            // Pos32
+            // 
+            this.Pos32.AutoSize = true;
+            this.Pos32.Location = new System.Drawing.Point(101, 184);
+            this.Pos32.Name = "Pos32";
+            this.Pos32.Size = new System.Drawing.Size(19, 13);
+            this.Pos32.TabIndex = 156;
+            this.Pos32.Text = "32";
+            this.Pos32.Visible = false;
+            // 
+            // Pos33
+            // 
+            this.Pos33.AutoSize = true;
+            this.Pos33.Location = new System.Drawing.Point(101, 155);
+            this.Pos33.Name = "Pos33";
+            this.Pos33.Size = new System.Drawing.Size(19, 13);
+            this.Pos33.TabIndex = 155;
+            this.Pos33.Text = "33";
+            this.Pos33.Visible = false;
+            // 
+            // Pos34
+            // 
+            this.Pos34.AutoSize = true;
+            this.Pos34.Location = new System.Drawing.Point(101, 126);
+            this.Pos34.Name = "Pos34";
+            this.Pos34.Size = new System.Drawing.Size(19, 13);
+            this.Pos34.TabIndex = 154;
+            this.Pos34.Text = "34";
+            this.Pos34.Visible = false;
+            // 
+            // Pos35
+            // 
+            this.Pos35.AutoSize = true;
+            this.Pos35.Location = new System.Drawing.Point(101, 97);
+            this.Pos35.Name = "Pos35";
+            this.Pos35.Size = new System.Drawing.Size(19, 13);
+            this.Pos35.TabIndex = 153;
+            this.Pos35.Text = "35";
+            this.Pos35.Visible = false;
+            // 
+            // Pos36
+            // 
+            this.Pos36.AutoSize = true;
+            this.Pos36.Location = new System.Drawing.Point(128, 39);
+            this.Pos36.Name = "Pos36";
+            this.Pos36.Size = new System.Drawing.Size(19, 13);
+            this.Pos36.TabIndex = 152;
+            this.Pos36.Text = "36";
+            this.Pos36.Visible = false;
+            // 
+            // Pos29
+            // 
+            this.Pos29.AutoSize = true;
+            this.Pos29.Location = new System.Drawing.Point(101, 271);
+            this.Pos29.Name = "Pos29";
+            this.Pos29.Size = new System.Drawing.Size(19, 13);
+            this.Pos29.TabIndex = 140;
+            this.Pos29.Text = "29";
+            this.Pos29.Visible = false;
+            // 
+            // Pos30
+            // 
+            this.Pos30.AutoSize = true;
+            this.Pos30.Location = new System.Drawing.Point(101, 242);
+            this.Pos30.Name = "Pos30";
+            this.Pos30.Size = new System.Drawing.Size(19, 13);
+            this.Pos30.TabIndex = 139;
+            this.Pos30.Text = "30";
+            this.Pos30.Visible = false;
             // 
             // BoardGame
             // 
@@ -421,6 +820,42 @@
             this.Controls.Add(this.ShareholdersLabel);
             this.Controls.Add(this.CompanyNameLabel);
             this.Controls.Add(this.RollDiceButton);
+            this.Controls.Add(this.Pos20);
+            this.Controls.Add(this.Pos19);
+            this.Controls.Add(this.Pos18);
+            this.Controls.Add(this.Pos17);
+            this.Controls.Add(this.Pos16);
+            this.Controls.Add(this.Pos15);
+            this.Controls.Add(this.Pos14);
+            this.Controls.Add(this.Pos13);
+            this.Controls.Add(this.Pos12);
+            this.Controls.Add(this.Pos11);
+            this.Controls.Add(this.Pos21);
+            this.Controls.Add(this.Pos22);
+            this.Controls.Add(this.Pos23);
+            this.Controls.Add(this.Pos10);
+            this.Controls.Add(this.Pos9);
+            this.Controls.Add(this.Pos8);
+            this.Controls.Add(this.Pos24);
+            this.Controls.Add(this.Pos25);
+            this.Controls.Add(this.Pos26);
+            this.Controls.Add(this.Pos27);
+            this.Controls.Add(this.Pos28);
+            this.Controls.Add(this.Pos7);
+            this.Controls.Add(this.Pos6);
+            this.Controls.Add(this.Pos5);
+            this.Controls.Add(this.Pos4);
+            this.Controls.Add(this.Pos3);
+            this.Controls.Add(this.Pos2);
+            this.Controls.Add(this.Pos1);
+            this.Controls.Add(this.Pos31);
+            this.Controls.Add(this.Pos32);
+            this.Controls.Add(this.Pos33);
+            this.Controls.Add(this.Pos34);
+            this.Controls.Add(this.Pos35);
+            this.Controls.Add(this.Pos36);
+            this.Controls.Add(this.Pos29);
+            this.Controls.Add(this.Pos30);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "BoardGame";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -466,5 +901,41 @@
         private System.Windows.Forms.Button ViewSalesOrders;
         private System.Windows.Forms.Button AgreementsButton;
         private System.Windows.Forms.PictureBox SquareDisplay;
+        private System.Windows.Forms.Label Pos20;
+        private System.Windows.Forms.Label Pos19;
+        private System.Windows.Forms.Label Pos18;
+        private System.Windows.Forms.Label Pos17;
+        private System.Windows.Forms.Label Pos16;
+        private System.Windows.Forms.Label Pos15;
+        private System.Windows.Forms.Label Pos14;
+        private System.Windows.Forms.Label Pos13;
+        private System.Windows.Forms.Label Pos12;
+        private System.Windows.Forms.Label Pos11;
+        private System.Windows.Forms.Label Pos21;
+        private System.Windows.Forms.Label Pos22;
+        private System.Windows.Forms.Label Pos23;
+        private System.Windows.Forms.Label Pos10;
+        private System.Windows.Forms.Label Pos9;
+        private System.Windows.Forms.Label Pos8;
+        private System.Windows.Forms.Label Pos24;
+        private System.Windows.Forms.Label Pos25;
+        private System.Windows.Forms.Label Pos26;
+        private System.Windows.Forms.Label Pos27;
+        private System.Windows.Forms.Label Pos28;
+        private System.Windows.Forms.Label Pos7;
+        private System.Windows.Forms.Label Pos6;
+        private System.Windows.Forms.Label Pos5;
+        private System.Windows.Forms.Label Pos4;
+        private System.Windows.Forms.Label Pos3;
+        private System.Windows.Forms.Label Pos2;
+        private System.Windows.Forms.Label Pos1;
+        private System.Windows.Forms.Label Pos31;
+        private System.Windows.Forms.Label Pos32;
+        private System.Windows.Forms.Label Pos33;
+        private System.Windows.Forms.Label Pos34;
+        private System.Windows.Forms.Label Pos35;
+        private System.Windows.Forms.Label Pos36;
+        private System.Windows.Forms.Label Pos29;
+        private System.Windows.Forms.Label Pos30;
     }
 }

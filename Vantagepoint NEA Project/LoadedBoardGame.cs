@@ -144,6 +144,13 @@ namespace Vantagepoint_NEA_Project
                 TimerSecondsDisplay.Text = "";
             }
 
+            foreach (int i in Enumerable.Range(0, 36))
+            {
+                labels.Add(Controls["Pos" + string.Concat(i)]);
+            }
+
+            labels[boardPosition].Visible = true;
+
             Square1();
         }
 
@@ -175,6 +182,7 @@ namespace Vantagepoint_NEA_Project
         public static int stock = 0;
         public static int staff = 0;
         public static bool validFileSelected = false;
+        public static List<Control> labels = new List<Control>();
 
         SqlConnection dataConnection = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename=|DataDirectory|\\SquaresDatabase.mdf;Integrated Security = True");
         SqlDataAdapter dataAdapter = new SqlDataAdapter();
@@ -234,6 +242,9 @@ namespace Vantagepoint_NEA_Project
             {
                 newBoardPosition = newBoardPosition - 36;
             }
+
+            labels[boardPosition].Visible = false;
+            labels[newBoardPosition].Visible = true;
 
             string squareNamevar = "";
             string squareDescvar = "";
@@ -1179,7 +1190,7 @@ namespace Vantagepoint_NEA_Project
                         {
                             foreach (int i in Enumerable.Range(0, staff))
                             {
-                                salesOpportunities.Add(10000);
+                                salesOpportunities.Add(100000);
                             }
                             salesOpportunities = MergeSort(salesOpportunities);
                             writeToFile(salesOpportunities, nameof(salesOpportunities));
@@ -2018,6 +2029,41 @@ namespace Vantagepoint_NEA_Project
                 salesOpportunities = MergeSort(salesOpportunities);
                 writeToFile(salesOpportunities, nameof(salesOpportunities));
             }
+
+        }
+
+        private void Pos1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Pos2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Pos35_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Pos34_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Pos33_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Pos32_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Pos31_Click(object sender, EventArgs e)
+        {
 
         }
     }

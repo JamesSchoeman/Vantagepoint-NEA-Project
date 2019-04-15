@@ -103,6 +103,13 @@ namespace Vantagepoint_NEA_Project
                 TimerSecondsDisplay.Text = "";
             }
 
+            foreach (int i in Enumerable.Range(0, 37))
+            {
+                labels.Add(Controls["Pos" + string.Concat(i)]);
+            }
+
+            labels[boardPosition].Visible = true;
+
             Square1();
         }
 
@@ -131,6 +138,7 @@ namespace Vantagepoint_NEA_Project
         public static List<int> salesOrders = new List<int>();
         public static int stock = 0;
         public static int staff = 0;
+        public static List<Control> labels = new List<Control>();
 
         SqlConnection dataConnection = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename=|DataDirectory|\\SquaresDatabase.mdf;Integrated Security = True");
         SqlDataAdapter dataAdapter = new SqlDataAdapter();
@@ -195,6 +203,9 @@ namespace Vantagepoint_NEA_Project
             {
                 newBoardPosition = newBoardPosition - 36;
             }
+
+            labels[boardPosition].Visible = false;
+            labels[newBoardPosition].Visible = true;
 
             string squareNamevar = "";
             string squareDescvar = "";
@@ -1139,7 +1150,7 @@ namespace Vantagepoint_NEA_Project
                         {
                             foreach (int i in Enumerable.Range(0, staff))
                             {
-                                salesOpportunities.Add(10000);
+                                salesOpportunities.Add(100000);
                             }
                             salesOpportunities = MergeSort(salesOpportunities);
                             writeToFile(salesOpportunities, nameof(salesOpportunities));
@@ -1200,6 +1211,7 @@ namespace Vantagepoint_NEA_Project
                 if (chance < 4)
                 {
                     salesOpportunities.Add(50000);
+                    writeToFile(salesOpportunities, "UNSORTEDSALESOPPORTUNITIES");
                     salesOpportunities = MergeSort(salesOpportunities);
                     writeToFile(salesOpportunities, nameof(salesOpportunities));
                     MessageBox.Show("You manage to secure a sales opportunity worth £50,000. ", "Passed or landed on a sales opportunity square!");
@@ -1207,6 +1219,7 @@ namespace Vantagepoint_NEA_Project
                 else if (chance < 7)
                 {
                     salesOpportunities.Add(100000);
+                    writeToFile(salesOpportunities, "UNSORTEDSALESOPPORTUNITIES");
                     salesOpportunities = MergeSort(salesOpportunities);
                     writeToFile(salesOpportunities, nameof(salesOpportunities));
                     MessageBox.Show("You manage to secure a sales opportunity worth £100,000. ", "Passed or landed on a sales opportunity square!");
@@ -1215,6 +1228,7 @@ namespace Vantagepoint_NEA_Project
                 {
                     UpdateCapital(-5000);
                     salesOpportunities.Add(50000);
+                    writeToFile(salesOpportunities, "UNSORTEDSALESOPPORTUNITIES");
                     salesOpportunities = MergeSort(salesOpportunities);
                     writeToFile(salesOpportunities, nameof(salesOpportunities));
                     MessageBox.Show("You manage to secure a sales opportunity worth £50,000 at the cost of £5000. ", "Passed or landed on a sales opportunity square!");
@@ -1981,5 +1995,6 @@ namespace Vantagepoint_NEA_Project
             }
 
         }
+
     }
 }
