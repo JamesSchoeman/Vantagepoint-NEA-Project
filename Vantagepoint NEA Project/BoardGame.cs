@@ -1305,6 +1305,7 @@ namespace Vantagepoint_NEA_Project
         {
             int cardNumber = new int();
             cardNumber = rnd.Next(0, cashFlowTable.Rows.Count);
+            MessageBox.Show(string.Concat(cashFlowTable.Rows[cardNumber][1]), "Cash Flow!");
             if (float.Parse(string.Concat(cashFlowTable.Rows[cardNumber][2])) != 0)
             {
                 UpdateCapital(float.Parse(string.Concat(cashFlowTable.Rows[cardNumber][2])));
@@ -1840,21 +1841,23 @@ namespace Vantagepoint_NEA_Project
                     return subject;
                 }
 
+                int middle = subject.Count / 2;
                 List<int> firstHalf = new List<int>();
-                foreach (int i in Enumerable.Range(0, int.Parse(string.Concat(Math.Floor(Convert.ToDecimal((subject.Count / 2)))))))
+
+                for (int i = 0; i < middle; i++)
                 {
                     firstHalf.Add(subject[i]);
                 }
 
                 List<int> secondHalf = new List<int>();
-                foreach (int i in Enumerable.Range(int.Parse(string.Concat(Math.Floor(Convert.ToDecimal((subject.Count / 2))))), int.Parse(string.Concat(Math.Floor(Convert.ToDecimal((subject.Count / 2)))))))
+
+                for (int i = middle; i < subject.Count; i++)
                 {
                     secondHalf.Add(subject[i]);
                 }
 
                 firstHalf = MergeSort(firstHalf);
                 secondHalf = MergeSort(secondHalf);
-
                 return Merge(firstHalf, secondHalf);
             }
             else
