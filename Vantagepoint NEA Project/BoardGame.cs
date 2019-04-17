@@ -139,6 +139,9 @@ namespace Vantagepoint_NEA_Project
         public static int stock = 0;
         public static int staff = 0;
         public static List<Control> labels = new List<Control>();
+        public static float lastMonthCapital = 0;
+        public static float moneyPaidOut = 0;
+        public static float moneyRecieved = 0;
 
         SqlConnection dataConnection = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename=|DataDirectory|\\SquaresDatabase.mdf;Integrated Security = True");
         SqlDataAdapter dataAdapter = new SqlDataAdapter();
@@ -1315,7 +1318,6 @@ namespace Vantagepoint_NEA_Project
                 shareCapital = shareCapital * float.Parse(string.Concat(cashFlowTable.Rows[cardNumber][3]));
                 CapitalDisplay.Text = "£" + string.Concat(shareCapital);
             }
-            MessageBox.Show(string.Concat(cashFlowTable.Rows[cardNumber][1]), "Cash Flow!");
         }
 
         //Selects a random Lucky Break card from the Lucky Break database table and carries it out if the company meets the requirements
@@ -1495,7 +1497,10 @@ namespace Vantagepoint_NEA_Project
                     {
                         SalesOpportunity();
                     }
+                    boardPosition = newBoardPosition;
+                    labels[boardPosition].Visible = false;
                     newBoardPosition = 36;
+                    labels[newBoardPosition].Visible = true;
                     string squareNamevar = "";
                     string squareDescvar = "";
                     squareNamevar = string.Concat(squaresTable.Rows[newBoardPosition - 1][1]);
@@ -1547,6 +1552,15 @@ namespace Vantagepoint_NEA_Project
         {
             shareCapital = shareCapital + amount;
             CapitalDisplay.Text = "£" + string.Concat(shareCapital);
+
+            if (amount > 0)
+            {
+                moneyRecieved = moneyRecieved + amount;
+            }
+            else if (amount < 0)
+            {
+                moneyPaidOut = moneyPaidOut + (amount * -1);
+            }
 
             if (shareCapital < 0)
             {

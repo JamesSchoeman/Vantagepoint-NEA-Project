@@ -44,6 +44,22 @@
             this.label2 = new System.Windows.Forms.Label();
             this.SalariesButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.CapitalChangeLabel = new System.Windows.Forms.Label();
+            this.CapitalChangeDisplay = new System.Windows.Forms.Label();
+            this.MoneyRecievedLabel = new System.Windows.Forms.Label();
+            this.MoneyPaidOutLabel = new System.Windows.Forms.Label();
+            this.MoneyRecievedDisplay = new System.Windows.Forms.Label();
+            this.MoneyPaidOutDisplay = new System.Windows.Forms.Label();
+            this.SalesOpportunitesNumberLabel = new System.Windows.Forms.Label();
+            this.SalesOpportunitiesNumberDisplay = new System.Windows.Forms.Label();
+            this.SalesOpportunitiesConvertedLabel = new System.Windows.Forms.Label();
+            this.SalesOpportunitiesConvertedDisplay = new System.Windows.Forms.Label();
+            this.SalesOpportunitiesLostLabel = new System.Windows.Forms.Label();
+            this.SalesOpportunitiesLostDisplay = new System.Windows.Forms.Label();
+            this.SalesOrdersNumberLabel = new System.Windows.Forms.Label();
+            this.SalesOrdersNumbersDisplay = new System.Windows.Forms.Label();
+            this.SalesOrdersConvertedLabel = new System.Windows.Forms.Label();
+            this.SalesOrdersConvertedDisplay = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // CloseButton
@@ -211,12 +227,204 @@
             this.label3.TabIndex = 54;
             this.label3.Text = "Pay staff salaries of £25000 each";
             // 
+            // CapitalChangeLabel
+            // 
+            this.CapitalChangeLabel.AutoSize = true;
+            this.CapitalChangeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CapitalChangeLabel.Location = new System.Drawing.Point(451, 100);
+            this.CapitalChangeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.CapitalChangeLabel.Name = "CapitalChangeLabel";
+            this.CapitalChangeLabel.Size = new System.Drawing.Size(206, 20);
+            this.CapitalChangeLabel.TabIndex = 56;
+            this.CapitalChangeLabel.Text = "Capital change over month: ";
+            // 
+            // CapitalChangeDisplay
+            // 
+            this.CapitalChangeDisplay.AutoSize = true;
+            this.CapitalChangeDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CapitalChangeDisplay.Location = new System.Drawing.Point(661, 100);
+            this.CapitalChangeDisplay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.CapitalChangeDisplay.Name = "CapitalChangeDisplay";
+            this.CapitalChangeDisplay.Size = new System.Drawing.Size(34, 20);
+            this.CapitalChangeDisplay.TabIndex = 57;
+            this.CapitalChangeDisplay.Text = "-----";
+            // 
+            // MoneyRecievedLabel
+            // 
+            this.MoneyRecievedLabel.AutoSize = true;
+            this.MoneyRecievedLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MoneyRecievedLabel.Location = new System.Drawing.Point(451, 134);
+            this.MoneyRecievedLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.MoneyRecievedLabel.Name = "MoneyRecievedLabel";
+            this.MoneyRecievedLabel.Size = new System.Drawing.Size(210, 20);
+            this.MoneyRecievedLabel.TabIndex = 58;
+            this.MoneyRecievedLabel.Text = "Money recieved over month: ";
+            // 
+            // MoneyPaidOutLabel
+            // 
+            this.MoneyPaidOutLabel.AutoSize = true;
+            this.MoneyPaidOutLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MoneyPaidOutLabel.Location = new System.Drawing.Point(451, 168);
+            this.MoneyPaidOutLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.MoneyPaidOutLabel.Name = "MoneyPaidOutLabel";
+            this.MoneyPaidOutLabel.Size = new System.Drawing.Size(208, 20);
+            this.MoneyPaidOutLabel.TabIndex = 59;
+            this.MoneyPaidOutLabel.Text = "Money paid out over month: ";
+            // 
+            // MoneyRecievedDisplay
+            // 
+            this.MoneyRecievedDisplay.AutoSize = true;
+            this.MoneyRecievedDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MoneyRecievedDisplay.Location = new System.Drawing.Point(661, 138);
+            this.MoneyRecievedDisplay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.MoneyRecievedDisplay.Name = "MoneyRecievedDisplay";
+            this.MoneyRecievedDisplay.Size = new System.Drawing.Size(34, 20);
+            this.MoneyRecievedDisplay.TabIndex = 60;
+            this.MoneyRecievedDisplay.Text = "-----";
+            // 
+            // MoneyPaidOutDisplay
+            // 
+            this.MoneyPaidOutDisplay.AutoSize = true;
+            this.MoneyPaidOutDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MoneyPaidOutDisplay.Location = new System.Drawing.Point(661, 168);
+            this.MoneyPaidOutDisplay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.MoneyPaidOutDisplay.Name = "MoneyPaidOutDisplay";
+            this.MoneyPaidOutDisplay.Size = new System.Drawing.Size(34, 20);
+            this.MoneyPaidOutDisplay.TabIndex = 61;
+            this.MoneyPaidOutDisplay.Text = "-----";
+            // 
+            // SalesOpportunitesNumberLabel
+            // 
+            this.SalesOpportunitesNumberLabel.AutoSize = true;
+            this.SalesOpportunitesNumberLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SalesOpportunitesNumberLabel.Location = new System.Drawing.Point(12, 252);
+            this.SalesOpportunitesNumberLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.SalesOpportunitesNumberLabel.Name = "SalesOpportunitesNumberLabel";
+            this.SalesOpportunitesNumberLabel.Size = new System.Drawing.Size(156, 20);
+            this.SalesOpportunitesNumberLabel.TabIndex = 62;
+            this.SalesOpportunitesNumberLabel.Text = "Sales Opportunities: ";
+            // 
+            // SalesOpportunitiesNumberDisplay
+            // 
+            this.SalesOpportunitiesNumberDisplay.AutoSize = true;
+            this.SalesOpportunitiesNumberDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SalesOpportunitiesNumberDisplay.Location = new System.Drawing.Point(176, 252);
+            this.SalesOpportunitiesNumberDisplay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.SalesOpportunitiesNumberDisplay.Name = "SalesOpportunitiesNumberDisplay";
+            this.SalesOpportunitiesNumberDisplay.Size = new System.Drawing.Size(34, 20);
+            this.SalesOpportunitiesNumberDisplay.TabIndex = 63;
+            this.SalesOpportunitiesNumberDisplay.Text = "-----";
+            // 
+            // SalesOpportunitiesConvertedLabel
+            // 
+            this.SalesOpportunitiesConvertedLabel.AutoSize = true;
+            this.SalesOpportunitiesConvertedLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SalesOpportunitiesConvertedLabel.Location = new System.Drawing.Point(12, 282);
+            this.SalesOpportunitiesConvertedLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.SalesOpportunitiesConvertedLabel.Name = "SalesOpportunitiesConvertedLabel";
+            this.SalesOpportunitiesConvertedLabel.Size = new System.Drawing.Size(298, 20);
+            this.SalesOpportunitiesConvertedLabel.TabIndex = 64;
+            this.SalesOpportunitiesConvertedLabel.Text = "Sales Opportunities converted to capital: ";
+            // 
+            // SalesOpportunitiesConvertedDisplay
+            // 
+            this.SalesOpportunitiesConvertedDisplay.AutoSize = true;
+            this.SalesOpportunitiesConvertedDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SalesOpportunitiesConvertedDisplay.Location = new System.Drawing.Point(318, 282);
+            this.SalesOpportunitiesConvertedDisplay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.SalesOpportunitiesConvertedDisplay.Name = "SalesOpportunitiesConvertedDisplay";
+            this.SalesOpportunitiesConvertedDisplay.Size = new System.Drawing.Size(34, 20);
+            this.SalesOpportunitiesConvertedDisplay.TabIndex = 65;
+            this.SalesOpportunitiesConvertedDisplay.Text = "-----";
+            // 
+            // SalesOpportunitiesLostLabel
+            // 
+            this.SalesOpportunitiesLostLabel.AutoSize = true;
+            this.SalesOpportunitiesLostLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SalesOpportunitiesLostLabel.Location = new System.Drawing.Point(13, 311);
+            this.SalesOpportunitiesLostLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.SalesOpportunitiesLostLabel.Name = "SalesOpportunitiesLostLabel";
+            this.SalesOpportunitiesLostLabel.Size = new System.Drawing.Size(185, 20);
+            this.SalesOpportunitiesLostLabel.TabIndex = 66;
+            this.SalesOpportunitiesLostLabel.Text = "Sales Opportunities lost: ";
+            // 
+            // SalesOpportunitiesLostDisplay
+            // 
+            this.SalesOpportunitiesLostDisplay.AutoSize = true;
+            this.SalesOpportunitiesLostDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SalesOpportunitiesLostDisplay.Location = new System.Drawing.Point(206, 311);
+            this.SalesOpportunitiesLostDisplay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.SalesOpportunitiesLostDisplay.Name = "SalesOpportunitiesLostDisplay";
+            this.SalesOpportunitiesLostDisplay.Size = new System.Drawing.Size(34, 20);
+            this.SalesOpportunitiesLostDisplay.TabIndex = 67;
+            this.SalesOpportunitiesLostDisplay.Text = "-----";
+            // 
+            // SalesOrdersNumberLabel
+            // 
+            this.SalesOrdersNumberLabel.AutoSize = true;
+            this.SalesOrdersNumberLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SalesOrdersNumberLabel.Location = new System.Drawing.Point(13, 342);
+            this.SalesOrdersNumberLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.SalesOrdersNumberLabel.Name = "SalesOrdersNumberLabel";
+            this.SalesOrdersNumberLabel.Size = new System.Drawing.Size(109, 20);
+            this.SalesOrdersNumberLabel.TabIndex = 68;
+            this.SalesOrdersNumberLabel.Text = "Sales Orders: ";
+            // 
+            // SalesOrdersNumbersDisplay
+            // 
+            this.SalesOrdersNumbersDisplay.AutoSize = true;
+            this.SalesOrdersNumbersDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SalesOrdersNumbersDisplay.Location = new System.Drawing.Point(130, 342);
+            this.SalesOrdersNumbersDisplay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.SalesOrdersNumbersDisplay.Name = "SalesOrdersNumbersDisplay";
+            this.SalesOrdersNumbersDisplay.Size = new System.Drawing.Size(34, 20);
+            this.SalesOrdersNumbersDisplay.TabIndex = 69;
+            this.SalesOrdersNumbersDisplay.Text = "-----";
+            // 
+            // SalesOrdersConvertedLabel
+            // 
+            this.SalesOrdersConvertedLabel.AutoSize = true;
+            this.SalesOrdersConvertedLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SalesOrdersConvertedLabel.Location = new System.Drawing.Point(13, 373);
+            this.SalesOrdersConvertedLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.SalesOrdersConvertedLabel.Name = "SalesOrdersConvertedLabel";
+            this.SalesOrdersConvertedLabel.Size = new System.Drawing.Size(183, 20);
+            this.SalesOrdersConvertedLabel.TabIndex = 70;
+            this.SalesOrdersConvertedLabel.Text = "Sales Orders converted: ";
+            // 
+            // SalesOrdersConvertedDisplay
+            // 
+            this.SalesOrdersConvertedDisplay.AutoSize = true;
+            this.SalesOrdersConvertedDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SalesOrdersConvertedDisplay.Location = new System.Drawing.Point(204, 373);
+            this.SalesOrdersConvertedDisplay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.SalesOrdersConvertedDisplay.Name = "SalesOrdersConvertedDisplay";
+            this.SalesOrdersConvertedDisplay.Size = new System.Drawing.Size(34, 20);
+            this.SalesOrdersConvertedDisplay.TabIndex = 71;
+            this.SalesOrdersConvertedDisplay.Text = "-----";
+            // 
             // EndOfMonth
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.ControlBox = false;
+            this.Controls.Add(this.SalesOrdersConvertedDisplay);
+            this.Controls.Add(this.SalesOrdersConvertedLabel);
+            this.Controls.Add(this.SalesOrdersNumbersDisplay);
+            this.Controls.Add(this.SalesOrdersNumberLabel);
+            this.Controls.Add(this.SalesOpportunitiesLostDisplay);
+            this.Controls.Add(this.SalesOpportunitiesLostLabel);
+            this.Controls.Add(this.SalesOpportunitiesConvertedDisplay);
+            this.Controls.Add(this.SalesOpportunitiesConvertedLabel);
+            this.Controls.Add(this.SalesOpportunitiesNumberDisplay);
+            this.Controls.Add(this.SalesOpportunitesNumberLabel);
+            this.Controls.Add(this.MoneyPaidOutDisplay);
+            this.Controls.Add(this.MoneyRecievedDisplay);
+            this.Controls.Add(this.MoneyPaidOutLabel);
+            this.Controls.Add(this.MoneyRecievedLabel);
+            this.Controls.Add(this.CapitalChangeDisplay);
+            this.Controls.Add(this.CapitalChangeLabel);
             this.Controls.Add(this.SalariesButton);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.SalesOpportunitiesButton);
@@ -261,5 +469,21 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button SalariesButton;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label CapitalChangeLabel;
+        private System.Windows.Forms.Label CapitalChangeDisplay;
+        private System.Windows.Forms.Label MoneyRecievedLabel;
+        private System.Windows.Forms.Label MoneyPaidOutLabel;
+        private System.Windows.Forms.Label MoneyRecievedDisplay;
+        private System.Windows.Forms.Label MoneyPaidOutDisplay;
+        private System.Windows.Forms.Label SalesOpportunitesNumberLabel;
+        private System.Windows.Forms.Label SalesOpportunitiesNumberDisplay;
+        private System.Windows.Forms.Label SalesOpportunitiesConvertedLabel;
+        private System.Windows.Forms.Label SalesOpportunitiesConvertedDisplay;
+        private System.Windows.Forms.Label SalesOpportunitiesLostLabel;
+        private System.Windows.Forms.Label SalesOpportunitiesLostDisplay;
+        private System.Windows.Forms.Label SalesOrdersNumberLabel;
+        private System.Windows.Forms.Label SalesOrdersNumbersDisplay;
+        private System.Windows.Forms.Label SalesOrdersConvertedLabel;
+        private System.Windows.Forms.Label SalesOrdersConvertedDisplay;
     }
 }

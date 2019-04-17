@@ -21,6 +21,12 @@ namespace Vantagepoint_NEA_Project
         private static List<int> localSalesOpportunities = new List<int>();
         private static List<int> opportunitiesToRemove = new List<int>();
         private static List<int> localSalesOrders = new List<int>();
+        public float LastMonthCapital = new float();
+        public float moneyRecieved = new float();
+        public float moneyPaidOut = new float();
+        public int salesOpportunitiesConverted = 0;
+        public int salesOpportunitiesLost = 0;
+        public int salesOrdersConverted = 0;
         Random rnd = new Random();
 
         //Initialises the class and sets all its attributes to the correct state
@@ -54,6 +60,9 @@ namespace Vantagepoint_NEA_Project
                 localCompanyType = BoardGame.companyType;
                 localSalesOpportunities = BoardGame.salesOpportunities;
                 localSalesOrders = BoardGame.salesOrders;
+                LastMonthCapital = BoardGame.lastMonthCapital;
+                moneyPaidOut = BoardGame.moneyPaidOut;
+                moneyRecieved = BoardGame.moneyRecieved;
             }
             else if (parentType == "Loaded")
             {
@@ -62,6 +71,9 @@ namespace Vantagepoint_NEA_Project
                 localCompanyType = LoadedBoardGame.companyType;
                 localSalesOpportunities = LoadedBoardGame.salesOpportunities;
                 localSalesOrders = LoadedBoardGame.salesOrders;
+                LastMonthCapital = LoadedBoardGame.lastMonthCapital;
+                moneyPaidOut = LoadedBoardGame.moneyPaidOut;
+                moneyRecieved = LoadedBoardGame.moneyRecieved;
             }
 
             BubbleSort(localSalesOpportunities);
@@ -69,6 +81,11 @@ namespace Vantagepoint_NEA_Project
             StaffDisplay.Text = string.Concat(localStaff);
             PayVATButton.Text = ("Pay VAT of -----");
             SalariesButton.Text = "Pay salaries of £" + string.Concat(localStaff * 25000);
+            SalesOpportunitiesNumberDisplay.Text = string.Concat(localSalesOpportunities.Count);
+            SalesOpportunitiesConvertedDisplay.Text = "0";
+            SalesOpportunitiesLostDisplay.Text = "0";
+            SalesOrdersNumbersDisplay.Text = string.Concat(localSalesOrders.Count);
+            SalesOrdersConvertedDisplay.Text = "0";
 
             if (localCompanyType == "Sole Trader")
             {
@@ -92,12 +109,18 @@ namespace Vantagepoint_NEA_Project
                 BoardGame.shareCapital = localShareCapital;
                 BoardGame.salesOpportunities = localSalesOpportunities;
                 BoardGame.salesOrders = localSalesOrders;
+                BoardGame.lastMonthCapital = localShareCapital;
+                BoardGame.moneyPaidOut = 0;
+                BoardGame.moneyRecieved = 0;
             }
             else if (parentType == "Loaded")
             {
                 LoadedBoardGame.shareCapital = localShareCapital;
                 LoadedBoardGame.salesOpportunities = localSalesOpportunities;
                 LoadedBoardGame.salesOrders = localSalesOrders;
+                LoadedBoardGame.lastMonthCapital = localShareCapital;
+                LoadedBoardGame.moneyPaidOut = 0;
+                LoadedBoardGame.moneyRecieved = 0;
             }
             this.Close();
         }
@@ -107,6 +130,15 @@ namespace Vantagepoint_NEA_Project
         {
             localShareCapital = localShareCapital + amount;
             CapitalDisplay.Text = string.Concat(localShareCapital);
+
+            if (amount > 0)
+            {
+                moneyRecieved = moneyRecieved + amount;
+            }
+            else if (amount < 0)
+            {
+                moneyPaidOut = moneyPaidOut + (amount * -1);
+            }
         }
 
         //Reduces Share Capital by 10%, disables the VAT button and enables the subsequent button
@@ -116,6 +148,9 @@ namespace Vantagepoint_NEA_Project
 
             PayVATButton.Enabled = false;
             CloseButton.Enabled = true;
+            CapitalChangeDisplay.Text = string.Concat(localShareCapital - LastMonthCapital);
+            MoneyPaidOutDisplay.Text = string.Concat(moneyPaidOut);
+            MoneyRecievedDisplay.Text = string.Concat(moneyRecieved);
         }
 
         //Converts sales orders into capital and then clears the sales orders list
@@ -124,6 +159,8 @@ namespace Vantagepoint_NEA_Project
             foreach (int i in localSalesOrders)
             {
                 UpdateCapital(i);
+                salesOrdersConverted = salesOrdersConverted + 1;
+                SalesOrdersConvertedDisplay.Text = string.Concat(salesOrdersConverted);
                 MessageBox.Show("£" + string.Concat(i) + " sales order payout received. ", "Payout recieved");
             }
             localSalesOrders.Clear();
@@ -167,6 +204,8 @@ namespace Vantagepoint_NEA_Project
                 if (chance < 6)
                 {
                     opportunitiesToRemove.Add(i);
+                    salesOpportunitiesLost = salesOpportunitiesLost + 1;
+                    SalesOpportunitiesLostDisplay.Text = string.Concat(salesOpportunitiesLost);
                     MessageBox.Show("£" + string.Concat(i) + " sales opportunity lost. ", "Sales opportunity lost");
                 }
                 else if (chance < 12)
@@ -177,10 +216,14 @@ namespace Vantagepoint_NEA_Project
                 {
                     localSalesOrders.Add(i);
                     opportunitiesToRemove.Add(i);
+                    salesOpportunitiesConverted = salesOpportunitiesConverted + 1;
+                    SalesOpportunitiesConvertedDisplay.Text = string.Concat(salesOpportunitiesConverted);
                     MessageBox.Show("£" + string.Concat(i) + " sales opportunity successfully converted to sales order. ", "Sales opportunity closed");
                 }
                 else if (chance == 36)
                 {
+                    salesOpportunitiesLost = localSalesOpportunities.Count - salesOpportunitiesConverted;
+                    SalesOpportunitiesLostDisplay.Text = string.Concat(salesOpportunitiesLost);
                     localSalesOpportunities.Clear();
                     MessageBox.Show("All sales opportunities lost due to unforeseen complications.", "All sales opportunities lost");
                     break;
@@ -206,6 +249,9 @@ namespace Vantagepoint_NEA_Project
             else if (localCompanyType == "Sole Trader")
             {
                 CloseButton.Enabled = true;
+                CapitalChangeDisplay.Text = string.Concat(localShareCapital - LastMonthCapital);
+                MoneyPaidOutDisplay.Text = string.Concat(moneyPaidOut);
+                MoneyRecievedDisplay.Text = string.Concat(moneyRecieved);
             }
             SalesOpportunitiesButton.Enabled = false;
 

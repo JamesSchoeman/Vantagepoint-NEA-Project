@@ -255,14 +255,14 @@ namespace Vantagepoint_NEA_Project
                     }
                 }
             }
-            CapitalDisplay.Text = "£" + string.Concat(localCapital);
+            CapitalDisplay.Text = string.Concat(localCapital);
         }
 
         //Deducts 300000 from the user's capital and updates the display
         private void PayLoanButton_Click(object sender, EventArgs e)
         {
             localCapital = localCapital - 300000;
-            PostLoanDisplay.Text = "£" + string.Concat(localCapital);
+            PostLoanDisplay.Text = string.Concat(localCapital);
             PayLoanButton.Enabled = false;
             CloseButton.Enabled = true;
         }

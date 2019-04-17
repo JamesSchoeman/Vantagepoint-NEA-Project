@@ -51,7 +51,7 @@
             this.ShareholdersLabel = new System.Windows.Forms.Label();
             this.CompanyNameLabel = new System.Windows.Forms.Label();
             this.AgreementsLabel = new System.Windows.Forms.Label();
-            this.AgreementsDisplay = new System.Windows.Forms.Label();
+            this.AgreementsDisplay = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // PayLoanButton
@@ -301,13 +301,14 @@
             // 
             // AgreementsDisplay
             // 
-            this.AgreementsDisplay.AutoSize = true;
+            this.AgreementsDisplay.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.AgreementsDisplay.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.AgreementsDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AgreementsDisplay.Location = new System.Drawing.Point(342, 310);
-            this.AgreementsDisplay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.AgreementsDisplay.Location = new System.Drawing.Point(346, 307);
             this.AgreementsDisplay.Name = "AgreementsDisplay";
-            this.AgreementsDisplay.Size = new System.Drawing.Size(0, 20);
+            this.AgreementsDisplay.Size = new System.Drawing.Size(335, 116);
             this.AgreementsDisplay.TabIndex = 61;
+            this.AgreementsDisplay.Text = "";
             // 
             // FinishPage
             // 
@@ -372,6 +373,6 @@
         private System.Windows.Forms.Label ShareholdersLabel;
         private System.Windows.Forms.Label CompanyNameLabel;
         private System.Windows.Forms.Label AgreementsLabel;
-        private System.Windows.Forms.Label AgreementsDisplay;
+        private System.Windows.Forms.RichTextBox AgreementsDisplay;
     }
 }
