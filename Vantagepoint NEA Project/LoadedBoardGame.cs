@@ -125,6 +125,14 @@ namespace Vantagepoint_NEA_Project
             dataAdapter.Fill(penaltyTable);
             dataConnection.Close();
 
+            dataAdapter.UpdateCommand = tipsCommand;
+            dataAdapter.SelectCommand = tipsCommand;
+            tipsCommand.CommandType = CommandType.Text;
+            tipsCommand.Connection = dataConnection;
+            dataConnection.Open();
+            dataAdapter.Fill(tipsTable);
+            dataConnection.Close();
+
             string squareNamevar = "";
             string squareDescvar = "";
             squareNamevar = string.Concat(squaresTable.Rows[boardPosition - 1][1]);
@@ -150,6 +158,10 @@ namespace Vantagepoint_NEA_Project
             }
 
             labels[boardPosition].Visible = true;
+
+            toolTip1.SetToolTip(SquareDisplay, string.Concat(tipsTable.Rows[0]["SmallTip"]));
+            toolTip1.Active = true;
+            toolTip1.InitialDelay = 0;
 
             Square1();
         }
@@ -205,6 +217,9 @@ namespace Vantagepoint_NEA_Project
         DataTable penaltyTable = new DataTable();
         static SqlCommand penaltyCommand = new SqlCommand("select * from Penalty");
 
+        DataTable tipsTable = new DataTable();
+        static SqlCommand tipsCommand = new SqlCommand("select * from TipsTable");
+
         Random rnd = new Random();
 
         private void Board_Game_Load(object sender, EventArgs e)
@@ -233,6 +248,8 @@ namespace Vantagepoint_NEA_Project
             if ((newBoardPosition > 36) && (boardPosition < 36))
             {
                 newBoardPosition = newBoardPosition - 36;
+                labels[boardPosition].Visible = false;
+                labels[newBoardPosition].Visible = true;
                 EndOfMonth monthlyReport = new EndOfMonth();
                 monthlyReport.ShowDialog(this);
                 CapitalDisplay.Text = string.Concat(shareCapital);
@@ -248,6 +265,10 @@ namespace Vantagepoint_NEA_Project
 
             labels[boardPosition].Visible = false;
             labels[newBoardPosition].Visible = true;
+
+            toolTip1.SetToolTip(SquareDisplay, string.Concat(tipsTable.Rows[newBoardPosition - 1]["SmallTip"]));
+            toolTip1.Active = true;
+            toolTip1.InitialDelay = 0;
 
             string squareNamevar = "";
             string squareDescvar = "";
@@ -2082,6 +2103,18 @@ namespace Vantagepoint_NEA_Project
         private void Pos31_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void SquareDisplay_Click(object sender, EventArgs e)
+        {
+            if (newBoardPosition != 0)
+            {
+                MessageBox.Show(string.Concat(tipsTable.Rows[newBoardPosition - 1]["LongTip"]), string.Concat(squaresTable.Rows[newBoardPosition - 1][1]));
+            }
+            else
+            {
+                MessageBox.Show(string.Concat(tipsTable.Rows[0]["LongTip"]), string.Concat(squaresTable.Rows[0][1]));
+            }
         }
     }
 }

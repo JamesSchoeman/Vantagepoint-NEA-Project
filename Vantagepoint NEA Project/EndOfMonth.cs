@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Data.SqlClient;
 
 namespace Vantagepoint_NEA_Project
 {
@@ -28,6 +29,12 @@ namespace Vantagepoint_NEA_Project
         public int salesOpportunitiesLost = 0;
         public int salesOrdersConverted = 0;
         Random rnd = new Random();
+
+        SqlConnection dataConnection = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename=|DataDirectory|\\SquaresDatabase.mdf;Integrated Security = True");
+        SqlDataAdapter dataAdapter = new SqlDataAdapter();
+
+        DataTable tipsTable = new DataTable();
+        static SqlCommand tipsCommand = new SqlCommand("select * from TipsTable");
 
         //Initialises the class and sets all its attributes to the correct state
         public EndOfMonth()
@@ -99,6 +106,30 @@ namespace Vantagepoint_NEA_Project
             {
                 StaffLimitDisplay.Text = "/3";
             }
+
+            dataAdapter.UpdateCommand = tipsCommand;
+            dataAdapter.SelectCommand = tipsCommand;
+            tipsCommand.CommandType = CommandType.Text;
+            tipsCommand.Connection = dataConnection;
+            dataConnection.Open();
+            dataAdapter.Fill(tipsTable);
+            dataConnection.Close();
+
+            toolTip1.SetToolTip(SalesOrdersButton, string.Concat(tipsTable.Rows[36]["SmallTip"]));
+            toolTip1.Active = true;
+            toolTip1.InitialDelay = 0;
+
+            toolTip2.SetToolTip(SalesOpportunitiesButton, string.Concat(tipsTable.Rows[37]["SmallTip"]));
+            toolTip2.Active = true;
+            toolTip2.InitialDelay = 0;
+
+            toolTip1.SetToolTip(SalariesButton, string.Concat(tipsTable.Rows[38]["SmallTip"]));
+            toolTip1.Active = true;
+            toolTip1.InitialDelay = 0;
+
+            toolTip1.SetToolTip(PayVATButton, string.Concat(tipsTable.Rows[39]["SmallTip"]));
+            toolTip1.Active = true;
+            toolTip1.InitialDelay = 0;
         }
 
         //When the Close button is pressed, sets the parents' attributes to their updated values and then closes this form

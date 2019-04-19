@@ -28,42 +28,45 @@ namespace Vantagepoint_NEA_Project
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.components = new System.ComponentModel.Container();
+            this.NewGameButton = new System.Windows.Forms.Button();
+            this.LoadGameButton = new System.Windows.Forms.Button();
+            this.ExitButton = new System.Windows.Forms.Button();
             this.LogoDisplay = new System.Windows.Forms.PictureBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.LogoDisplay)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // NewGameButton
             // 
-            this.button1.Location = new System.Drawing.Point(272, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(200, 70);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "New Game";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.NewGameButton.Location = new System.Drawing.Point(272, 12);
+            this.NewGameButton.Name = "NewGameButton";
+            this.NewGameButton.Size = new System.Drawing.Size(200, 70);
+            this.NewGameButton.TabIndex = 0;
+            this.NewGameButton.Text = "New Game";
+            this.NewGameButton.UseVisualStyleBackColor = true;
+            this.NewGameButton.Click += new System.EventHandler(this.NewGameButton_Click);
             // 
-            // button2
+            // LoadGameButton
             // 
-            this.button2.Location = new System.Drawing.Point(272, 125);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(200, 70);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "Load Game";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.LoadGameButton.Location = new System.Drawing.Point(272, 125);
+            this.LoadGameButton.Name = "LoadGameButton";
+            this.LoadGameButton.Size = new System.Drawing.Size(200, 70);
+            this.LoadGameButton.TabIndex = 0;
+            this.LoadGameButton.Text = "Load Game";
+            this.LoadGameButton.UseVisualStyleBackColor = true;
+            this.LoadGameButton.Click += new System.EventHandler(this.LoadGameButton_Click);
             // 
-            // button3
+            // ExitButton
             // 
-            this.button3.Location = new System.Drawing.Point(272, 239);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(200, 70);
-            this.button3.TabIndex = 0;
-            this.button3.Text = "Exit";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.ExitButton.Location = new System.Drawing.Point(272, 239);
+            this.ExitButton.Name = "ExitButton";
+            this.ExitButton.Size = new System.Drawing.Size(200, 70);
+            this.ExitButton.TabIndex = 0;
+            this.ExitButton.Text = "Exit";
+            this.ExitButton.UseVisualStyleBackColor = true;
+            this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
             // 
             // LogoDisplay
             // 
@@ -84,9 +87,9 @@ namespace Vantagepoint_NEA_Project
             this.ClientSize = new System.Drawing.Size(484, 321);
             this.ControlBox = false;
             this.Controls.Add(this.LogoDisplay);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.ExitButton);
+            this.Controls.Add(this.LoadGameButton);
+            this.Controls.Add(this.NewGameButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MainMenu";
@@ -99,10 +102,12 @@ namespace Vantagepoint_NEA_Project
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button NewGameButton;
+        private System.Windows.Forms.Button LoadGameButton;
+        private System.Windows.Forms.Button ExitButton;
         private System.Windows.Forms.PictureBox LogoDisplay;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolTip toolTip2;
     }
 }
 

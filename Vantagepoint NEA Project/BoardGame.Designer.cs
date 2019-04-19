@@ -96,6 +96,7 @@
             this.Pos36 = new System.Windows.Forms.Label();
             this.Pos29 = new System.Windows.Forms.Label();
             this.Pos30 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.BoardDisplay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SquareDisplay)).BeginInit();
             this.SuspendLayout();
@@ -421,6 +422,7 @@
             this.SquareDisplay.Size = new System.Drawing.Size(150, 150);
             this.SquareDisplay.TabIndex = 54;
             this.SquareDisplay.TabStop = false;
+            this.SquareDisplay.Click += new System.EventHandler(this.SquareDisplay_Click);
             // 
             // Pos20
             // 
@@ -937,5 +939,6 @@
         private System.Windows.Forms.Label Pos36;
         private System.Windows.Forms.Label Pos29;
         private System.Windows.Forms.Label Pos30;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

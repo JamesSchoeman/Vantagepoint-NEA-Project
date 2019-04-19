@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.PayLoanButton = new System.Windows.Forms.Button();
             this.CapitalLabel = new System.Windows.Forms.Label();
             this.CapitalDisplay = new System.Windows.Forms.Label();
@@ -52,6 +53,7 @@
             this.CompanyNameLabel = new System.Windows.Forms.Label();
             this.AgreementsLabel = new System.Windows.Forms.Label();
             this.AgreementsDisplay = new System.Windows.Forms.RichTextBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // PayLoanButton
@@ -374,5 +376,6 @@
         private System.Windows.Forms.Label CompanyNameLabel;
         private System.Windows.Forms.Label AgreementsLabel;
         private System.Windows.Forms.RichTextBox AgreementsDisplay;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

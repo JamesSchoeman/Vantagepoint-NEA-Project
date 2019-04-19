@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.CloseButton = new System.Windows.Forms.Button();
             this.VATLabel = new System.Windows.Forms.Label();
             this.CapitalDisplay = new System.Windows.Forms.Label();
@@ -60,6 +61,10 @@
             this.SalesOrdersNumbersDisplay = new System.Windows.Forms.Label();
             this.SalesOrdersConvertedLabel = new System.Windows.Forms.Label();
             this.SalesOrdersConvertedDisplay = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip3 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip4 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // CloseButton
@@ -300,15 +305,15 @@
             this.SalesOpportunitesNumberLabel.Location = new System.Drawing.Point(12, 252);
             this.SalesOpportunitesNumberLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.SalesOpportunitesNumberLabel.Name = "SalesOpportunitesNumberLabel";
-            this.SalesOpportunitesNumberLabel.Size = new System.Drawing.Size(156, 20);
+            this.SalesOpportunitesNumberLabel.Size = new System.Drawing.Size(230, 20);
             this.SalesOpportunitesNumberLabel.TabIndex = 62;
-            this.SalesOpportunitesNumberLabel.Text = "Sales Opportunities: ";
+            this.SalesOpportunitesNumberLabel.Text = "Sales Opportunities to convert: ";
             // 
             // SalesOpportunitiesNumberDisplay
             // 
             this.SalesOpportunitiesNumberDisplay.AutoSize = true;
             this.SalesOpportunitiesNumberDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SalesOpportunitiesNumberDisplay.Location = new System.Drawing.Point(176, 252);
+            this.SalesOpportunitiesNumberDisplay.Location = new System.Drawing.Point(250, 252);
             this.SalesOpportunitiesNumberDisplay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.SalesOpportunitiesNumberDisplay.Name = "SalesOpportunitiesNumberDisplay";
             this.SalesOpportunitiesNumberDisplay.Size = new System.Drawing.Size(34, 20);
@@ -366,15 +371,15 @@
             this.SalesOrdersNumberLabel.Location = new System.Drawing.Point(13, 342);
             this.SalesOrdersNumberLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.SalesOrdersNumberLabel.Name = "SalesOrdersNumberLabel";
-            this.SalesOrdersNumberLabel.Size = new System.Drawing.Size(109, 20);
+            this.SalesOrdersNumberLabel.Size = new System.Drawing.Size(183, 20);
             this.SalesOrdersNumberLabel.TabIndex = 68;
-            this.SalesOrdersNumberLabel.Text = "Sales Orders: ";
+            this.SalesOrdersNumberLabel.Text = "Sales Orders to convert: ";
             // 
             // SalesOrdersNumbersDisplay
             // 
             this.SalesOrdersNumbersDisplay.AutoSize = true;
             this.SalesOrdersNumbersDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SalesOrdersNumbersDisplay.Location = new System.Drawing.Point(130, 342);
+            this.SalesOrdersNumbersDisplay.Location = new System.Drawing.Point(204, 342);
             this.SalesOrdersNumbersDisplay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.SalesOrdersNumbersDisplay.Name = "SalesOrdersNumbersDisplay";
             this.SalesOrdersNumbersDisplay.Size = new System.Drawing.Size(34, 20);
@@ -485,5 +490,9 @@
         private System.Windows.Forms.Label SalesOrdersNumbersDisplay;
         private System.Windows.Forms.Label SalesOrdersConvertedLabel;
         private System.Windows.Forms.Label SalesOrdersConvertedDisplay;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.ToolTip toolTip2;
+        private System.Windows.Forms.ToolTip toolTip3;
+        private System.Windows.Forms.ToolTip toolTip4;
     }
 }

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace Vantagepoint_NEA_Project
 {
@@ -14,6 +15,12 @@ namespace Vantagepoint_NEA_Project
     {
         public string parentType = null;
         public float localCapital = new float();
+
+        SqlConnection dataConnection = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename=|DataDirectory|\\SquaresDatabase.mdf;Integrated Security = True");
+        SqlDataAdapter dataAdapter = new SqlDataAdapter();
+
+        DataTable tipsTable = new DataTable();
+        static SqlCommand tipsCommand = new SqlCommand("select * from TipsTable");
 
         //Initialises the subroutine and sets all its attributes to the correct state
         public FinishPage()
@@ -45,104 +52,116 @@ namespace Vantagepoint_NEA_Project
 
                 }
 
-                    CNDisplay.Text = BoardGame.companyName;
-                    SHDisplay.Text = BoardGame.shareholders;
-                    NOBDisplay.Text = BoardGame.natureOfBusiness;
-                    CTDisplay.Text = BoardGame.companyType;
+                CNDisplay.Text = BoardGame.companyName;
+                SHDisplay.Text = BoardGame.shareholders;
+                NOBDisplay.Text = BoardGame.natureOfBusiness;
+                CTDisplay.Text = BoardGame.companyType;
 
-                    int minutesRemaining = (int)(Math.Floor(BoardGame.timeLimit / 60.0));
-                    int secondsRemaining = (int)(Math.Floor(BoardGame.timeLimit - (minutesRemaining * 60.0)));
+                int minutesRemaining = (int)(Math.Floor(BoardGame.timeLimit / 60.0));
+                int secondsRemaining = (int)(Math.Floor(BoardGame.timeLimit - (minutesRemaining * 60.0)));
 
-                    TimerMinutesDisplay.Text = string.Concat(minutesRemaining) + " minutes";
-                    TimerSecondsDisplay.Text = string.Concat(secondsRemaining) + " seconds";
+                TimerMinutesDisplay.Text = string.Concat(minutesRemaining) + " minutes";
+                TimerSecondsDisplay.Text = string.Concat(secondsRemaining) + " seconds";
 
-                    StockDisplay.Text = string.Concat(BoardGame.stock);
-                    StaffDisplay.Text = string.Concat(BoardGame.staff);
+                StockDisplay.Text = string.Concat(BoardGame.stock);
+                StaffDisplay.Text = string.Concat(BoardGame.staff);
 
-                    if (BoardGame.companyType == "Sole Trader")
+                if (BoardGame.companyType == "Sole Trader")
+                {
+                    StaffLimitDisplay.Text = "/0";
+                }
+                else if (BoardGame.companyType == "Partnership")
+                {
+                    StaffLimitDisplay.Text = "/1";
+                }
+                else if (BoardGame.companyType == "Limited")
+                {
+                    StaffLimitDisplay.Text = "/3";
+                }
+
+                if (BoardGame.hasBEE == true)
+                {
+                    if (AgreementsDisplay.Text == "")
                     {
-                        StaffLimitDisplay.Text = "/0";
+                        AgreementsDisplay.Text = AgreementsDisplay.Text + "BEE Agreement";
                     }
-                    else if (BoardGame.companyType == "Partnership")
+                    else
                     {
-                        StaffLimitDisplay.Text = "/1";
+                        AgreementsDisplay.Text = AgreementsDisplay.Text + ", BEE Agreement";
                     }
-                    else if (BoardGame.companyType == "Limited")
-                    {
-                        StaffLimitDisplay.Text = "/3";
-                    }
+                }
 
-                    if (BoardGame.hasBEE == true)
+                if (BoardGame.hasWebsite == true)
+                {
+                    if (AgreementsDisplay.Text == "")
                     {
-                        if (AgreementsDisplay.Text == "")
-                        {
-                            AgreementsDisplay.Text = AgreementsDisplay.Text + "BEE Agreement";
-                        }
-                        else
-                        {
-                            AgreementsDisplay.Text = AgreementsDisplay.Text + ", BEE Agreement";
-                        }
+                        AgreementsDisplay.Text = AgreementsDisplay.Text + "Website";
                     }
+                    else
+                    {
+                        AgreementsDisplay.Text = AgreementsDisplay.Text + ", Website";
+                    }
+                }
 
-                    if (BoardGame.hasWebsite == true)
+                if (BoardGame.hasHealthCare == true)
+                {
+                    if (AgreementsDisplay.Text == "")
                     {
-                        if (AgreementsDisplay.Text == "")
-                        {
-                            AgreementsDisplay.Text = AgreementsDisplay.Text + "Website";
-                        }
-                        else
-                        {
-                            AgreementsDisplay.Text = AgreementsDisplay.Text + ", Website";
-                        }
+                        AgreementsDisplay.Text = AgreementsDisplay.Text + "Healthcare Agreement";
                     }
+                    else
+                    {
+                        AgreementsDisplay.Text = AgreementsDisplay.Text + ", Healthcare Agreement";
+                    }
+                }
 
-                    if (BoardGame.hasHealthCare == true)
+                if (BoardGame.hasPR == true)
+                {
+                    if (AgreementsDisplay.Text == "")
                     {
-                        if (AgreementsDisplay.Text == "")
-                        {
-                            AgreementsDisplay.Text = AgreementsDisplay.Text + "Healthcare Agreement";
-                        }
-                        else
-                        {
-                            AgreementsDisplay.Text = AgreementsDisplay.Text + ", Healthcare Agreement";
-                        }
+                        AgreementsDisplay.Text = AgreementsDisplay.Text + "PR Agreement";
                     }
+                    else
+                    {
+                        AgreementsDisplay.Text = AgreementsDisplay.Text + ", PR Agreement";
+                    }
+                }
 
-                    if (BoardGame.hasPR == true)
+                if (BoardGame.hasMarketing == true)
+                {
+                    if (AgreementsDisplay.Text == "")
                     {
-                        if (AgreementsDisplay.Text == "")
-                        {
-                            AgreementsDisplay.Text = AgreementsDisplay.Text + "PR Agreement";
-                        }
-                        else
-                        {
-                            AgreementsDisplay.Text = AgreementsDisplay.Text + ", PR Agreement";
-                        }
+                        AgreementsDisplay.Text = AgreementsDisplay.Text + "Marketing Agreement";
                     }
+                    else
+                    {
+                        AgreementsDisplay.Text = AgreementsDisplay.Text + ", Marketing Agreement";
+                    }
+                }
 
-                    if (BoardGame.hasMarketing == true)
+                if (BoardGame.hasInsurance == true)
+                {
+                    if (AgreementsDisplay.Text == "")
                     {
-                        if (AgreementsDisplay.Text == "")
-                        {
-                            AgreementsDisplay.Text = AgreementsDisplay.Text + "Marketing Agreement";
-                        }
-                        else
-                        {
-                            AgreementsDisplay.Text = AgreementsDisplay.Text + ", Marketing Agreement";
-                        }
+                        AgreementsDisplay.Text = AgreementsDisplay.Text + "Insurance";
                     }
+                    else
+                    {
+                        AgreementsDisplay.Text = AgreementsDisplay.Text + ", Insurance";
+                    }
+                }
 
-                    if (BoardGame.hasInsurance == true)
-                    {
-                        if (AgreementsDisplay.Text == "")
-                        {
-                            AgreementsDisplay.Text = AgreementsDisplay.Text + "Insurance";
-                        }
-                        else
-                        {
-                            AgreementsDisplay.Text = AgreementsDisplay.Text + ", Insurance";
-                        }
-                    }
+                dataAdapter.UpdateCommand = tipsCommand;
+                dataAdapter.SelectCommand = tipsCommand;
+                tipsCommand.CommandType = CommandType.Text;
+                tipsCommand.Connection = dataConnection;
+                dataConnection.Open();
+                dataAdapter.Fill(tipsTable);
+                dataConnection.Close();
+
+                toolTip1.SetToolTip(PayLoanButton, string.Concat(tipsTable.Rows[40]["SmallTip"]));
+                toolTip1.Active = true;
+                toolTip1.InitialDelay = 0;
             }
 
             if (parentType == "Loaded")

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace Vantagepoint_NEA_Project
 {
@@ -19,6 +20,12 @@ namespace Vantagepoint_NEA_Project
         public static float shareCapital;
         public static string companyType;
         public static int timeLimit;
+
+        SqlConnection dataConnection = new SqlConnection("Data Source = (LocalDB)\\MSSQLLocalDB; AttachDbFilename=|DataDirectory|\\SquaresDatabase.mdf;Integrated Security = True");
+        SqlDataAdapter dataAdapter = new SqlDataAdapter();
+
+        DataTable tipsTable = new DataTable();
+        static SqlCommand tipsCommand = new SqlCommand("select * from TipsTable");
 
         //This sibroutine initialises the class
         public CreateCompany()
@@ -34,6 +41,22 @@ namespace Vantagepoint_NEA_Project
             CompanyTypeHeaderLabel.Visible = false;
             FeesHeader.Visible = false;
             SalesStaffHeader.Visible = false;
+
+            dataAdapter.UpdateCommand = tipsCommand;
+            dataAdapter.SelectCommand = tipsCommand;
+            tipsCommand.CommandType = CommandType.Text;
+            tipsCommand.Connection = dataConnection;
+            dataConnection.Open();
+            dataAdapter.Fill(tipsTable);
+            dataConnection.Close();
+
+            toolTip1.SetToolTip(comboBox2, string.Concat(tipsTable.Rows[43]["SmallTip"]));
+            toolTip1.Active = true;
+            toolTip1.InitialDelay = 0;
+
+            toolTip2.SetToolTip(comboBox1, string.Concat(tipsTable.Rows[44]["SmallTip"]));
+            toolTip2.Active = true;
+            toolTip2.InitialDelay = 0;
         }
 
         //Called when the Back button is clicked; creates an instance of the MainMenu class and then closes this form
