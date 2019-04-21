@@ -129,7 +129,7 @@ namespace Vantagepoint_NEA_Project
         public static string companyName = CreateCompany.companyName;
         public static string shareholders = CreateCompany.shareholders;
         public static string natureOfBusiness = CreateCompany.natureOfBusiness;
-        public static float shareCapital = CreateCompany.shareCapital;
+        public static float shareCapital = 0;
         public static int timeLimit = (CreateCompany.timeLimit * 60);
         public static int diceRollResult;
         public static int boardPosition = 1;
@@ -455,14 +455,17 @@ namespace Vantagepoint_NEA_Project
             {
                 if (companyType == "Sole Trader")
                 {
+                    UpdateCapital(250000);
                     UpdateCapital(-5000);
                 }
                 else if (companyType == "Partnership")
                 {
+                    UpdateCapital(250000);
                     UpdateCapital(-10000);
                 }
                 else if (companyType == "Limited")
                 {
+                    UpdateCapital(250000);
                     UpdateCapital(-20000);
                 }
                 regFeesPaid = true;

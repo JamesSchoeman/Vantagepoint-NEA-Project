@@ -327,15 +327,15 @@
             this.SalesOpportunitiesConvertedLabel.Location = new System.Drawing.Point(12, 282);
             this.SalesOpportunitiesConvertedLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.SalesOpportunitiesConvertedLabel.Name = "SalesOpportunitiesConvertedLabel";
-            this.SalesOpportunitiesConvertedLabel.Size = new System.Drawing.Size(298, 20);
+            this.SalesOpportunitiesConvertedLabel.Size = new System.Drawing.Size(297, 20);
             this.SalesOpportunitiesConvertedLabel.TabIndex = 64;
-            this.SalesOpportunitiesConvertedLabel.Text = "Sales Opportunities converted to capital: ";
+            this.SalesOpportunitiesConvertedLabel.Text = "Sales Opportunities converted to orders: ";
             // 
             // SalesOpportunitiesConvertedDisplay
             // 
             this.SalesOpportunitiesConvertedDisplay.AutoSize = true;
             this.SalesOpportunitiesConvertedDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SalesOpportunitiesConvertedDisplay.Location = new System.Drawing.Point(318, 282);
+            this.SalesOpportunitiesConvertedDisplay.Location = new System.Drawing.Point(317, 282);
             this.SalesOpportunitiesConvertedDisplay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.SalesOpportunitiesConvertedDisplay.Name = "SalesOpportunitiesConvertedDisplay";
             this.SalesOpportunitiesConvertedDisplay.Size = new System.Drawing.Size(34, 20);
@@ -393,15 +393,15 @@
             this.SalesOrdersConvertedLabel.Location = new System.Drawing.Point(13, 373);
             this.SalesOrdersConvertedLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.SalesOrdersConvertedLabel.Name = "SalesOrdersConvertedLabel";
-            this.SalesOrdersConvertedLabel.Size = new System.Drawing.Size(183, 20);
+            this.SalesOrdersConvertedLabel.Size = new System.Drawing.Size(251, 20);
             this.SalesOrdersConvertedLabel.TabIndex = 70;
-            this.SalesOrdersConvertedLabel.Text = "Sales Orders converted: ";
+            this.SalesOrdersConvertedLabel.Text = "Sales Orders converted to capital: ";
             // 
             // SalesOrdersConvertedDisplay
             // 
             this.SalesOrdersConvertedDisplay.AutoSize = true;
             this.SalesOrdersConvertedDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SalesOrdersConvertedDisplay.Location = new System.Drawing.Point(204, 373);
+            this.SalesOrdersConvertedDisplay.Location = new System.Drawing.Point(272, 373);
             this.SalesOrdersConvertedDisplay.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.SalesOrdersConvertedDisplay.Name = "SalesOrdersConvertedDisplay";
             this.SalesOrdersConvertedDisplay.Size = new System.Drawing.Size(34, 20);

@@ -54,6 +54,8 @@
             this.LogoDisplay = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.LogoDisplay)).BeginInit();
             this.SuspendLayout();
             // 
@@ -308,12 +310,36 @@
             this.LogoDisplay.TabIndex = 23;
             this.LogoDisplay.TabStop = false;
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label8.Location = new System.Drawing.Point(790, 215);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(20, 22);
+            this.label8.TabIndex = 24;
+            this.label8.Text = "?";
+            this.label8.Click += new System.EventHandler(this.label8_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label9.Location = new System.Drawing.Point(790, 250);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(20, 22);
+            this.label9.TabIndex = 25;
+            this.label9.Text = "?";
+            this.label9.Click += new System.EventHandler(this.label9_Click);
+            // 
             // CreateCompany
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 658);
             this.ControlBox = false;
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.LogoDisplay);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.comboBox2);
@@ -376,5 +402,7 @@
         private System.Windows.Forms.PictureBox LogoDisplay;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.ToolTip toolTip2;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
     }
 }

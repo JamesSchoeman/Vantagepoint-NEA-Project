@@ -308,6 +308,7 @@
             this.AgreementsDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AgreementsDisplay.Location = new System.Drawing.Point(346, 307);
             this.AgreementsDisplay.Name = "AgreementsDisplay";
+            this.AgreementsDisplay.ReadOnly = true;
             this.AgreementsDisplay.Size = new System.Drawing.Size(335, 116);
             this.AgreementsDisplay.TabIndex = 61;
             this.AgreementsDisplay.Text = "";

@@ -139,5 +139,14 @@ namespace Vantagepoint_NEA_Project
 
         }
 
+        private void label8_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(string.Concat(tipsTable.Rows[44]["LongTip"]), "Help");
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(string.Concat(tipsTable.Rows[43]["LongTip"]), "Help");
+        }
     }
 }

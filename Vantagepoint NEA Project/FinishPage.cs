@@ -44,6 +44,7 @@ namespace Vantagepoint_NEA_Project
             if (parentType == "NonLoaded")
             {
                 localCapital = BoardGame.shareCapital;
+                CloseButton.Enabled = false;
                 if (BoardGame.bankLoanTaken == false)
                 {
                     PayLoanButton.Enabled = false;
