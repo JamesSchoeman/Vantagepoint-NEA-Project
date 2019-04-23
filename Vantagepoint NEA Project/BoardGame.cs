@@ -440,6 +440,9 @@ namespace Vantagepoint_NEA_Project
             public int saveStock;
             public int saveStaff;
             public bool saveHasInsurance;
+            public float saveLastMonthCapital;
+            public float saveMoneyOut;
+            public float saveMoneyRecieved;
         }
 
         //Calls the SaveGame subroutine
@@ -1783,6 +1786,9 @@ namespace Vantagepoint_NEA_Project
                 tw.WriteLine("  <" + nameof(newSave.saveStock) + ">" + string.Concat(newSave.saveStock) + "</" + nameof(newSave.saveStock) + ">");
                 tw.WriteLine("  <" + nameof(newSave.saveStaff) + ">" + string.Concat(newSave.saveStaff) + "</" + nameof(newSave.saveStaff) + ">");
                 tw.WriteLine("  <" + nameof(newSave.saveHasInsurance) + ">" + string.Concat(newSave.saveHasInsurance).ToLower() + "</" + nameof(newSave.saveHasInsurance) + ">");
+                tw.WriteLine("  <" + nameof(newSave.saveLastMonthCapital) + ">" + string.Concat(newSave.saveLastMonthCapital).ToLower() + "</" + nameof(newSave.saveLastMonthCapital) + ">");
+                tw.WriteLine("  <" + nameof(newSave.saveMoneyOut) + ">" + string.Concat(newSave.saveMoneyOut).ToLower() + "</" + nameof(newSave.saveMoneyOut) + ">");
+                tw.WriteLine("  <" + nameof(newSave.saveMoneyRecieved) + ">" + string.Concat(newSave.saveMoneyRecieved).ToLower() + "</" + nameof(newSave.saveMoneyRecieved) + ">");
                 tw.WriteLine("</" + newSave.GetType().Name + ">");
             }
 
