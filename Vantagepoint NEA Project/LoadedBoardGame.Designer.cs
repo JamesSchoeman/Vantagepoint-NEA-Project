@@ -692,7 +692,6 @@
             this.Pos2.TabIndex = 97;
             this.Pos2.Text = "2";
             this.Pos2.Visible = false;
-            this.Pos2.Click += new System.EventHandler(this.Pos2_Click);
             // 
             // Pos1
             // 
@@ -703,7 +702,6 @@
             this.Pos1.TabIndex = 96;
             this.Pos1.Text = "1";
             this.Pos1.Visible = false;
-            this.Pos1.Click += new System.EventHandler(this.Pos1_Click);
             // 
             // Pos31
             // 
@@ -716,7 +714,6 @@
             this.Pos31.TabIndex = 121;
             this.Pos31.Text = "31";
             this.Pos31.Visible = false;
-            this.Pos31.Click += new System.EventHandler(this.Pos31_Click);
             // 
             // Pos32
             // 
@@ -727,7 +724,6 @@
             this.Pos32.TabIndex = 120;
             this.Pos32.Text = "32";
             this.Pos32.Visible = false;
-            this.Pos32.Click += new System.EventHandler(this.Pos32_Click);
             // 
             // Pos33
             // 
@@ -738,7 +734,6 @@
             this.Pos33.TabIndex = 119;
             this.Pos33.Text = "33";
             this.Pos33.Visible = false;
-            this.Pos33.Click += new System.EventHandler(this.Pos33_Click);
             // 
             // Pos34
             // 
@@ -749,7 +744,6 @@
             this.Pos34.TabIndex = 118;
             this.Pos34.Text = "34";
             this.Pos34.Visible = false;
-            this.Pos34.Click += new System.EventHandler(this.Pos34_Click);
             // 
             // Pos35
             // 
@@ -760,7 +754,6 @@
             this.Pos35.TabIndex = 117;
             this.Pos35.Text = "35";
             this.Pos35.Visible = false;
-            this.Pos35.Click += new System.EventHandler(this.Pos35_Click);
             // 
             // Pos36
             // 

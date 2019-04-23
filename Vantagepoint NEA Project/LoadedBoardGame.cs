@@ -230,7 +230,7 @@ namespace Vantagepoint_NEA_Project
 
         }
 
-        //Checks if the player has gone bankrupt, rolls the dice, moves the player, enacts end of month procedures if necessary, calls the subroutine of the square the player has landed on
+        //Checks if the player has gone bankrupt, rolls the dice, moves the player, changes teh displayed square image, enacts end of month procedures if necessary, calls the subroutine of the square the player has landed on
         private void RollDiceButton_Click(object sender, EventArgs e)
         {
             if (shareCapital < 0)
@@ -1914,13 +1914,15 @@ namespace Vantagepoint_NEA_Project
         //Part of mergesort algorithm
         public List<int> MergeSort(List<int> subject)
         {
+            //If the list is empty, return list as it cannot be sorted
             if (subject.Count != 0)
             {
+                //If there is only one item in the list, return the list as it cannot be sorted
                 if (subject.Count == 1)
                 {
                     return subject;
                 }
-
+                //Split the list into two halves
                 int middle = subject.Count / 2;
                 List<int> firstHalf = new List<int>();
 
@@ -1936,8 +1938,11 @@ namespace Vantagepoint_NEA_Project
                     secondHalf.Add(subject[i]);
                 }
 
+                //Sort first half of list
                 firstHalf = MergeSort(firstHalf);
+                //Sort second half of list
                 secondHalf = MergeSort(secondHalf);
+                //Merge first and second halves of list
                 return Merge(firstHalf, secondHalf);
             }
             else
@@ -1951,6 +1956,7 @@ namespace Vantagepoint_NEA_Project
         {
             List<int> sorted = new List<int>();
 
+            //Merge the two lists such that the result is a sorted list
             while (firstHalf.Count != 0 && secondHalf.Count != 0)
             {
                 if (firstHalf[0] > secondHalf[0])
@@ -1977,6 +1983,7 @@ namespace Vantagepoint_NEA_Project
                 secondHalf.Remove(secondHalf[0]);
             }
 
+            //Return the sorted list
             return sorted;
         }
 
@@ -2076,41 +2083,6 @@ namespace Vantagepoint_NEA_Project
                 salesOpportunities = MergeSort(salesOpportunities);
                 writeToFile(salesOpportunities, nameof(salesOpportunities));
             }
-
-        }
-
-        private void Pos1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Pos2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Pos35_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Pos34_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Pos33_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Pos32_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Pos31_Click(object sender, EventArgs e)
-        {
 
         }
 
